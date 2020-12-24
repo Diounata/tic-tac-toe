@@ -1,0 +1,28 @@
+*{
+    font-size: 3vw;
+    text-align: center;
+}
+
+html, body, div{
+    height: 100%;
+    margin: auto;
+    display: table;
+}
+
+table{
+    display: table-cell;
+    vertical-align: middle;
+    border-spacing: 1px;
+}
+
+td{
+    width: 70px;
+    height: 70px;
+    padding: 50px;
+    border: 1px solid #000;
+    cursor: pointer;
+}
+
+td:hover{
+    background: #dfe6e9;
+}
