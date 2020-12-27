@@ -2,3 +2,7 @@ td{
     min-width: 50px;
     cursor: pointer;
 }
+
+.espaçamento-placar{
+    word-spacing: 9vw;
+}

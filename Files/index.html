@@ -10,37 +10,38 @@
     <title> Jogo da velha </title>
 </head>
 
-<body class="bg-light">
+<body class="bg-dark text-light">
     <div class="container-fluid text-center" id="teste">
-        <div>
-            <p class="d-inline-block h3 m-5 mt-2"> </p>
-            <p class="d-inline-block h3"> </p>
+        <div class="row m-3">
+            <div class="col-5 text-end h2">Jogador 1</div>
+            <div class="col-2 h2 espaçamento-placar">0 0</div>
+            <div class="col-5 text-start h2">Jogador 2</div>
         </div>
 
         <div class="row mt-1">
             <div class="col-4"></div>
             <table class="col-4">
-                <tr class="h3">
+                <tr class="h1">
                     <td id="r1" onclick="casa1()" class="" style="height: 150px;"></td>
-                    <td id="r2" onclick="casa2()" class="border-2 border-dark border-start border-end border-top-0"
+                    <td id="r2" onclick="casa2()" class="border-1 border-light border-start border-end border-top-0"
                         style="height: 150px;">
                     </td>
                     <td id="r3" onclick="casa3()" class="" style="height: 150px;"></td>
                 </tr>
 
-                <tr class="h3">
-                    <td id="r4" onclick="casa4()" class="border-2 border-dark border-top border-bottom border-start-0"
+                <tr class="h1">
+                    <td id="r4" onclick="casa4()" class="border-1 border-light border-top border-bottom border-start-0"
                         style="height: 150px;">
                     </td>
-                    <td id="r5" onclick="casa5()" class="border-2 border-dark border" style="height: 150px;"></td>
-                    <td id="r6" onclick="casa6()" class="border-2 border-dark border-top border-bottom border-end-0"
+                    <td id="r5" onclick="casa5()" class="border-1 border-light border" style="height: 150px;"></td>
+                    <td id="r6" onclick="casa6()" class="border-1 border-light border-top border-bottom border-end-0"
                         style="height: 150px;">
                     </td>
                 </tr>
 
-                <tr class="h3">
+                <tr class="h1">
                     <td id="r7" onclick="casa7()" class="" style="height: 150px;"></td>
-                    <td id="r8" onclick="casa8()" class="border-2 border-dark border-start border-end border-bottom-0"
+                    <td id="r8" onclick="casa8()" class="border-1 border-light border-start border-end border-bottom-0"
                         style="height: 150px;">
                     </td>
                     <td id="r9" onclick="casa9()" class="" style="height: 150px;"></td>
