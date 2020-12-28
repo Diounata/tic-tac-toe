@@ -7,10 +7,12 @@ function preencher_casa(n) {
     if (casa_preenchida[n] == 0) {
         if (rodada[0] == 1) {
             resultado[n].innerHTML = `${rodada[1]}`
+            resultado[n].className += ' text-primary'
             casa_preenchida[n] = 1
             rodada[0] = 2
         } else {
             resultado[n].innerHTML = `${rodada[2]}`
+            resultado[n].className += ' text-danger'
             casa_preenchida[n] = 2
             rodada[0] = 1
         }
@@ -98,7 +100,6 @@ function casa9() {
     preencher_casa(8)
     verificar_resultado()
 }
-
 
 
 // Determinar quem venceu o jogo
