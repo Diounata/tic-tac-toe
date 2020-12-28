@@ -1,8 +1,15 @@
 td{
     min-width: 50px;
     cursor: pointer;
+    height: 80px;
+    width: 80px;
 }
 
 .espaçamento-placar{
-    word-spacing: 9vw;
+    word-spacing: 5vw;
+    letter-spacing: 3px;
+}
+
+.div-central{
+    box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.397);
 }
