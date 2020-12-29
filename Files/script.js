@@ -17,6 +17,13 @@ function preencher_casa(n) {
             rodada[0] = 1
         }
     }
+
+    // Verificar se o jogo empatou
+    for (t = 0; casa_preenchida[t] > 0; t++) {
+        if (t == 8) {
+            div_resultado.innerHTML += `Empate`
+        }
+    }
 }
 
 // Verificar se algum jogador venceu a rodada
@@ -25,37 +32,37 @@ function verificar_resultado() {
     if ((casa_preenchida[0] == 1 && casa_preenchida[1] == 1 && casa_preenchida[2] == 1) || (casa_preenchida[3] == 1 && casa_preenchida[4] == 1 && casa_preenchida[5] == 1) || (casa_preenchida[6] == 1 && casa_preenchida[7] == 1 && casa_preenchida[8] == 1)) {
         div_resultado.innerHTML = mensagem_vitoria[0]
         placar_valor[0] += 1
-        placar_div[0].innerHTML = `(${placar_valor[0]})`
+        placar_div[0].innerHTML = `${placar_valor[0]}`
     } else if ((casa_preenchida[0] == 2 && casa_preenchida[1] == 2 && casa_preenchida[2] == 2) || (casa_preenchida[3] == 2 && casa_preenchida[4] == 2 && casa_preenchida[5] == 2) || (casa_preenchida[6] == 2 && casa_preenchida[7] == 2 && casa_preenchida[8] == 2)) {
         div_resultado.innerHTML = mensagem_vitoria[1]
         placar_valor[1] += 1
-        placar_div[1].innerHTML = `(${placar_valor[1]})`
+        placar_div[1].innerHTML = `${placar_valor[1]}`
     }
 
     // Verificar eixo y
     if ((casa_preenchida[0] == 1 && casa_preenchida[3] == 1 && casa_preenchida[6] == 1) || (casa_preenchida[1] == 1 && casa_preenchida[4] == 1 && casa_preenchida[7] == 1) || (casa_preenchida[2] == 1 && casa_preenchida[5] == 1 && casa_preenchida[8] == 1)) {
         div_resultado.innerHTML = mensagem_vitoria[0]
         placar_valor[0] += 1
-        placar_div[0].innerHTML = `(${placar_valor[0]})`
+        placar_div[0].innerHTML = `${placar_valor[0]}`
     } else if ((casa_preenchida[0] == 2 && casa_preenchida[3] == 2 && casa_preenchida[6] == 2) || (casa_preenchida[1] == 2 && casa_preenchida[4] == 2 && casa_preenchida[7] == 2) || (casa_preenchida[2] == 2 && casa_preenchida[5] == 2 && casa_preenchida[8] == 2)) {
         div_resultado.innerHTML = mensagem_vitoria[1]
         placar_valor[1] += 1
-        placar_div[1].innerHTML = `(${placar_valor[1]})`
+        placar_div[1].innerHTML = `${placar_valor[1]}`
     }
 
     // Verificar eixo da diagonal
     if ((casa_preenchida[0] == 1 && casa_preenchida[4] == 1 && casa_preenchida[8] == 1) || (casa_preenchida[2] == 1 && casa_preenchida[4] == 1 && casa_preenchida[6] == 1)) {
         div_resultado.innerHTML = mensagem_vitoria[0]
         placar_valor[0] += 1
-        placar_div[0].innerHTML = `(${placar_valor[0]})`
+        placar_div[0].innerHTML = `${placar_valor[0]}`
     } else if ((casa_preenchida[0] == 2 && casa_preenchida[4] == 2 && casa_preenchida[8] == 2) || (casa_preenchida[2] == 2 && casa_preenchida[4] == 2 && casa_preenchida[6] == 2)) {
         div_resultado.innerHTML = mensagem_vitoria[1]
         placar_valor[1] += 1
-        placar_div[1].innerHTML = `(${placar_valor[1]})`
+        placar_div[1].innerHTML = `${placar_valor[1]}`
     }
 }
 
-// Função para preencher a casa e verificar o resultado
+// Funções para preencher a casa e verificar o resultado
 function casa1() {
     preencher_casa(0)
     verificar_resultado()
