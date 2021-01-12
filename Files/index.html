@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <title> Jogo da velha </title>
 </head>
@@ -15,40 +14,36 @@
         <div class="h1 text-center text-light my-3"> Jogo da velha </div>
 
         <div class="p-3 bg-light div-central border rounded-3">
-            <div class="h4 row my-3">
-                <div class="col-5 text-end pe-2 nome_jogador_1">  </div>
-                <div class="col-2 text-center espaçamento-placar m-0 p-0">
+            <div class="row h4 my-3">
+                <div class="col-4 col-md-5 text-end pe-2 nome_jogador_1"></div>
+                <div class="col-4 col-md-2 text-center espaçamento-placar m-0 p-0">
                     <span class="placar-jogador1 border-bottom border-3 px-2 border-primary"> 0 </span>
                     <span class="placar-jogador2 border-bottom border-3 px-2 border-danger"> 0 </span>
                 </div>
-                <div class="col-5 text-start ps-2 nome_jogador_2 ">  </div>
+                <div class="col-4 col-md-5 text-start ps-2 nome_jogador_2 "></div>
             </div>
 
-            <div class="verificar-vez-jogador h5">
-                • Vez de 
+            <div class="verificar-vez-jogador h5 my-4 my-sm-1">
+                • Vez de
             </div>
 
             <div>
                 <table class="m-auto text-center h2">
                     <tr>
                         <td onclick="casa1()" class="r1"></td>
-                        <td onclick="casa2()" class="r2 border-5 border-dark border-start border-end border-top-0">
-                        </td>
+                        <td onclick="casa2()" class="r2 border-5 border-dark border-start border-end border-top-0"></td>
                         <td onclick="casa3()" class="r3"></td>
                     </tr>
 
                     <tr>
-                        <td onclick="casa4()" class="r4 border-5 border-dark border-top border-bottom border-start-0">
-                        </td>
+                        <td onclick="casa4()" class="r4 border-5 border-dark border-top border-bottom border-start-0"></td>
                         <td onclick="casa5()" class="r5 border-5 border-dark border"></td>
-                        <td onclick="casa6()" class="r6 border-5 border-dark border-top border-bottom border-end-0">
-                        </td>
+                        <td onclick="casa6()" class="r6 border-5 border-dark border-top border-bottom border-end-0"></td>
                     </tr>
 
                     <tr>
-                        <td id="" onclick="casa7()" class="r7"></td>
-                        <td onclick="casa8()" class="r8 border-5 border-dark border-start border-end border-bottom-0">
-                        </td>
+                        <td onclick="casa7()" class="r7"></td>
+                        <td onclick="casa8()" class="r8 border-5 border-dark border-start border-end border-bottom-0"></td>
                         <td onclick="casa9()" class="r9"></td>
                     </tr>
                 </table>
@@ -62,12 +57,8 @@
 
     <script src="script.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
-        integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
-        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
 </body>
 
 </html>
