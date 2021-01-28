@@ -1,7 +1,8 @@
-var casas, casasPreenchidas, rodada, fimRodada, possiveisResultados, divNomeJogadores, divVezJogador, divFimRodada
+var casas, casasPreenchidas, quantidadeCasasPreenchidas, rodada, fimRodada, possiveisResultados, divNomeJogadores, divVezJogador, divFimRodada
 
 // + Atribuição de valores de algumas variáveis
 casasPreenchidas = ['', '', '', '', '', '', '', '', '']
+quantidadeCasasPreenchidas = 0
 rodada = 'X'
 divVezJogador = document.querySelector('div.divVezJogador')
 divFimRodada = document.querySelector('div.divFimRodada')
@@ -103,6 +104,7 @@ function verificarResultado(item) {
                     jogador.X.divPlacar.innerText = `${jogador.X.pontuação}`
                 }
 
+                quantidadeCasasPreenchidas = 0
                 divVezJogador.innerHTML = ''
                 divFimRodada.innerHTML = `
                     ${c == 1 ? jogador.O.nome : jogador.X.nome} venceu a rodada <br>
@@ -111,6 +113,28 @@ function verificarResultado(item) {
                     </button>
                 `
             }
+        }
+    }
+}
+
+function verificarEmpate(casa) {
+    if (casasPreenchidas[casa].length > 0) {
+        quantidadeCasasPreenchidas++
+
+        if (quantidadeCasasPreenchidas == 9) {
+            for (pos in casasPreenchidas) {
+                casasPreenchidas[pos] = ''
+            }
+
+            fimRodada = true
+            quantidadeCasasPreenchidas = 0
+            divVezJogador.innerHTML = ''
+            divFimRodada.innerHTML = `
+                Jogo empatado <br>
+                <button class="btn btn-outline-primary rounded-pill my-2" onclick="comecarNovoJogo()">
+                    Começar próxima rodada
+                </button>
+            `
         }
     }
 }
@@ -135,45 +159,54 @@ function comecarNovoJogo() {
 function casa1() {
     preencherCasa(0)
     possiveisResultados.forEach(verificarResultado)
+    verificarEmpate(0)
 }
 
 function casa2() {
     preencherCasa(1)
     possiveisResultados.forEach(verificarResultado)
+    verificarEmpate(1)
 }
 
 function casa3() {
     preencherCasa(2)
     possiveisResultados.forEach(verificarResultado)
+    verificarEmpate(2)
 }
 
 function casa4() {
     preencherCasa(3)
     possiveisResultados.forEach(verificarResultado)
+    verificarEmpate(3)
 }
 
 function casa5() {
     preencherCasa(4)
     possiveisResultados.forEach(verificarResultado)
+    verificarEmpate(4)
 }
 
 function casa6() {
     preencherCasa(5)
     possiveisResultados.forEach(verificarResultado)
+    verificarEmpate(5)
 }
 
 function casa7() {
     preencherCasa(6)
     possiveisResultados.forEach(verificarResultado)
+    verificarEmpate(6)
 }
 
 function casa8() {
     preencherCasa(7)
     possiveisResultados.forEach(verificarResultado)
+    verificarEmpate(7)
 }
 
 function casa9() {
     preencherCasa(8)
     possiveisResultados.forEach(verificarResultado)
+    verificarEmpate(8)
 }
 // - Funções para casas
