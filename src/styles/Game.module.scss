@@ -1,6 +1,9 @@
 .gameContainer {
+    background: var(--light-color);
+    border-radius: 10px;
+
     tr td {
-        background: var(--light-color);
+        background: var(--dark-color);
 
         width: 7rem;
         height: 7rem;
@@ -8,7 +11,7 @@
         cursor: pointer;
 
         &:hover {
-            opacity: 0.7;
+            opacity: 0.6;
         }
     }
 }
