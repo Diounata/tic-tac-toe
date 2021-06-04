@@ -1,0 +1,14 @@
+.gameContainer {
+    tr td {
+        background: var(--light-color);
+
+        width: 7rem;
+        height: 7rem;
+
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}
