@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 body,
@@ -15,10 +15,11 @@ html {
 .container {
     display: grid;
     place-items: center;
-    flex-direction: column;
-    gap: 2rem;
 
-    margin: 2rem 0;
+    width: 100vw;
+    height: 100vh;
+
+    padding: 0.1rem 0;
 }
 
 :root {
