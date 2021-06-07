@@ -14,6 +14,7 @@ interface ChildrenProps {
 
 interface ContextProps {
     position: string[];
+    playerTurn: string;
     changePosition(number: number): void;
 }
 
@@ -39,6 +40,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
         <GameContext.Provider
             value={{
                 position,
+                playerTurn,
                 changePosition,
             }}
         >

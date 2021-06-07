@@ -1,4 +1,5 @@
 import Scoreboard from '../Components/Scoreboard';
+import PlayerTurn from '../Components/PlayerTurn';
 import Game from '../Components/Game';
 import Footer from '../Components/Footer';
 
@@ -9,6 +10,7 @@ export default function Home() {
         <GameContextProvider>
             <div className='container'>
                 <Scoreboard />
+                <PlayerTurn />
                 <Game />
                 <Footer />
             </div>

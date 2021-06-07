@@ -5,7 +5,7 @@ export default function Scoreboard() {
         <header className={styles.scoreboardComponent}>
             <div>
                 <div>
-                    <span className={styles.x}>&times;</span> Player 1
+                    <span className='x'>&times;</span> Player 1
                 </div>
                 <div>2</div>
             </div>
@@ -15,7 +15,7 @@ export default function Scoreboard() {
             <div>
                 <div>0</div>
                 <div>
-                    Player 2 <span className={styles.o}>o</span>
+                    Player 2 <span className='o'>o</span>
                 </div>
             </div>
         </header>
