@@ -11,6 +11,7 @@ export default function Game() {
                 <div
                     onClick={() => changePosition(index)}
                     key={index}
+                    className={i ? styles.filled : styles.unfilled}
                     style={{
                         color:
                             position[index] === 'X'
@@ -19,7 +20,7 @@ export default function Game() {
                         cursor: position[index] && 'not-allowed',
                     }}
                 >
-                    {i}
+                    <span>{i}</span>
                 </div>
             ))}
         </main>
