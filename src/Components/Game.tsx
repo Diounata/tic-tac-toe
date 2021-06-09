@@ -13,13 +13,11 @@ export default function Game() {
                     key={index}
                     className={i ? styles.filled : styles.unfilled}
                     style={{
-                        color:
-                            position[index] === 'X'
-                                ? 'var(--blue)'
-                                : 'var(--purple)',
-                        cursor: position[index] && 'not-allowed',
-                    }}
-                >
+                        color: position[index] === 'X'
+                            ? 'var(--blue)'
+                            : 'var(--purple)'
+                    }}>
+                        
                     <span>{i}</span>
                 </div>
             ))}
