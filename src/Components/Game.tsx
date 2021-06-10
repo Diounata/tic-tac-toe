@@ -3,13 +3,13 @@ import styles from '../styles/Game.module.scss';
 import { useGame } from '../Contexts/GameContext';
 
 export default function Game() {
-    const { position, changePosition } = useGame();
+    const { position, updatePosition } = useGame();
 
     return (
         <main className={styles.gameContainer}>
             {position.map((i, index) => (
                 <div
-                    onClick={() => changePosition(index)}
+                    onClick={() => updatePosition(index)}
                     key={index}
                     className={i ? styles.filled : styles.unfilled}
                     style={{

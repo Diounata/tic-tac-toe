@@ -15,15 +15,15 @@ interface ChildrenProps {
 interface ContextProps {
     position: string[];
     playerTurn: string;
-    changePosition(number: number): void;
+    updatePosition(number: number): void;
 }
 
 export function GameContextProvider({ children }: ChildrenProps) {
-    const [position, setPosition] = useState(['','','','','','','','','']);
+    const [position, setPosition] = useState(['', '', '', '', '', '', '', '', '']);
     const [playerTurn, setPlayerTurn] = useState('Player'); // It'll start as X
     const [amountFilledPosition, setAmountFilledPosition] = useState(0);
 
-    function changePosition(number: number): void {
+    function updatePosition(number: number): void {
         if (!position[number]) {
             const newPosition = position.map((i, index) =>
                 number === index ? playerTurn : i
@@ -38,11 +38,11 @@ export function GameContextProvider({ children }: ChildrenProps) {
         if (amountFilledPosition === 9) {
             checkIfGameHasTie();
         } else {
-            checkIfGameHasFinished();
+            checkIfAnyPlayerHasWin();
         }
     }
 
-    function checkIfGameHasFinished(): void {
+    function checkIfAnyPlayerHasWin(): void {
         const combinations = [
             [0, 1, 2],
             [3, 4, 5],
@@ -84,7 +84,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
             value={{
                 position,
                 playerTurn,
-                changePosition,
+                updatePosition,
             }}
         >
             {children}
