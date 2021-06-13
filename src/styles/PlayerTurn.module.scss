@@ -1,10 +1,12 @@
 .playerTurnContainer {
     display: flex;
-    align-items: center;
 
     font-size: 1.3rem;
 
     span {
+        display: inline-flex;
+        align-items: center;
+    
         margin-right: 1rem;
     }
 }

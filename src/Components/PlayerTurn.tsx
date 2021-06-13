@@ -1,5 +1,8 @@
 import styles from '../styles/PlayerTurn.module.scss';
 
+import X from '../Icons/X';
+import O from '../Icons/O';
+
 import { useGame } from '../Contexts/GameContext';
 
 export default function PlayerTurn() {
@@ -7,12 +10,9 @@ export default function PlayerTurn() {
 
     return (
         <div className={styles.playerTurnContainer}>
-            {playerTurn === 'X'
-                ? <span className='x'>&times;</span>
-                : <span className='o'>o</span>
-            }
+            <span>{playerTurn === 'X' ? <X /> : <O />}</span>
 
-            {playerTurn === 'X' ? 'Player 1' : 'Player 2'}'s turn
+            <span>{playerTurn === 'X' ? 'Player 1' : 'Player 2'}'s turn</span>
         </div>
     );
 }
