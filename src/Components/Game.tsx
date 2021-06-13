@@ -1,5 +1,8 @@
 import styles from '../styles/Game.module.scss';
 
+import X from '../Icons/X';
+import O from '../Icons/O';
+
 import { useGame } from '../Contexts/GameContext';
 
 export default function Game() {
@@ -9,16 +12,14 @@ export default function Game() {
         <main className={styles.gameContainer}>
             {position.map((i, index) => (
                 <div
+                    className={i ? styles.filled : styles.unfilled}
                     onClick={() => updatePosition(index)}
                     key={index}
-                    className={i ? styles.filled : styles.unfilled}
-                    style={{
-                        color: position[index] === 'X'
-                            ? 'var(--blue)'
-                            : 'var(--purple)'
-                    }}>
-                        
-                    <span>{i}</span>
+                >
+                    <span>
+                        {i === 'X' && <X />}
+                        {i === 'O' && <O />}
+                    </span>
                 </div>
             ))}
         </main>

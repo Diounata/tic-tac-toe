@@ -6,6 +6,8 @@ import {
     useState,
 } from 'react';
 
+import { useModal } from './ModalContext';
+
 export const GameContext = createContext({} as ContextProps);
 
 interface ChildrenProps {
@@ -15,13 +17,16 @@ interface ChildrenProps {
 interface ContextProps {
     position: string[];
     playerTurn: string;
+
     updatePosition(number: number): void;
+    resetGame(): void;
 }
 
 export function GameContextProvider({ children }: ChildrenProps) {
     const [position, setPosition] = useState(['', '', '', '', '', '', '', '', '']);
     const [playerTurn, setPlayerTurn] = useState('Player'); // It'll start as X
     const [amountFilledPosition, setAmountFilledPosition] = useState(0);
+    const { isModalOpen, changeModalState } = useModal();
 
     function updatePosition(number: number): void {
         if (!position[number]) {
@@ -34,7 +39,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
         }
     }
 
-    function checkGameSituation() {
+    function checkGameSituation(): void {
         if (amountFilledPosition === 9) {
             checkIfGameHasTie();
         } else {
@@ -63,7 +68,9 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 }
             });
 
-            c === 3 && alert(`Player ${playerTurn} wins!`);
+            if (c === 3) {
+                changeModalState(true);
+            }
         });
     }
 
@@ -71,12 +78,22 @@ export function GameContextProvider({ children }: ChildrenProps) {
         alert('The game has tie.');
     }
 
+    function resetGame(): void {
+        setPosition(['', '', '', '', '', '', '', '', '']);
+        setPlayerTurn('');
+        setAmountFilledPosition(0);
+        changeModalState(false);
+    }
+
     useEffect(() => {
         if (playerTurn === 'X' || playerTurn === 'O') {
             checkGameSituation();
         }
 
-        setPlayerTurn(playerTurn === 'X' ? 'O' : 'X');
+        if (!isModalOpen) {
+            setPlayerTurn(playerTurn === 'X' ? 'O' : 'X');
+        }
+
     }, [position]);
 
     return (
@@ -85,6 +102,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 position,
                 playerTurn,
                 updatePosition,
+                resetGame,
             }}
         >
             {children}
