@@ -1,5 +1,9 @@
 import { FaTimes } from 'react-icons/fa';
 
+import { useGame } from '../Contexts/GameContext';
+
 export default function X() {
-    return <FaTimes color='#04dac2' />;
+    const { player } = useGame();
+
+    return <FaTimes color={player.x.color} />;
 }

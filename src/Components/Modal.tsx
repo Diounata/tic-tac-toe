@@ -8,14 +8,14 @@ import { useModal } from '../Contexts/ModalContext';
 
 export default function Modal() {
     const { isModalOpen, changeModalState } = useModal();
-    const { playerTurn, resetGame } = useGame();
+    const { winner, playerTurn, resetGame } = useGame();
 
     return (
         <div className={isModalOpen ? styles.modalContainer : styles.closedModal}>
             <div>
                 <main>
                     <span>{playerTurn === 'X' ? <O /> : <X />}</span>
-                    <p>Player {playerTurn === 'X' ? 2 : 1} wins!</p>
+                    <p>{winner} wins!</p>
                 </main>
 
                 <footer>

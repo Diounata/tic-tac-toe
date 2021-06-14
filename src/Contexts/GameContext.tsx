@@ -14,20 +14,48 @@ interface ChildrenProps {
     children: ReactNode;
 }
 
+interface PlayerContentProps {
+    name: string;
+    color: string;
+    score: number;
+}
+
+interface PlayerProps {
+    x: PlayerContentProps;
+    o: PlayerContentProps;
+}
+
 interface ContextProps {
+    player: PlayerProps;
     position: string[];
     playerTurn: string;
+    winner: string;
 
     updatePosition(number: number): void;
     resetGame(): void;
 }
 
 export function GameContextProvider({ children }: ChildrenProps) {
+    const [player, setPlayer] = useState({
+        x: {
+            name: 'John',
+            color: '#04dac2',
+            score: 0,
+        },
+
+        o: {
+            name: 'Mary',
+            color: '#bb86fc',
+            score: 0,
+        },
+    })
     const [position, setPosition] = useState(['', '', '', '', '', '', '', '', '']);
     const [playerTurn, setPlayerTurn] = useState('Player'); // It'll start as X
     const [amountFilledPosition, setAmountFilledPosition] = useState(0);
+    const [winner, setWinner] = useState('');
+    
     const { isModalOpen, changeModalState } = useModal();
-
+    
     function updatePosition(number: number): void {
         if (!position[number]) {
             const newPosition = position.map((i, index) =>
@@ -69,6 +97,9 @@ export function GameContextProvider({ children }: ChildrenProps) {
             });
 
             if (c === 3) {
+                const playerWhoHasWon = playerTurn === 'X' ? player.x.name : player.o.name; 
+                
+                setWinner(playerWhoHasWon);
                 changeModalState(true);
             }
         });
@@ -99,8 +130,10 @@ export function GameContextProvider({ children }: ChildrenProps) {
     return (
         <GameContext.Provider
             value={{
+                player,
                 position,
                 playerTurn,
+                winner,
                 updatePosition,
                 resetGame,
             }}

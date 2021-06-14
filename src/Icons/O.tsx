@@ -1,5 +1,9 @@
 import { FaRegCircle } from 'react-icons/fa';
 
+import { useGame } from '../Contexts/GameContext';
+
 export default function O() {
-    return <FaRegCircle color='#bb86fc' />;
+    const { player } = useGame();
+
+    return <FaRegCircle color={player.o.color} />;
 }
