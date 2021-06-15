@@ -8,6 +8,9 @@ import {
 
 import { useModal } from './ModalContext';
 
+import X from '../Icons/X';
+import O from '../Icons/O';
+
 export const GameContext = createContext({} as ContextProps);
 
 interface ChildrenProps {
@@ -18,6 +21,7 @@ interface PlayerContentProps {
     name: string;
     color: string;
     score: number;
+    icon: JSX.Element;
 }
 
 interface PlayerProps {
@@ -29,7 +33,7 @@ interface ContextProps {
     player: PlayerProps;
     position: string[];
     playerTurn: string;
-    winner: string;
+    winner: PlayerContentProps;
 
     updatePosition(number: number): void;
     resetGame(): void;
@@ -41,18 +45,20 @@ export function GameContextProvider({ children }: ChildrenProps) {
             name: 'John',
             color: '#04dac2',
             score: 0,
+            icon: <X />
         },
 
         o: {
             name: 'Mary',
             color: '#bb86fc',
             score: 0,
+            icon: <O />
         },
     })
     const [position, setPosition] = useState(['', '', '', '', '', '', '', '', '']);
     const [playerTurn, setPlayerTurn] = useState('Player'); // It'll start as X
     const [amountFilledPosition, setAmountFilledPosition] = useState(0);
-    const [winner, setWinner] = useState('');
+    const [winner, setWinner] = useState({} as PlayerContentProps);
     
     const { isModalOpen, changeModalState } = useModal();
     
@@ -97,8 +103,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
             });
 
             if (c === 3) {
-                const playerWhoHasWon = playerTurn === 'X' ? player.x.name : player.o.name; 
-                
+                const playerWhoHasWon = playerTurn === 'X' ? player.x : player.o; 
                 setWinner(playerWhoHasWon);
                 changeModalState(true);
             }
@@ -106,13 +111,15 @@ export function GameContextProvider({ children }: ChildrenProps) {
     }
 
     function checkIfGameHasTie(): void {
-        alert('The game has tie.');
+        setWinner(null);
+        changeModalState(true);
     }
 
     function resetGame(): void {
         setPosition(['', '', '', '', '', '', '', '', '']);
         setPlayerTurn('');
         setAmountFilledPosition(0);
+        setWinner(null);
         changeModalState(false);
     }
 

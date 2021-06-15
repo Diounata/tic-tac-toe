@@ -1,21 +1,20 @@
-import styles from '../styles/Modal.module.scss';
+import styles from '../../styles/Modal.module.scss';
 
-import X from '../Icons/X';
-import O from '../Icons/O';
+import Winner from './Winner';
+import Tie from './Tie';
 
-import { useGame } from '../Contexts/GameContext';
-import { useModal } from '../Contexts/ModalContext';
+import { useGame } from '../../Contexts/GameContext';
+import { useModal } from '../../Contexts/ModalContext';
 
 export default function Modal() {
     const { isModalOpen, changeModalState } = useModal();
-    const { winner, playerTurn, resetGame } = useGame();
+    const { winner, resetGame } = useGame();
 
     return (
         <div className={isModalOpen ? styles.modalContainer : styles.closedModal}>
             <div>
                 <main>
-                    <span>{playerTurn === 'X' ? <O /> : <X />}</span>
-                    <p>{winner} wins!</p>
+                    {winner ? <Winner /> : <Tie />}
                 </main>
 
                 <footer>
