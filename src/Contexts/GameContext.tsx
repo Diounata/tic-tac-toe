@@ -19,6 +19,7 @@ interface ChildrenProps {
 
 interface PlayerContentProps {
     name: string;
+    symbol: string;
     color: string;
     score: number;
     icon: JSX.Element;
@@ -43,6 +44,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
     const [player, setPlayer] = useState({
         x: {
             name: 'John',
+            symbol: 'X',
             color: '#04dac2',
             score: 0,
             icon: <X />
@@ -50,6 +52,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
 
         o: {
             name: 'Mary',
+            symbol: 'O',
             color: '#bb86fc',
             score: 0,
             icon: <O />
@@ -76,9 +79,9 @@ export function GameContextProvider({ children }: ChildrenProps) {
     function checkGameSituation(): void {
         if (amountFilledPosition === 9) {
             checkIfGameHasTie();
-        } else {
-            checkIfAnyPlayerHasWin();
-        }
+        } 
+
+        checkIfAnyPlayerHasWin();
     }
 
     function checkIfAnyPlayerHasWin(): void {
@@ -103,8 +106,9 @@ export function GameContextProvider({ children }: ChildrenProps) {
             });
 
             if (c === 3) {
-                const playerWhoHasWon = playerTurn === 'X' ? player.x : player.o; 
-                setWinner(playerWhoHasWon);
+                const winnerPlayer = playerTurn === 'X' ? player.x : player.o; 
+                
+                setWinner(winnerPlayer);
                 changeModalState(true);
             }
         });
@@ -113,6 +117,21 @@ export function GameContextProvider({ children }: ChildrenProps) {
     function checkIfGameHasTie(): void {
         setWinner(null);
         changeModalState(true);
+    }
+
+    function addScore(): void {
+        const players = player;
+
+
+        if (winner.symbol === 'X') {
+            players.x.score++
+        }
+
+        if (winner.symbol === 'O') {
+            players.o.score++
+        }
+
+        setPlayer({...players});
     }
 
     function resetGame(): void {
@@ -131,8 +150,13 @@ export function GameContextProvider({ children }: ChildrenProps) {
         if (!isModalOpen) {
             setPlayerTurn(playerTurn === 'X' ? 'O' : 'X');
         }
-
     }, [position]);
+
+    useEffect((() => {
+        if (winner) {
+            addScore();
+        }
+    }), [winner])
 
     return (
         <GameContext.Provider
