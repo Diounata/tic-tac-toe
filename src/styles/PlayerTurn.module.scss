@@ -8,5 +8,9 @@
         align-items: center;
     
         margin-right: 1rem;
+    
+        &:first-of-type {
+            gap: 0.5rem;
+        }
     }
 }

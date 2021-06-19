@@ -35,6 +35,8 @@ interface ContextProps {
     position: string[];
     playerTurn: string;
     winner: PlayerContentProps;
+    winnerPosition: Number[];
+    isGameFinished: boolean;
 
     updatePosition(number: number): void;
     resetGame(): void;
@@ -62,6 +64,8 @@ export function GameContextProvider({ children }: ChildrenProps) {
     const [playerTurn, setPlayerTurn] = useState('Player'); // It'll start as X
     const [amountFilledPosition, setAmountFilledPosition] = useState(0);
     const [winner, setWinner] = useState({} as PlayerContentProps);
+    const [winnerPosition, setWinnerPosition] = useState([]);
+    const [isGameFinished, setIsGameFinished] = useState(false);
     
     const { isModalOpen, changeModalState } = useModal();
     
@@ -96,11 +100,11 @@ export function GameContextProvider({ children }: ChildrenProps) {
             [2, 4, 6],
         ];
 
-        combinations.forEach(pos => {
+        combinations.forEach(numArray => {
             let c = 0;
 
-            pos.forEach(n => {
-                if (position[n] === playerTurn) {
+            numArray.forEach(pos => {
+                if (position[pos] === playerTurn) {
                     c++;
                 }
             });
@@ -109,6 +113,8 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 const winnerPlayer = playerTurn === 'X' ? player.x : player.o; 
                 
                 setWinner(winnerPlayer);
+                setWinnerPosition(numArray);
+                setIsGameFinished(true);
                 changeModalState(true);
             }
         });
@@ -116,6 +122,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
 
     function checkIfGameHasTie(): void {
         setWinner(null);
+        setIsGameFinished(true);
         changeModalState(true);
     }
 
@@ -139,6 +146,8 @@ export function GameContextProvider({ children }: ChildrenProps) {
         setPlayerTurn('');
         setAmountFilledPosition(0);
         setWinner(null);
+        setWinnerPosition([]);
+        setIsGameFinished(false);
         changeModalState(false);
     }
 
@@ -165,6 +174,8 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 position,
                 playerTurn,
                 winner,
+                winnerPosition,
+                isGameFinished,
                 updatePosition,
                 resetGame,
             }}
