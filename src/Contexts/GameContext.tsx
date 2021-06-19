@@ -81,10 +81,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
     }
 
     function checkGameSituation(): void {
-        if (amountFilledPosition === 9) {
-            checkIfGameHasTie();
-        } 
-
+        checkIfGameHasTie();
         checkIfAnyPlayerHasWin();
     }
 
@@ -121,9 +118,11 @@ export function GameContextProvider({ children }: ChildrenProps) {
     }
 
     function checkIfGameHasTie(): void {
-        setWinner(null);
-        setIsGameFinished(true);
-        changeModalState(true);
+        if (amountFilledPosition === 9) {
+            setWinner(null);
+            setIsGameFinished(true);
+            changeModalState(true);
+        }
     }
 
     function addScore(): void {
