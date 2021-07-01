@@ -1,11 +1,9 @@
 .footerContainer {
-    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 
-    span {
-        font-size: 1.4em;
-        color: #e74c3c;
-        margin: 0 0.2rem;
-    }
+    font-size: 1.1rem;
 
     a {
         color: inherit;

@@ -1,25 +1,21 @@
-import Scoreboard from '../Components/Scoreboard';
-import PlayerTurn from '../Components/PlayerTurn/index';
-import GameComponent from '../Components/GameComponent';
+import TitlePage from '../utils/TitlePage';
+import Hashtag from '../Icons/Hashtag';
 import Footer from '../Components/Footer';
-import Modal from '../Components/Modal/Modal';
-
-import { GameContextProvider } from '../Contexts/GameContext';
-import { ModalContextProvider } from '../Contexts/ModalContext';
 
 export default function Home() {
     return (
-        <ModalContextProvider>
-            <GameContextProvider>
-                <div className='container'>
-                    <Scoreboard />
-                    <PlayerTurn />
-                    <GameComponent />
-                    <Footer />
-                </div>
+        <>
+            <div>
+                <TitlePage title='Home' />
 
-                <Modal />
-            </GameContextProvider>
-        </ModalContextProvider>
+                <h2>
+                    <Hashtag color='#04dac2' />
+                    tic-tac-toe
+                    <Hashtag color='#bb86fc' />
+                </h2>
+            </div>
+            
+            <Footer />
+        </>
     );
 }
