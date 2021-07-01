@@ -1,5 +1,7 @@
 import styles from '../styles/FinishedGame.module.scss';
 
+import Button from './Button';
+
 import X from '../Icons/X';
 import O from '../Icons/O';
 
@@ -36,9 +38,7 @@ export default function FinishedGame() {
                 ))}
             </main>
 
-            <button className={styles.resetGameButton} onClick={resetGame}>
-                Start new game
-            </button>
+            <Button onClick={resetGame}>Start new game</Button>
         </>
     );
 }

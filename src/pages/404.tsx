@@ -3,6 +3,8 @@ import styles from '../styles/404.module.scss';
 
 import TitlePage from '../utils/TitlePage';
 
+import Button from '../Components/Button';
+
 import Sad from '../Icons/Sad';
 
 export default function NotFound() {
@@ -22,7 +24,7 @@ export default function NotFound() {
                 <span>404</span> This page does not exist
             </div>
 
-            <button onClick={redirectUser}>Return home</button>
+            <Button onClick={redirectUser}>Return home</Button>
         </div>
     );
 }
