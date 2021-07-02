@@ -2,6 +2,10 @@ import { useRouter } from 'next/router';
 import styles from '../styles/Menu.module.scss';
 
 import Button from './Button';
+import Play from '../Icons/Play';
+import Trophy from '../Icons/Trophy';
+import Users from '../Icons/Users';
+import Gear from '../Icons/Gear';
 
 export default function Menu() {
     const router = useRouter();
@@ -12,11 +16,25 @@ export default function Menu() {
 
     return (
         <main className={styles.menuContainer}>
-            <Button onClick={() => handleRouter('as')}>Players</Button>
+            <div className={styles.startButton}>
+                <Button onClick={() => handleRouter('play')}>
+                    <Play /> Start new game
+                </Button>
+            </div>
 
-            <Button onClick={() => handleRouter('play')}>Start new game</Button>
+            <div>
+                <Button onClick={() => handleRouter('undefined')}>
+                    <Trophy /> Leaderboard
+                </Button>
 
-            <Button onClick={() => handleRouter('as')}>Settings</Button>
+                <Button onClick={() => handleRouter('undefined')}>
+                    <Users /> Players
+                </Button>
+
+                <Button onClick={() => handleRouter('undefined')}>
+                    <Gear /> Settings
+                </Button>
+            </div>
         </main>
     );
 }

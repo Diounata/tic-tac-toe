@@ -1,10 +1,29 @@
 .menuContainer {
-    display: flex;
-    justify-content: space-around;
-    gap: 1.4rem;
+    div:last-of-type {
+        margin-top: 2rem;
 
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        justify-content: center;
+        gap: 2rem;
+    }
 
     button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+
         padding: 0.8rem 3rem;
+    }
+}
+
+.startButton {
+    display: grid;
+    justify-content: center;
+
+    button {
+        padding: 0.8rem 6rem;
     }
 }
