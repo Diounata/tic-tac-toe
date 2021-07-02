@@ -1,4 +1,4 @@
-import { FaExclamationTriangle } from "react-icons/fa";
+import { FaExclamationTriangle } from 'react-icons/fa';
 
 export default function Tie() {
     return (
