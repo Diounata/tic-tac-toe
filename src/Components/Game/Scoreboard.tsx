@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
-import styles from '../styles/Scoreboard.module.scss';
+import styles from '../../styles/Game/Scoreboard.module.scss';
 
-import BackIcon from '../Icons/Back';
+import BackIcon from '../../Icons/Back';
 
-import { useGame } from '../Contexts/GameContext';
+import { useGame } from '../../Contexts/GameContext';
 
 export default function Scoreboard() {
     const { player } = useGame();

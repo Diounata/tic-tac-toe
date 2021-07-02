@@ -1,11 +1,11 @@
-import styles from '../styles/FinishedGame.module.scss';
+import styles from '../../styles/Game/FinishedGame.module.scss';
 
-import Button from './Button';
+import Button from '../Button';
 
-import X from '../Icons/X';
-import O from '../Icons/O';
+import X from '../../Icons/X';
+import O from '../../Icons/O';
 
-import { useGame } from '../Contexts/GameContext';
+import { useGame } from '../../Contexts/GameContext';
 
 export default function FinishedGame() {
     const { position, winnerPosition, resetGame } = useGame();

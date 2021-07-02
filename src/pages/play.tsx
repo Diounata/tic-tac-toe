@@ -1,6 +1,6 @@
-import Scoreboard from '../Components/Scoreboard';
+import Scoreboard from '../Components/Game/Scoreboard';
 import PlayerTurn from '../Components/PlayerTurn/index';
-import GameComponent from '../Components/GameComponent';
+import GameComponent from '../Components/Game/GameComponent';
 import Modal from '../Components/Modal/Modal';
 import Footer from '../Components/Footer';
 

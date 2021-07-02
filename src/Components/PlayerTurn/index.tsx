@@ -1,4 +1,4 @@
-import styles from '../../styles/PlayerTurn.module.scss';
+import styles from '../../styles/Game/PlayerTurn.module.scss';
 
 import Winner from './Winner';
 import Tie from './Tie';
