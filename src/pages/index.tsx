@@ -1,5 +1,7 @@
 import TitlePage from '../utils/TitlePage';
 import Hashtag from '../Icons/Hashtag';
+
+import Menu from '../Components/Menu';
 import Footer from '../Components/Footer';
 
 export default function Home() {
@@ -14,7 +16,9 @@ export default function Home() {
                     <Hashtag color='#bb86fc' />
                 </h2>
             </div>
-            
+
+            <Menu />
+
             <Footer />
         </>
     );

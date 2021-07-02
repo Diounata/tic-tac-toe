@@ -11,9 +11,13 @@ export default function Play() {
         <>
             <TitlePage title='Play' />
 
-            <Scoreboard />
-            <PlayerTurn />
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem'}}>
+                <Scoreboard />
+                <PlayerTurn />
+            </div>
+
             <GameComponent />
+            
             <Footer />
 
             <Modal />
