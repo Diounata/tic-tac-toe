@@ -1,19 +1,14 @@
 .menuContainer {
     div:last-of-type {
-        margin-top: 2rem;
-
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr;
         gap: 2rem;
+
+        margin-top: 2rem;
     }
 
     button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-
         padding: 0.8rem 3rem;
     }
 }

@@ -6,6 +6,7 @@ import TitlePage from '../utils/TitlePage';
 import Button from '../Components/Button';
 
 import Sad from '../Icons/Sad';
+import House from '../Icons/House';
 
 export default function NotFound() {
     const router = useRouter();
@@ -24,7 +25,9 @@ export default function NotFound() {
                 <span>404</span> This page does not exist
             </div>
 
-            <Button onClick={redirectUser}>Return home</Button>
+            <Button onClick={redirectUser}>
+                <House /> Return home
+            </Button>
         </div>
     );
 }
