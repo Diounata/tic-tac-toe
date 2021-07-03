@@ -5,6 +5,7 @@ import Button from './Button';
 import Play from '../Icons/Play';
 import Info from '../Icons/Info';
 import History from '../Icons/History';
+import Question from '../Icons/Question';
 import Trophy from '../Icons/Trophy';
 import Users from '../Icons/Users';
 import Gear from '../Icons/Gear';
@@ -31,6 +32,10 @@ export default function Menu() {
 
                 <Button onClick={() => handleRouter('undefined')}>
                     <History /> History
+                </Button>
+
+                <Button onClick={() => handleRouter('undefined')}>
+                    <Question /> How to play
                 </Button>
 
                 <Button onClick={() => handleRouter('undefined')}>
