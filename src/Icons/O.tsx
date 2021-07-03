@@ -5,5 +5,5 @@ import { useGame } from '../Contexts/GameContext';
 export default function O() {
     const { player } = useGame();
 
-    return <FaRegCircle color={player.o.color} />;
+    return <FaRegCircle color={player.o.color} title='O' />;
 }

@@ -1,5 +1,7 @@
 import TitlePage from '../utils/TitlePage';
-import Hashtag from '../Icons/Hashtag';
+
+import X from '../Icons/X';
+import O from '../Icons/O';
 
 import Menu from '../Components/Menu';
 import Footer from '../Components/Footer';
@@ -11,9 +13,8 @@ export default function Home() {
                 <TitlePage title='Home' />
 
                 <h2>
-                    <Hashtag color='#04dac2' />
-                    tic-tac-toe
-                    <Hashtag color='#bb86fc' />
+                    <X /> <O />
+                    Tic-tac-toe
                 </h2>
             </div>
 

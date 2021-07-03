@@ -5,5 +5,5 @@ import { useGame } from '../Contexts/GameContext';
 export default function X() {
     const { player } = useGame();
 
-    return <FaTimes color={player.x.color} />;
+    return <FaTimes color={player.x.color} title='X' />;
 }
