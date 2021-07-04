@@ -45,7 +45,7 @@ interface ContextProps {
 export function GameContextProvider({ children }: ChildrenProps) {
     const [player, setPlayer] = useState({
         x: {
-            name: 'John',
+            name: 'Player 1',
             symbol: 'X',
             color: '#04dac2',
             score: 0,
@@ -53,7 +53,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
         },
 
         o: {
-            name: 'Mary',
+            name: 'Player 2',
             symbol: 'O',
             color: '#bb86fc',
             score: 0,

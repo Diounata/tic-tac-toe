@@ -9,15 +9,16 @@
     display: grid;
     place-items: center;
 
-    div:first-child {
+    > div {
         width: 25rem;
         height: 14rem;
 
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        z-index: 2;
 
-        background: var(--light-color);
+        background: var(--dark-color);
         border-radius: 10px;
 
         main {
@@ -30,6 +31,10 @@
             padding: 2rem;
             text-align: center;
             font-size: 1.5rem;
+
+            background: var(--light-color);
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
 
             span, p {
                 display: inline-flex;

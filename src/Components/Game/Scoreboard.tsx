@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styles from '../../styles/Game/Scoreboard.module.scss';
 
 import BackIcon from '../../Icons/Back';
@@ -7,12 +7,15 @@ import { useGame } from '../../Contexts/GameContext';
 
 export default function Scoreboard() {
     const { player } = useGame();
-    const router = useRouter();
 
     return (
         <>
-            <div className={styles.back} onClick={() => router.push('/')}>
-                <BackIcon />
+            <div className={styles.back}>
+                <Link href='/'>
+                    <a>
+                        <BackIcon />
+                    </a>
+                </Link>
             </div>
 
             <header className={styles.scoreboardComponent}>

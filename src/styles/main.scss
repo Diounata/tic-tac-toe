@@ -31,6 +31,13 @@ h2 {
     padding: 1.3rem 0;
 }
 
+button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
 .x {
     color: var(--blue);
 }

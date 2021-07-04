@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import styles from '../styles/Menu.module.scss';
 
 import Button from './Button';
@@ -10,46 +9,54 @@ import Trophy from '../Icons/Trophy';
 import Users from '../Icons/Users';
 import Gear from '../Icons/Gear';
 
-export default function Menu() {
-    const router = useRouter();
+import LinkButton from './LinkButton';
+import Modal from './Modal/Modal';
+import StartNewGame from './Modal/StartNewGame';
 
-    function handleRouter(path: string): void {
-        router.push(`/${path}`);
-    }
+import { useModal } from '../Contexts/ModalContext';
+
+export default function Menu() {
+    const { changeModalState } = useModal();
 
     return (
-        <main className={styles.menuContainer}>
-            <div className={styles.startButton}>
-                <Button onClick={() => handleRouter('play')}>
-                    <Play /> Start new game
-                </Button>
-            </div>
+        <>
+            <Modal>
+                <StartNewGame />
+            </Modal>
 
-            <div>
-                <Button onClick={() => handleRouter('undefined')}>
-                    <Info /> About
-                </Button>
+            <main className={styles.menuContainer}>
+                <div className={styles.startButton}>
+                    <Button onClick={() => changeModalState(true)}>
+                        <Play /> Start new game
+                    </Button>
+                </div>
 
-                <Button onClick={() => handleRouter('undefined')}>
-                    <History /> History
-                </Button>
+                <div>
+                    <LinkButton href='/about'>
+                        <Info /> About
+                    </LinkButton>
 
-                <Button onClick={() => handleRouter('undefined')}>
-                    <Question /> How to play
-                </Button>
+                    <LinkButton href='/history'>
+                        <History /> History
+                    </LinkButton>
 
-                <Button onClick={() => handleRouter('undefined')}>
-                    <Trophy /> Leaderboard
-                </Button>
+                    <LinkButton href='/how-to-play'>
+                        <Question /> How to play
+                    </LinkButton>
 
-                <Button onClick={() => handleRouter('undefined')}>
-                    <Users /> Players
-                </Button>
+                    <LinkButton href='/leaderboard'>
+                        <Trophy /> Leaderboard
+                    </LinkButton>
 
-                <Button onClick={() => handleRouter('undefined')}>
-                    <Gear /> Settings
-                </Button>
-            </div>
-        </main>
+                    <LinkButton href='/players'>
+                        <Users /> Players
+                    </LinkButton>
+
+                    <LinkButton href='/settings'>
+                        <Gear /> Settings
+                    </LinkButton>
+                </div>
+            </main>
+        </>
     );
 }

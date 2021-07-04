@@ -1,6 +1,7 @@
 import Scoreboard from '../Components/Game/Scoreboard';
 import PlayerTurn from '../Components/PlayerTurn/index';
 import GameComponent from '../Components/Game/GameComponent';
+import GameSituation from '../Components/Modal/GameSituation/index';
 import Modal from '../Components/Modal/Modal';
 import Footer from '../Components/Footer';
 
@@ -20,7 +21,9 @@ export default function Play() {
             
             <Footer />
 
-            <Modal />
+            <Modal>
+                <GameSituation />
+            </Modal>
         </>
     );
 }
