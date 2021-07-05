@@ -1,5 +1,9 @@
 import { FaTrophy } from 'react-icons/fa';
 
-export default function Trophy() {
-    return <FaTrophy size='16' />;
+type IconProps = {
+    size?: number;
+};
+
+export default function Trophy({ size }: IconProps) {
+    return <FaTrophy size={size ? size : '16'} />;
 }

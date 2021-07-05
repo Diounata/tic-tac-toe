@@ -3,7 +3,7 @@ import PlayerTurn from '../Components/PlayerTurn/index';
 import GameComponent from '../Components/Game/GameComponent';
 import GameSituation from '../Components/Modal/GameSituation/index';
 import Modal from '../Components/Modal/Modal';
-import Footer from '../Components/Footer';
+import Footer from '../Components/General/Footer';
 
 import TitlePage from '../utils/TitlePage';
 

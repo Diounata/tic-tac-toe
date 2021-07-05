@@ -1,7 +1,6 @@
-import Link from 'next/link';
 import styles from '../../styles/Game/Scoreboard.module.scss';
 
-import BackIcon from '../../Icons/Back';
+import BackButton from '../../Components/General/BackButton';
 
 import { useGame } from '../../Contexts/GameContext';
 
@@ -10,13 +9,7 @@ export default function Scoreboard() {
 
     return (
         <>
-            <div className={styles.back}>
-                <Link href='/'>
-                    <a>
-                        <BackIcon />
-                    </a>
-                </Link>
-            </div>
+            <BackButton />
 
             <header className={styles.scoreboardComponent}>
                 <div>

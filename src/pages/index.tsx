@@ -4,7 +4,7 @@ import X from '../Icons/X';
 import O from '../Icons/O';
 
 import Menu from '../Components/Menu';
-import Footer from '../Components/Footer';
+import Footer from '../Components/General/Footer';
 
 export default function Home() {
     return (

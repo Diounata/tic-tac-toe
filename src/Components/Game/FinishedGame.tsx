@@ -1,6 +1,6 @@
 import styles from '../../styles/Game/FinishedGame.module.scss';
 
-import Button from '../Button';
+import Button from '../General/Button';
 
 import X from '../../Icons/X';
 import O from '../../Icons/O';

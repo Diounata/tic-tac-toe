@@ -1,7 +1,7 @@
 import styles from '../styles/404.module.scss';
 
 import TitlePage from '../utils/TitlePage';
-import LinkButton from '../Components/LinkButton';
+import LinkButton from '../Components/General/LinkButton';
 
 import Sad from '../Icons/Sad';
 import House from '../Icons/House';
