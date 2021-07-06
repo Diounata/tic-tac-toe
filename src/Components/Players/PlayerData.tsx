@@ -4,24 +4,29 @@ import X from '../../Icons/X';
 import O from '../../Icons/O';
 
 import PlayersButton from './PlayersButton';
+import { usePlayers } from '../../Contexts/PlayersContext';
 
 export default function PlayerData() {
+    const { players } = usePlayers();
+
     return (
         <article className={styles.container}>
-            <div>
-                <div className={styles.icons}>
-                    <X />
-                    <O />
-                </div>
+            {players.map(player => (
+                <div>
+                    <div className={styles.icons}>
+                        <X />
+                        <O />
+                    </div>
 
-                <div className={styles.username}>Diounata</div>
+                    <div className={styles.username}>{player.name}</div>
 
-                <div className={styles.actions}>
-                    <PlayersButton>Edit</PlayersButton>
-                    <PlayersButton>Delete</PlayersButton>
-                    <PlayersButton>Reset</PlayersButton>
+                    <div className={styles.actions}>
+                        <PlayersButton>Edit</PlayersButton>
+                        <PlayersButton>Delete</PlayersButton>
+                        <PlayersButton>Reset</PlayersButton>
+                    </div>
                 </div>
-            </div>
+            ))}
         </article>
     );
 }
