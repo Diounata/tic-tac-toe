@@ -5,5 +5,5 @@ type IconProps = {
 };
 
 export default function Users({ size }: IconProps) {
-    return <FaUserFriends size={size ? size : '16'} />;
+    return <FaUserFriends size={size || '16'} />;
 }

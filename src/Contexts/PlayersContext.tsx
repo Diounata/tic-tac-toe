@@ -8,6 +8,7 @@ type ChildrenProps = {
 
 type PlayerProps = {
     name: string;
+    color: string;
     match: PlayerMatchProps;
 };
 
@@ -28,6 +29,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     const [players, setPlayers] = useState([
         {
             name: 'Diounata',
+            color: '#FFF',
             match: {
                 matches: 0,
                 wins: 0,
@@ -41,6 +43,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     const [defaultPlayers, setDefaultPlayers] = useState([
         {
             name: 'Player X',
+            color: '#FFF',
             match: {
                 matches: 0,
                 wins: 0,
@@ -52,6 +55,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
 
         {
             name: 'Player O',
+            color: '#FFF',
             match: {
                 matches: 0,
                 wins: 0,

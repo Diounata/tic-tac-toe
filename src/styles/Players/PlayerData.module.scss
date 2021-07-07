@@ -1,6 +1,6 @@
 .container > div {
     display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr;
+    grid-template-columns: 0.5fr 1fr 1fr 2fr 1fr;
     align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
@@ -20,6 +20,17 @@
     gap: 1rem;
 
     padding-left: 0.5rem;
+}
+
+.colorSquare {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+
+    div {
+        width: 0.8rem;
+        height: 0.8rem;
+    }
 }
 
 .actions {

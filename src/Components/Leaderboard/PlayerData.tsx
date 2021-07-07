@@ -12,8 +12,8 @@ export default function PlayerData() {
 
     return (
         <article className={styles.container}>
-            {players.map(player => (
-                <div>
+            {players.map((player, key) => (
+                <div key={key}>
                     <div className={styles.icons}>
                         <X />
                         <O />

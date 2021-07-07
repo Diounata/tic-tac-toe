@@ -5,5 +5,5 @@ type IconProps = {
 };
 
 export default function Trophy({ size }: IconProps) {
-    return <FaTrophy size={size ? size : '16'} />;
+    return <FaTrophy size={size || '16'} />;
 }
