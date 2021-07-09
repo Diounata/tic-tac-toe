@@ -7,13 +7,11 @@
     margin-top: 5rem;
 
     input[type='text'] {
-        width: 100%;
-
+        width: 100%;        
+        padding: 1rem 1.4rem;
+        
         background: var(--light-color);
         border: 0;
-
-        padding: 1rem 1.4rem;
-
         outline: none;
         transition: 0.2s;
 
@@ -21,6 +19,10 @@
             box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.4);
         }
     }
+}
+
+.inputNotFilled {
+    border: 1px solid var(--red) !important;
 }
 
 .colors {

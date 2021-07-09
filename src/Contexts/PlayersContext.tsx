@@ -28,6 +28,7 @@ type PlayerMatchProps = {
 type ContextProps = {
     players: PlayerProps[];
     defaultPlayers: PlayerProps[];
+    addNewPlayer(newPlayer: PlayerProps): void;
 };
 
 export function PlayersContextProvider({ children }: ChildrenProps) {
@@ -80,8 +81,14 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         },
     ]);
 
+    function addNewPlayer(newPlayer: PlayerProps): void {
+        const newPlayers = [...players, newPlayer];
+
+        setPlayers(newPlayers);
+    }
+
     return (
-        <PlayersContext.Provider value={{ players, defaultPlayers }}>
+        <PlayersContext.Provider value={{ players, defaultPlayers, addNewPlayer }}>
             {children}
         </PlayersContext.Provider>
     );
