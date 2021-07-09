@@ -15,8 +15,8 @@ export default function PlayerData() {
             {players.map((player, key) => (
                 <div key={key}>
                     <div className={styles.icons}>
-                        <X color={player.color} />
-                        <O color={player.color} />
+                        <X color={player.color.hex} />
+                        <O color={player.color.hex} />
                     </div>
 
                     <div className={styles.username}>{player.name}</div>

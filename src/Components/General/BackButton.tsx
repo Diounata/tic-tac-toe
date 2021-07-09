@@ -3,10 +3,14 @@ import styles from '../../styles/General/BackButton.module.scss';
 
 import BackIcon from '../../Icons/Back';
 
-export default function BackButton() {
+type ButtonProps = {
+    href?: string;
+};
+
+export default function BackButton({ href }: ButtonProps) {
     return (
         <div className={styles.back}>
-            <Link href='/'>
+            <Link href={href || '/'}>
                 <a>
                     <BackIcon />
                 </a>

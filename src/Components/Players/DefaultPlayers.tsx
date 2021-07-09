@@ -14,7 +14,7 @@ export default function PlayerData() {
 
                 <div className={styles.username}>Player X</div>
                 <div className={styles.colorSquare}>
-                    <div style={{ background: '#04DAC2' }}></div> #04DAC2
+                    <div style={{ background: '#04DAC2' }}></div> Blue
                 </div>
                 <div>
                     <XCircle />
@@ -28,7 +28,7 @@ export default function PlayerData() {
 
                 <div className={styles.username}>Player O</div>
                 <div className={styles.colorSquare}>
-                    <div style={{ background: '#BB86FC' }}></div> #BB86FC
+                    <div style={{ background: '#BB86FC' }}></div> Purple
                 </div>
                 <div>
                     <XCircle />

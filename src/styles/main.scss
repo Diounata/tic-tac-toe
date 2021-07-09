@@ -22,6 +22,10 @@ h2 {
     gap: 1rem;
 }
 
+input {
+    color: var(--text);
+}
+
 .container {
     display: flex;
     flex-direction: column;

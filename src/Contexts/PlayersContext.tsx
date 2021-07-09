@@ -8,8 +8,13 @@ type ChildrenProps = {
 
 type PlayerProps = {
     name: string;
-    color: string;
+    color: ColorProps;
     match: PlayerMatchProps;
+};
+
+type ColorProps = {
+    hex: string;
+    name: string;
 };
 
 type PlayerMatchProps = {
@@ -29,7 +34,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     const [players, setPlayers] = useState([
         {
             name: 'Diounata',
-            color: '#FFF',
+            color: {
+                hex: '#FFF',
+                name: 'White',
+            },
             match: {
                 matches: 0,
                 wins: 0,
@@ -43,7 +51,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     const [defaultPlayers, setDefaultPlayers] = useState([
         {
             name: 'Player X',
-            color: '#FFF',
+            color: {
+                hex: '#04dac2',
+                name: 'Blue',
+            },
             match: {
                 matches: 0,
                 wins: 0,
@@ -55,7 +66,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
 
         {
             name: 'Player O',
-            color: '#FFF',
+            color: {
+                hex: '#bb86fc',
+                name: 'Purple'
+            },
             match: {
                 matches: 0,
                 wins: 0,
