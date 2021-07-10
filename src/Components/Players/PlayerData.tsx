@@ -12,7 +12,7 @@ import DefaultPlayers from './DefaultPlayers';
 import { usePlayers } from '../../Contexts/PlayersContext';
 
 export default function PlayerData() {
-    const { players } = usePlayers();
+    const { players, deletePlayer } = usePlayers();
 
     return (
         <article className={styles.container}>
@@ -34,7 +34,7 @@ export default function PlayerData() {
                             <Edit /> Edit
                         </PlayersButton>
 
-                        <PlayersButton>
+                        <PlayersButton onClick={() => deletePlayer(key)}>
                             <Trash /> Delete
                         </PlayersButton>
 

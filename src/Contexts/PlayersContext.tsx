@@ -28,7 +28,9 @@ type PlayerMatchProps = {
 type ContextProps = {
     players: PlayerProps[];
     defaultPlayers: PlayerProps[];
+
     addNewPlayer(newPlayer: PlayerProps): void;
+    deletePlayer(indexPlayer: number): void;
 };
 
 export function PlayersContextProvider({ children }: ChildrenProps) {
@@ -69,7 +71,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             name: 'Player O',
             color: {
                 hex: '#bb86fc',
-                name: 'Purple'
+                name: 'Purple',
             },
             match: {
                 matches: 0,
@@ -87,8 +89,21 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         setPlayers(newPlayers);
     }
 
+    function deletePlayer(indexPlayer: number): void {
+        const newPlayers = players.filter((p, i) => i !== indexPlayer);
+
+        setPlayers(newPlayers);
+    }
+
     return (
-        <PlayersContext.Provider value={{ players, defaultPlayers, addNewPlayer }}>
+        <PlayersContext.Provider
+            value={{
+                players,
+                defaultPlayers,
+                addNewPlayer,
+                deletePlayer,
+            }}
+        >
             {children}
         </PlayersContext.Provider>
     );
