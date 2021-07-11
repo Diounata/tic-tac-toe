@@ -28,7 +28,9 @@ type PlayerMatchProps = {
 type ContextProps = {
     players: PlayerProps[];
     defaultPlayers: PlayerProps[];
+    selectedPlayer: number;
 
+    changeSelectedPlayer(key: number): void;
     addNewPlayer(newPlayer: PlayerProps): void;
     deletePlayer(indexPlayer: number): void;
 };
@@ -83,6 +85,12 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         },
     ]);
 
+    const [selectedPlayer, setSelectedPlayer] = useState<number>();
+
+    function changeSelectedPlayer(key: number): void {
+        setSelectedPlayer(key);
+    }
+
     function addNewPlayer(newPlayer: PlayerProps): void {
         const newPlayers = [...players, newPlayer];
 
@@ -100,6 +108,8 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             value={{
                 players,
                 defaultPlayers,
+                selectedPlayer,
+                changeSelectedPlayer,
                 addNewPlayer,
                 deletePlayer,
             }}

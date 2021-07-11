@@ -5,6 +5,7 @@
 
     position: absolute;
     top: 0;
+    left: 0;
 
     display: grid;
     place-items: center;
@@ -36,12 +37,13 @@
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
 
-            span, p {
+            span,
+            p {
                 display: inline-flex;
                 align-items: center;
             }
         }
-        
+
         footer {
             display: flex;
             align-items: center;
@@ -52,6 +54,10 @@
             background: var(--dark-color);
 
             button {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+
                 border: 0;
                 padding: 0.6rem 1rem;
 
@@ -65,7 +71,7 @@
 
                 &:hover {
                     border-radius: 10px;
-                    transform: scaleX(1.05);    
+                    transform: scaleX(1.05);
                 }
             }
         }
