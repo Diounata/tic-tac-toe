@@ -25,6 +25,7 @@ export default function PlayerData() {
                     <div>{player.match.wins}</div>
                     <div>{player.match.defeats}</div>
                     <div>{player.match.ties}</div>
+                    <div>{player.match.winrate} %</div>
                     <div>{player.match.score}</div>
                 </div>
             ))}

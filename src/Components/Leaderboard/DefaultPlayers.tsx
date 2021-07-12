@@ -17,6 +17,7 @@ export default function DefaultPlayers() {
                 <div>0</div>
                 <div>0</div>
                 <div>0</div>
+                <div>0 %</div>
                 <div>0</div>
             </div>
 
@@ -31,6 +32,7 @@ export default function DefaultPlayers() {
                 <div>0</div>
                 <div>0</div>
                 <div>0</div>
+                <div>0 %</div>
                 <div>0</div>
             </div>
         </>

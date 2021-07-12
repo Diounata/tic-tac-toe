@@ -30,6 +30,7 @@ export default function Leaderboard() {
                         <h4>Wins</h4>
                         <h4>Defeats</h4>
                         <h4>Ties</h4>
+                        <h4>% Win rate</h4>
                         <h4>Score</h4>
                     </div>
 

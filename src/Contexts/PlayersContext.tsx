@@ -22,6 +22,7 @@ type PlayerMatchProps = {
     wins: number;
     defeats: number;
     ties: number;
+    winrate: number;
     score: number;
 };
 
@@ -48,6 +49,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 wins: 0,
                 defeats: 0,
                 ties: 0,
+                winrate: 0,
                 score: 0,
             },
         },
@@ -65,6 +67,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 wins: 0,
                 defeats: 0,
                 ties: 0,
+                winrate: 0,
                 score: 0,
             },
         },
@@ -80,6 +83,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 wins: 0,
                 defeats: 0,
                 ties: 0,
+                winrate: 0,
                 score: 0,
             },
         },
