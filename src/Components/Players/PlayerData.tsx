@@ -12,12 +12,13 @@ import DefaultPlayers from './DefaultPlayers';
 
 import Modal from '../Modal/Modal';
 import DeleteModal from './Modals/Delete';
+import ResetModal from './Modals/Reset';
 
 import { usePlayers } from '../../Contexts/PlayersContext';
 import { useModal } from '../../Contexts/ModalContext';
 
 export default function PlayerData() {
-    const { players, changeSelectedPlayer } = usePlayers();
+    const { players, changeSelectedPlayer, resetPlayerStats } = usePlayers();
     const { changeModalState } = useModal();
 
     const [modalComponent, setModalComponent] = useState<JSX.Element>();
@@ -57,7 +58,7 @@ export default function PlayerData() {
                                 <Trash /> Delete
                             </PlayersButton>
 
-                            <PlayersButton>
+                            <PlayersButton onClick={() => showModal(<ResetModal />, key)}>
                                 <Refresh /> Reset
                             </PlayersButton>
                         </div>

@@ -34,6 +34,7 @@ type ContextProps = {
     changeSelectedPlayer(key: number): void;
     addNewPlayer(newPlayer: PlayerProps): void;
     deletePlayer(indexPlayer: number): void;
+    resetPlayerStats(indexPlayer: number): void;
 };
 
 export function PlayersContextProvider({ children }: ChildrenProps) {
@@ -107,6 +108,15 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         setPlayers(newPlayers);
     }
 
+    function resetPlayerStats(indexPlayer: number): void {
+        const newPlayerStatistic = players.filter((p, i) => i === indexPlayer);
+        Object.keys(newPlayerStatistic[0].match).forEach(item => newPlayerStatistic[0].match[item] = 0);
+
+        const newPlayers = players.map((player, index) => index !== indexPlayer ? player : newPlayerStatistic[0]);
+
+        setPlayers(newPlayers);
+    }
+
     return (
         <PlayersContext.Provider
             value={{
@@ -116,6 +126,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 changeSelectedPlayer,
                 addNewPlayer,
                 deletePlayer,
+                resetPlayerStats
             }}
         >
             {children}
