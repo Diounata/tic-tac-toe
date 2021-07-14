@@ -5,12 +5,13 @@ import BackIcon from '../../Icons/Back';
 
 type ButtonProps = {
     href?: string;
+    onClick?: () => void;
 };
 
-export default function BackButton({ href }: ButtonProps) {
+export default function BackButton(props: ButtonProps) {
     return (
         <div className={styles.back}>
-            <Link href={href || '/'}>
+            <Link {...props} href={props.href || '/'}>
                 <a>
                     <BackIcon />
                 </a>

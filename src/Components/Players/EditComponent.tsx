@@ -3,13 +3,13 @@ import { useRouter } from 'next/router';
 import styles from '../../styles/Players/NewPlayer.module.scss';
 
 import TitlePage from '../../utils/TitlePage';
-import Button from '../../Components/General/Button';
-import UserPlus from '../../Icons/UserPlus';
-
-import Colors from '../../Components/Players/new/Colors';
-import Footer from '../../Components/General/Footer';
 import BackButton from '../../Components/General/BackButton';
+import Button from '../General/Button';
+import EditIcon from '../../Icons/Edit';
+
 import Header from '../../Components/General/Header';
+import Colors from './new/Colors';
+import Footer from '../General/Footer';
 
 import { usePlayers } from '../../Contexts/PlayersContext';
 
@@ -18,55 +18,44 @@ type ColorProps = {
     name: string;
 };
 
-export default function NewPlayerForm() {
-    const { addNewPlayer } = usePlayers();
+export default function Edit() {
+    const { selectedPlayerForEditing, changeIsEditingAPlayer, editPlayer } = usePlayers();
     const router = useRouter();
 
     const [isInputNotFilled, setIsInputNotFilled] = useState(false);
-    const [name, setName] = useState('');
-    const [color, setColor] = useState({ hex: '#fff', name: 'White' } as ColorProps);
+    const [name, setName] = useState(selectedPlayerForEditing.player.name);
+    const [color, setColor] = useState({ ...selectedPlayerForEditing.player.color } as ColorProps);
 
     function updateColor(value: ColorProps): void {
         setColor(value);
     }
 
-    function newPlayerButton(): void {
+    function editPlayerButton(): void {
         if (!name) {
-            setIsInputNotFilled(true);        
+            setIsInputNotFilled(true);
         } else {
-            const player = {
-                name,
-                color,
-                match: {
-                    matches: 0,
-                    wins: 0,
-                    defeats: 0,
-                    ties: 0,
-                    winrate: 0,
-                    score: 0,
-                },
-            };
+            const player = { ...selectedPlayerForEditing.player, name, color };
 
-            addNewPlayer(player);
+            editPlayer(player);
             router.push('/players');
         }
     }
 
     return (
         <>
-            <TitlePage title='New player' />
+            <TitlePage title='Edit' />
 
             <div>
                 <div>
-                    <BackButton href='/players' />
+                    <BackButton href='/players' onClick={() => changeIsEditingAPlayer(false)} />
 
                     <Header>
-                        <UserPlus size={24} /> New player
+                        <EditIcon size={24} /> Edit: {selectedPlayerForEditing.player.name}
                     </Header>
                 </div>
-
+                
                 <form action='/players/' className={styles.newContainer}>
-                    <h4>Fill out this form below to sign up in our system.</h4>
+                    <h4>{selectedPlayerForEditing.player.name}'s information.</h4>
 
                     <input
                         type='text' placeholder='Username' required
@@ -86,8 +75,8 @@ export default function NewPlayerForm() {
                     </div>
 
                     <div className={styles.signUpButton}>
-                        <Button onClick={newPlayerButton}>
-                            <UserPlus /> Sign up
+                        <Button onClick={editPlayerButton}>
+                            <EditIcon /> Edit
                         </Button>
                     </div>
                 </form>

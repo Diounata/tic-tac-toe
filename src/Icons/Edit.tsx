@@ -1,5 +1,9 @@
 import { FaEdit } from 'react-icons/fa';
 
-export default function Edit() {
-    return <FaEdit />;
+type IconProps = {
+    size?: number;
+};
+
+export default function Edit({ size }: IconProps) {
+    return <FaEdit size={size} />;
 }

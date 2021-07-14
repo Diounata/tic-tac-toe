@@ -2,6 +2,8 @@ import { createContext, ReactNode, useContext, useState } from 'react';
 
 export const PlayersContext = createContext({} as ContextProps);
 
+import EmptyPlayer from '../utils/EmptyPlayer.json';
+
 type ChildrenProps = {
     children: ReactNode;
 };
@@ -26,15 +28,25 @@ type PlayerMatchProps = {
     score: number;
 };
 
+type EditingPlayerProps = {
+    player: PlayerProps;
+    key: number;
+};
+
 type ContextProps = {
     players: PlayerProps[];
     defaultPlayers: PlayerProps[];
     selectedPlayer: number;
+    selectedPlayerForEditing: EditingPlayerProps;
+    isEditingAPlayer: boolean;
 
+    changeIsEditingAPlayer(value: boolean): void;
     changeSelectedPlayer(key: number): void;
     addNewPlayer(newPlayer: PlayerProps): void;
-    deletePlayer(indexPlayer: number): void;
-    resetPlayerStats(indexPlayer: number): void;
+    updateSelectedPlayerForEditing(key: number): void;
+    editPlayer(player: PlayerProps): void;
+    deletePlayer(key: number): void;
+    resetPlayerStats(key: number): void;
 };
 
 export function PlayersContextProvider({ children }: ChildrenProps) {
@@ -42,7 +54,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         {
             name: 'Diounata',
             color: {
-                hex: '#FFF',
+                hex: '#fff',
                 name: 'White',
             },
             match: {
@@ -91,9 +103,21 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     ]);
 
     const [selectedPlayer, setSelectedPlayer] = useState<number>();
+    const [selectedPlayerForEditing, setSelectedPlayerForEditing] = useState<EditingPlayerProps>(EmptyPlayer[0]);
+    const [isEditingAPlayer, setIsEditingAPlayer] = useState(false);
+
+    function changeIsEditingAPlayer(value: boolean): void {
+        setIsEditingAPlayer(value);
+    }
 
     function changeSelectedPlayer(key: number): void {
         setSelectedPlayer(key);
+    }
+
+    function updateSelectedPlayerForEditing(key: number): void {
+        const editingPlayer = players.filter((p, index) => index === key);
+
+        setSelectedPlayerForEditing({ player: editingPlayer[0], key });
     }
 
     function addNewPlayer(newPlayer: PlayerProps): void {
@@ -102,17 +126,30 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         setPlayers(newPlayers);
     }
 
-    function deletePlayer(indexPlayer: number): void {
-        const newPlayers = players.filter((p, i) => i !== indexPlayer);
+    function editPlayer(player: PlayerProps): void {
+        const newPlayers = players.map((p, index) =>
+            selectedPlayerForEditing.key === index ? player : p
+        );
+
+        setPlayers(newPlayers);
+        setIsEditingAPlayer(false);
+    }
+
+    function deletePlayer(key: number): void {
+        const newPlayers = players.filter((p, i) => i !== key);
 
         setPlayers(newPlayers);
     }
 
-    function resetPlayerStats(indexPlayer: number): void {
-        const newPlayerStatistic = players.filter((p, i) => i === indexPlayer);
-        Object.keys(newPlayerStatistic[0].match).forEach(item => newPlayerStatistic[0].match[item] = 0);
+    function resetPlayerStats(key: number): void {
+        const newPlayerStatistic = players.filter((p, i) => i === key);
+        Object.keys(newPlayerStatistic[0].match).forEach(
+            item => (newPlayerStatistic[0].match[item] = 0)
+        );
 
-        const newPlayers = players.map((player, index) => index !== indexPlayer ? player : newPlayerStatistic[0]);
+        const newPlayers = players.map((player, index) =>
+            index !== key ? player : newPlayerStatistic[0]
+        );
 
         setPlayers(newPlayers);
     }
@@ -123,10 +160,15 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 players,
                 defaultPlayers,
                 selectedPlayer,
+                selectedPlayerForEditing,
+                isEditingAPlayer,
+                changeIsEditingAPlayer,
                 changeSelectedPlayer,
                 addNewPlayer,
+                updateSelectedPlayerForEditing,
+                editPlayer,
                 deletePlayer,
-                resetPlayerStats
+                resetPlayerStats,
             }}
         >
             {children}

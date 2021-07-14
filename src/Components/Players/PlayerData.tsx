@@ -11,6 +11,7 @@ import PlayersButton from './PlayersButton';
 import DefaultPlayers from './DefaultPlayers';
 
 import Modal from '../Modal/Modal';
+import EditModal from './Modals/Edit';
 import DeleteModal from './Modals/Delete';
 import ResetModal from './Modals/Reset';
 
@@ -18,7 +19,7 @@ import { usePlayers } from '../../Contexts/PlayersContext';
 import { useModal } from '../../Contexts/ModalContext';
 
 export default function PlayerData() {
-    const { players, changeSelectedPlayer, resetPlayerStats } = usePlayers();
+    const { players, changeSelectedPlayer } = usePlayers();
     const { changeModalState } = useModal();
 
     const [modalComponent, setModalComponent] = useState<JSX.Element>();
@@ -50,7 +51,7 @@ export default function PlayerData() {
                         </div>
 
                         <div className={styles.actions}>
-                            <PlayersButton>
+                            <PlayersButton onClick={() => showModal(<EditModal />, key)}>
                                 <Edit /> Edit
                             </PlayersButton>
 
