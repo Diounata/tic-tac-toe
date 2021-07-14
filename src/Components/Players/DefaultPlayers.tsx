@@ -1,8 +1,8 @@
-import styles from '../../styles/Players/PlayerData.module.scss';
+import styles from '@styles/Players/PlayerData.module.scss';
 
-import X from '../../Icons/X';
-import O from '../../Icons/O';
-import XCircle from '../../Icons/XCircle';
+import X from '@Icons/X';
+import O from '@Icons/O';
+import XCircle from '@Icons/XCircle';
 
 export default function PlayerData() {
     return (

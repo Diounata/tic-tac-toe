@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import styles from '../../styles/Players/PlayerData.module.scss';
+import styles from '@styles/Players/PlayerData.module.scss';
 
-import Edit from '../../Icons/Edit';
-import Trash from '../../Icons/Trash';
-import Refresh from '../../Icons/Refresh';
-import X from '../../Icons/X';
-import O from '../../Icons/O';
+import Edit from '@Icons/Edit';
+import Trash from '@Icons/Trash';
+import Refresh from '@Icons/Refresh';
+import X from '@Icons/X';
+import O from '@Icons/O';
 
 import PlayersButton from './PlayersButton';
 import DefaultPlayers from './DefaultPlayers';
@@ -15,8 +15,8 @@ import EditModal from './Modals/Edit';
 import DeleteModal from './Modals/Delete';
 import ResetModal from './Modals/Reset';
 
-import { usePlayers } from '../../Contexts/PlayersContext';
-import { useModal } from '../../Contexts/ModalContext';
+import { usePlayers } from '@Contexts/PlayersContext';
+import { useModal } from '@Contexts/ModalContext';
 
 export default function PlayerData() {
     const { players, changeSelectedPlayer } = usePlayers();

@@ -1,11 +1,11 @@
 import Link from 'next/link';
 
-import EditIcon from '../../../Icons/Edit';
-import ThumbsUp from '../../../Icons/ThumbsUp';
-import ThumbsDown from '../../../Icons/ThumbsDown';
+import EditIcon from '@Icons/Edit';
+import ThumbsUp from '@Icons/ThumbsUp';
+import ThumbsDown from '@Icons/ThumbsDown';
 
-import { useModal } from '../../../Contexts/ModalContext';
-import { usePlayers } from '../../../Contexts/PlayersContext';
+import { useModal } from '@Contexts/ModalContext';
+import { usePlayers } from '@Contexts/PlayersContext';
 
 export default function EditModal() {
     const { changeModalState } = useModal();

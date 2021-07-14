@@ -2,7 +2,7 @@ import { createContext, ReactNode, useContext, useState } from 'react';
 
 export const PlayersContext = createContext({} as ContextProps);
 
-import EmptyPlayer from '../utils/EmptyPlayer.json';
+import EmptyPlayer from '@utils/EmptyPlayer.json';
 
 type ChildrenProps = {
     children: ReactNode;

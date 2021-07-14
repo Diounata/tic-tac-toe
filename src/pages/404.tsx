@@ -1,10 +1,10 @@
-import styles from '../styles/404.module.scss';
+import styles from '@styles/404.module.scss';
 
-import TitlePage from '../utils/TitlePage';
-import LinkButton from '../Components/General/LinkButton';
+import TitlePage from '@utils/TitlePage';
+import LinkButton from '@Components/General/LinkButton';
 
-import Sad from '../Icons/Sad';
-import House from '../Icons/House';
+import Sad from '@Icons/Sad';
+import House from '@Icons/House';
 
 export default function NotFound() {
     return (

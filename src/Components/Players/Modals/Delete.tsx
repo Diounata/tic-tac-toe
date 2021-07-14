@@ -1,9 +1,9 @@
-import Danger from '../../../Icons/Danger';
-import ThumbsUp from '../../../Icons/ThumbsUp';
-import ThumbsDown from '../../../Icons/ThumbsDown';
+import Danger from '@Icons/Danger';
+import ThumbsUp from '@Icons/ThumbsUp';
+import ThumbsDown from '@Icons/ThumbsDown';
 
-import { useModal } from '../../../Contexts/ModalContext';
-import { usePlayers } from '../../../Contexts/PlayersContext';
+import { useModal } from '@Contexts/ModalContext';
+import { usePlayers } from '@Contexts/PlayersContext';
 
 export default function DeleteModal() {
     const { changeModalState } = useModal();

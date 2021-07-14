@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../../styles/Players/NewPlayer.module.scss';
+import styles from '@styles/Players/NewPlayer.module.scss';
 
-import TitlePage from '../../utils/TitlePage';
-import BackButton from '../../Components/General/BackButton';
+import TitlePage from '@utils/TitlePage';
+import BackButton from '@Components/General/BackButton';
 import Button from '../General/Button';
-import EditIcon from '../../Icons/Edit';
+import EditIcon from '@Icons/Edit';
 
-import Header from '../../Components/General/Header';
+import Header from '@Components/General/Header';
 import Colors from './new/Colors';
-import Footer from '../General/Footer';
+import Footer from '@Components/General/Footer';
 
-import { usePlayers } from '../../Contexts/PlayersContext';
+import { usePlayers } from '@Contexts/PlayersContext';
 
 type ColorProps = {
     hex: string;

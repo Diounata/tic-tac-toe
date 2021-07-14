@@ -1,7 +1,7 @@
-import styles from '../../styles/Leaderboard/PlayerData.module.scss';
+import styles from '@styles/Leaderboard/PlayerData.module.scss';
 
-import X from '../../Icons/X';
-import O from '../../Icons/O';
+import X from '@Icons/X';
+import O from '@Icons/O';
 
 export default function DefaultPlayers() {
     return (

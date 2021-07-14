@@ -1,8 +1,8 @@
-import styles from '../../styles/Game/Scoreboard.module.scss';
+import styles from '@styles/Game/Scoreboard.module.scss';
 
-import BackButton from '../../Components/General/BackButton';
+import BackButton from '@Components/General/BackButton';
 
-import { useGame } from '../../Contexts/GameContext';
+import { useGame } from '@Contexts/GameContext';
 
 export default function Scoreboard() {
     const { player } = useGame();

@@ -1,8 +1,8 @@
 import Link from 'next/link';
 
-import Question from '../../Icons/Question';
+import Question from '@Icons/Question';
 
-import { useModal } from '../../Contexts/ModalContext';
+import { useModal } from '@Contexts/ModalContext';
 
 export default function StartNewGame() {
     const { changeModalState } = useModal();

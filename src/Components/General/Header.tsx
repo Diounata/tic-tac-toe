@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import styles from '../../styles/General/Header.module.scss';
+import styles from '@styles/General/Header.module.scss';
 
 type HeaderProps = {
     children: ReactNode;

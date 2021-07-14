@@ -1,14 +1,14 @@
-import styles from '../../styles/Players/Players.module.scss';
+import styles from '@styles/Players/Players.module.scss';
 
-import TitlePage from '../../utils/TitlePage';
-import LinkButton from '../../Components/General/LinkButton';
-import BackButton from '../../Components/General/BackButton';
-import UserPlus from '../../Icons/UserPlus';
-import Users from '../../Icons/Users';
+import TitlePage from '@utils/TitlePage';
+import LinkButton from '@Components/General/LinkButton';
+import BackButton from '@Components/General/BackButton';
+import UserPlus from '@Icons/UserPlus';
+import Users from '@Icons/Users';
 
-import Header from '../../Components/General/Header';
-import Footer from '../../Components/General/Footer';
-import PlayerData from '../../Components/Players/PlayerData';
+import Header from '@Components/General/Header';
+import Footer from '@Components/General/Footer';
+import PlayerData from '@Components/Players/PlayerData';
 
 export default function Players() {
     return (

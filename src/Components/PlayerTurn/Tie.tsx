@@ -1,5 +1,5 @@
-import X from '../../Icons/X';
-import O from '../../Icons/O';
+import X from '@Icons/X';
+import O from '@Icons/O';
 
 export default function Tie() {
     return (

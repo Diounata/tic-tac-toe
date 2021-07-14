@@ -1,10 +1,10 @@
-import styles from '../../styles/Game/PlayerTurn.module.scss';
+import styles from '@styles/Game/PlayerTurn.module.scss';
 
 import Winner from './Winner';
 import Tie from './Tie';
 import PlayerTurnComponent from './PlayerTurn';
 
-import { useGame } from '../../Contexts/GameContext';
+import { useGame } from '@Contexts/GameContext';
 
 export default function PlayerTurn() {
     const { isGameFinished, winner } = useGame();

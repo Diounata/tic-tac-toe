@@ -1,10 +1,10 @@
-import TitlePage from '../utils/TitlePage';
+import TitlePage from '@utils/TitlePage';
 
-import X from '../Icons/X';
-import O from '../Icons/O';
+import X from '@Icons/X';
+import O from '@Icons/O';
 
-import Menu from '../Components/Menu';
-import Footer from '../Components/General/Footer';
+import Menu from '@Components/Menu';
+import Footer from '@Components/General/Footer';
 
 export default function Home() {
     return (

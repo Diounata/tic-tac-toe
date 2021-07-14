@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../../styles/Players/EditRoute.module.scss';
+import styles from '@styles/Players/EditRoute.module.scss';
 
-import EditComponent from '../../Components/Players/EditComponent';
+import EditComponent from '@Components/Players/EditComponent';
 
-import { usePlayers } from '../../Contexts/PlayersContext';
+import { usePlayers } from '@Contexts/PlayersContext';
 
 export default function Edit() {
     const { isEditingAPlayer } = usePlayers();

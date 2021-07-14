@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import styles from '../../styles/General/Button.module.scss';
+import styles from '@styles/General/Button.module.scss';
 
 type ButtonProps = {
     href: string;

@@ -1,19 +1,19 @@
-import styles from '../styles/Menu.module.scss';
+import styles from '@styles/Menu.module.scss';
 
 import Button from './General/Button';
-import Play from '../Icons/Play';
-import Info from '../Icons/Info';
-import History from '../Icons/History';
-import Question from '../Icons/Question';
-import Trophy from '../Icons/Trophy';
-import Users from '../Icons/Users';
-import Gear from '../Icons/Gear';
+import Play from '@Icons/Play';
+import Info from '@Icons/Info';
+import History from '@Icons/History';
+import Question from '@Icons/Question';
+import Trophy from '@Icons/Trophy';
+import Users from '@Icons/Users';
+import Gear from '@Icons/Gear';
 
 import LinkButton from './General/LinkButton';
 import Modal from './Modal/Modal';
 import StartNewGame from './Modal/StartNewGame';
 
-import { useModal } from '../Contexts/ModalContext';
+import { useModal } from '@Contexts/ModalContext';
 
 export default function Menu() {
     const { changeModalState } = useModal();

@@ -1,7 +1,7 @@
-import { useGame } from '../../Contexts/GameContext';
+import { useGame } from '@Contexts/GameContext';
 
-import X from '../../Icons/X';
-import O from '../../Icons/O';
+import X from '@Icons/X';
+import O from '@Icons/O';
 
 export default function PlayerTurnComponent() {
     const { playerTurn, player } = useGame();

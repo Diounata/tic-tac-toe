@@ -1,11 +1,11 @@
-import styles from '../../styles/Leaderboard/PlayerData.module.scss';
+import styles from '@styles/Leaderboard/PlayerData.module.scss';
 
-import X from '../../Icons/X';
-import O from '../../Icons/O';
+import X from '@Icons/X';
+import O from '@Icons/O';
 
 import DefaultPlayers from './DefaultPlayers';
 
-import { usePlayers } from '../../Contexts/PlayersContext';
+import { usePlayers } from '@Contexts/PlayersContext';
 
 export default function PlayerData() {
     const { players } = usePlayers();

@@ -8,8 +8,8 @@ import {
 
 import { useModal } from './ModalContext';
 
-import X from '../Icons/X';
-import O from '../Icons/O';
+import X from '@Icons/X';
+import O from '@Icons/O';
 
 export const GameContext = createContext({} as ContextProps);
 

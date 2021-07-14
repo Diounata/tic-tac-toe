@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from '../../styles/Players/NewPlayer.module.scss';
+import styles from '@styles/Players/NewPlayer.module.scss';
 
-import TitlePage from '../../utils/TitlePage';
-import Button from '../../Components/General/Button';
-import UserPlus from '../../Icons/UserPlus';
+import TitlePage from '@utils/TitlePage';
+import Button from '@Components/General/Button';
+import UserPlus from '@Icons/UserPlus';
 
-import Colors from '../../Components/Players/new/Colors';
-import Footer from '../../Components/General/Footer';
-import BackButton from '../../Components/General/BackButton';
-import Header from '../../Components/General/Header';
+import Colors from '@Components/Players/new/Colors';
+import Footer from '@Components/General/Footer';
+import BackButton from '@Components/General/BackButton';
+import Header from '@Components/General/Header';
 
-import { usePlayers } from '../../Contexts/PlayersContext';
+import { usePlayers } from '@Contexts/PlayersContext';
 
 type ColorProps = {
     hex: string;

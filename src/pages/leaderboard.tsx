@@ -1,12 +1,12 @@
-import styles from '../styles/Leaderboard/Leaderboard.module.scss';
+import styles from '@styles/Leaderboard/Leaderboard.module.scss';
 
-import TitlePage from '../utils/TitlePage';
-import Trophy from '../Icons/Trophy';
+import TitlePage from '@utils/TitlePage';
+import Trophy from '@Icons/Trophy';
 
-import BackButton from '../Components/General/BackButton';
-import Header from '../Components/General/Header';
-import PlayerData from '../Components/Leaderboard/PlayerData';
-import Footer from '../Components/General/Footer';
+import BackButton from '@Components/General/BackButton';
+import Header from '@Components/General/Header';
+import PlayerData from '@Components/Leaderboard/PlayerData';
+import Footer from '@Components/General/Footer';
 
 export default function Leaderboard() {
     return (

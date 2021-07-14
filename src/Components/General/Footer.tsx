@@ -1,6 +1,6 @@
-import styles from '../../styles/General/Footer.module.scss';
+import styles from '@styles/General/Footer.module.scss';
 
-import Heart from '../../Icons/Heart';
+import Heart from '@Icons/Heart';
 
 export default function Footer() {
     return (

@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import styles from '../../styles/General/BackButton.module.scss';
+import styles from '@styles/General/BackButton.module.scss';
 
-import BackIcon from '../../Icons/Back';
+import BackIcon from '@Icons/Back';
 
 type ButtonProps = {
     href?: string;
