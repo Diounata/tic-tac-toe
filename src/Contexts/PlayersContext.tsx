@@ -24,13 +24,17 @@ type PlayerMatchProps = {
     wins: number;
     defeats: number;
     ties: number;
-    winrate: number;
     score: number;
 };
 
 type EditingPlayerProps = {
     player: PlayerProps;
     key: number;
+};
+
+type ShowWinrateProps = {
+    wins: number;
+    matches: number;
 };
 
 type ContextProps = {
@@ -47,6 +51,8 @@ type ContextProps = {
     editPlayer(player: PlayerProps): void;
     deletePlayer(key: number): void;
     resetPlayerStats(key: number): void;
+
+    ShowWinrate({ wins, matches }: ShowWinrateProps): JSX.Element;
 };
 
 export function PlayersContextProvider({ children }: ChildrenProps) {
@@ -62,7 +68,6 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 wins: 0,
                 defeats: 0,
                 ties: 0,
-                winrate: 0,
                 score: 0,
             },
         },
@@ -80,7 +85,6 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 wins: 0,
                 defeats: 0,
                 ties: 0,
-                winrate: 0,
                 score: 0,
             },
         },
@@ -96,7 +100,6 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 wins: 0,
                 defeats: 0,
                 ties: 0,
-                winrate: 0,
                 score: 0,
             },
         },
@@ -143,15 +146,28 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
 
     function resetPlayerStats(key: number): void {
         const newPlayerStatistic = players.filter((p, i) => i === key);
-        Object.keys(newPlayerStatistic[0].match).forEach(
-            item => (newPlayerStatistic[0].match[item] = 0)
-        );
+        Object.keys(newPlayerStatistic[0].match).forEach(item => (newPlayerStatistic[0].match[item] = 0));
 
-        const newPlayers = players.map((player, index) =>
-            index !== key ? player : newPlayerStatistic[0]
-        );
+        const newPlayers = players.map((player, index) => index !== key ? player : newPlayerStatistic[0]);
 
         setPlayers(newPlayers);
+    }
+
+    
+    // Components
+    
+    function ShowWinrate({ wins, matches }: ShowWinrateProps) {
+        function caculateWinrate(): number {
+            if (matches === 0) {
+                return 0;
+            } else {
+                const winrate = (wins * 100) / matches;
+            
+                return winrate;
+            }
+        }
+    
+        return <> {caculateWinrate()} </>
     }
 
     return (
@@ -169,6 +185,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 editPlayer,
                 deletePlayer,
                 resetPlayerStats,
+                ShowWinrate
             }}
         >
             {children}
