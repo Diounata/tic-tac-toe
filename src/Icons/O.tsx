@@ -1,9 +1,6 @@
 import { FaRegCircle } from 'react-icons/fa';
+import { IconBaseProps } from 'react-icons';
 
-type IconProps = {
-    color?: string;
-}
-
-export default function O({ color }: IconProps) {
-    return <FaRegCircle color={color || '#bb86fc'} title='O' />;
+export default function O(props: IconBaseProps) {
+    return <FaRegCircle color={'#bb86fc'} {...props} title='O' />;
 }

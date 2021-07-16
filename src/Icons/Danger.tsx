@@ -1,9 +1,6 @@
 import { BsFillExclamationTriangleFill } from 'react-icons/bs';
+import { IconBaseProps } from 'react-icons';
 
-type IconProps = {
-    color?: string;
-};
-
-export default function Danger({ color }: IconProps) {
-    return <BsFillExclamationTriangleFill color={color || '#f39c12'} />;
+export default function Danger(props: IconBaseProps) {
+    return <BsFillExclamationTriangleFill color='#f39c12' {...props} />;
 }

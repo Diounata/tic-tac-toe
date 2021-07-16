@@ -1,9 +1,6 @@
 import { FaUserFriends } from 'react-icons/fa';
+import { IconBaseProps } from 'react-icons';
 
-type IconProps = {
-    size?: number;
-};
-
-export default function Users({ size }: IconProps) {
-    return <FaUserFriends size={size || '16'} />;
+export default function Users(props: IconBaseProps) {
+    return <FaUserFriends {...props} />;
 }

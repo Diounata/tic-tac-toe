@@ -1,9 +1,6 @@
 import { FaUserPlus } from 'react-icons/fa';
+import { IconBaseProps } from 'react-icons';
 
-type IconProps = {
-    size?: number;
-};
-
-export default function UserPlus({ size }: IconProps) {
-    return <FaUserPlus size={size || 16} />;
+export default function UserPlus(props: IconBaseProps) {
+    return <FaUserPlus {...props} />;
 }

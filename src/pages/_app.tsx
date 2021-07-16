@@ -7,7 +7,7 @@ import { PlayersContextProvider } from '@Contexts/PlayersContext';
 
 export default function MyApp({ Component, pageProps }) {
     return (
-        <IconContext.Provider value={{ color: '#e1e1e1' }}>
+        <IconContext.Provider value={{ color: '#e1e1e1', style: { verticalAlign: 'middle' }}}>
             <ModalContextProvider>
                 <GameContextProvider>
                     <PlayersContextProvider>

@@ -1,5 +1,6 @@
 import { FaHistory } from 'react-icons/fa';
+import { IconBaseProps } from 'react-icons';
 
-export default function History() {
-    return <FaHistory size='16' />;
+export default function History(props: IconBaseProps) {
+    return <FaHistory {...props} />;
 }

@@ -1,5 +1,6 @@
 import { FaQuestionCircle } from 'react-icons/fa';
+import { IconBaseProps } from 'react-icons';
 
-export default function Question() {
-    return <FaQuestionCircle size='16' />;
+export default function Question(props: IconBaseProps) {
+    return <FaQuestionCircle {...props} />;
 }

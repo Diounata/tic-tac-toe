@@ -1,5 +1,6 @@
 import { BsFillGearFill } from 'react-icons/bs';
+import { IconBaseProps } from 'react-icons';
 
-export default function Gear() {
-    return <BsFillGearFill size='16' />;
+export default function Gear(props: IconBaseProps) {
+    return <BsFillGearFill {...props} />;
 }
