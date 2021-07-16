@@ -4,6 +4,7 @@ import styles from '@styles/Players/NewPlayer.module.scss';
 
 import TitlePage from '@utils/TitlePage';
 import BackButton from '@Components/General/BackButton';
+import WarningAlert from './WarningAlert';
 import Button from '../General/Button';
 import EditIcon from '@Icons/Edit';
 
@@ -18,21 +19,33 @@ type ColorProps = {
     name: string;
 };
 
+type ErrorProps = {
+    situation: boolean;
+    text: string;
+}
+
 export default function Edit() {
-    const { selectedPlayerForEditing, changeIsEditingAPlayer, editPlayer } = usePlayers();
+    const { playersName, selectedPlayerForEditing, changeIsEditingAPlayer, editPlayer } = usePlayers();
     const router = useRouter();
 
-    const [isInputNotFilled, setIsInputNotFilled] = useState(false);
+    const [hasError, setHasError] = useState({} as ErrorProps);
     const [name, setName] = useState(selectedPlayerForEditing.player.name);
     const [color, setColor] = useState({ ...selectedPlayerForEditing.player.color } as ColorProps);
+
+    const newPlayersName = playersName.filter(player => player !== selectedPlayerForEditing.player.name);
 
     function updateColor(value: ColorProps): void {
         setColor(value);
     }
 
-    function editPlayerButton(): void {
+    function editPlayerButton(e): void {
+        const hasEqualNameRegistered = newPlayersName.some(player => player === name);
+        e.preventDefault();
+
         if (!name) {
-            setIsInputNotFilled(true);
+            setHasError({ situation: true, text: "There's no username insered" });
+        } else if (hasEqualNameRegistered) {
+            setHasError({ situation: true, text: "There's a username registered with this name" });
         } else {
             const player = { ...selectedPlayerForEditing.player, name, color };
 
@@ -59,10 +72,12 @@ export default function Edit() {
 
                     <input
                         type='text' placeholder='Username' required
-                        className={isInputNotFilled ? styles.inputNotFilled : ''}
+                        className={hasError.situation ? styles.inputNotFilled : ''}
                         onChange={e => setName(e.target.value)}
                         value={name}
                     />
+
+                    <WarningAlert hasError={hasError} />
 
                     <h4>User color:</h4>
 

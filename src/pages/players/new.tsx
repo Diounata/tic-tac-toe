@@ -9,10 +9,10 @@ import UserPlus from '@Icons/UserPlus';
 import Colors from '@Components/Players/new/Colors';
 import Footer from '@Components/General/Footer';
 import BackButton from '@Components/General/BackButton';
+import WarningAlert from '@Components/Players/WarningAlert';
 import Header from '@Components/General/Header';
 
 import { usePlayers } from '@Contexts/PlayersContext';
-import WarningAlert from '@Components/Players/new/WarningAlert';
 
 type ColorProps = {
     hex: string;

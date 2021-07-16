@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import EditIcon from '@Icons/Edit';
 import ThumbsUp from '@Icons/ThumbsUp';
@@ -11,10 +11,13 @@ export default function EditModal() {
     const { changeModalState } = useModal();
     const { selectedPlayer, updateSelectedPlayerForEditing, changeIsEditingAPlayer } = usePlayers();
 
+    const router = useRouter();
+
     function go(): void {
         changeIsEditingAPlayer(true);
         updateSelectedPlayerForEditing(selectedPlayer);
         changeModalState(false);
+        router.push('/players/edit');
     }
 
     return (
@@ -31,13 +34,7 @@ export default function EditModal() {
 
             <footer>
                 <button onClick={go}>
-                    <Link href='/players/edit'>
-                        <a>
-                            <>
-                                <ThumbsUp /> Yes, I do!
-                            </>
-                        </a>
-                    </Link>
+                    <ThumbsUp /> Yes, I do!
                 </button>
 
                 <button onClick={() => changeModalState(false)}>
