@@ -1,4 +1,4 @@
-import styles from '@styles/404.module.scss';
+import styles from '@styles/General/404.module.scss';
 
 import TitlePage from '@utils/TitlePage';
 import LinkButton from '@Components/General/LinkButton';

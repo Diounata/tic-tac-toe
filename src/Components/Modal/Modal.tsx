@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import styles from '@styles/Modal.module.scss';
+import styles from '@styles/General/Modal.module.scss';
 
 import { useModal } from '@Contexts/ModalContext';
 

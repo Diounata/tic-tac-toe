@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 export const PlayersContext = createContext({} as ContextProps);
 
@@ -40,6 +40,7 @@ type ShowWinrateProps = {
 type ContextProps = {
     players: PlayerProps[];
     defaultPlayers: PlayerProps[];
+    playersName: string[];
     selectedPlayer: number;
     selectedPlayerForEditing: EditingPlayerProps;
     isEditingAPlayer: boolean;
@@ -105,6 +106,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         },
     ]);
 
+    const [playersName, setPlayersName] = useState({} as string[]);
     const [selectedPlayer, setSelectedPlayer] = useState<number>();
     const [selectedPlayerForEditing, setSelectedPlayerForEditing] = useState<EditingPlayerProps>(EmptyPlayer[0]);
     const [isEditingAPlayer, setIsEditingAPlayer] = useState(false);
@@ -130,9 +132,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     }
 
     function editPlayer(player: PlayerProps): void {
-        const newPlayers = players.map((p, index) =>
-            selectedPlayerForEditing.key === index ? player : p
-        );
+        const newPlayers = players.map((p, index) => selectedPlayerForEditing.key === index ? player : p);
 
         setPlayers(newPlayers);
         setIsEditingAPlayer(false);
@@ -170,11 +170,18 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         return <> {caculateWinrate()} </>
     }
 
+    useEffect(() => {
+        const newPlayersName = players.map(player => player.name);
+
+        setPlayersName(newPlayersName);
+    }, [players]);
+
     return (
         <PlayersContext.Provider
             value={{
                 players,
                 defaultPlayers,
+                playersName,
                 selectedPlayer,
                 selectedPlayerForEditing,
                 isEditingAPlayer,

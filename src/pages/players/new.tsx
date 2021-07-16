@@ -12,17 +12,23 @@ import BackButton from '@Components/General/BackButton';
 import Header from '@Components/General/Header';
 
 import { usePlayers } from '@Contexts/PlayersContext';
+import WarningAlert from '@Components/Players/new/WarningAlert';
 
 type ColorProps = {
     hex: string;
     name: string;
 };
 
+type ErrorProps = {
+    situation: boolean;
+    text: string;
+}
+
 export default function NewPlayerForm() {
-    const { addNewPlayer } = usePlayers();
+    const { playersName, addNewPlayer } = usePlayers();
     const router = useRouter();
 
-    const [isInputNotFilled, setIsInputNotFilled] = useState(false);
+    const [hasError, setHasError] = useState({} as ErrorProps);
     const [name, setName] = useState('');
     const [color, setColor] = useState({ hex: '#fff', name: 'White' } as ColorProps);
 
@@ -30,9 +36,14 @@ export default function NewPlayerForm() {
         setColor(value);
     }
 
-    function newPlayerButton(): void {
+    function newPlayerButton(e): void {
+        const hasEqualNameRegistered = playersName.some(player => player === name);
+        e.preventDefault();
+
         if (!name) {
-            setIsInputNotFilled(true);        
+            setHasError({ situation: true, text: "There's no username insered" });
+        } else if (hasEqualNameRegistered) {
+            setHasError({ situation: true, text: "There's a username registered with this name" });
         } else {
             const player = {
                 name,
@@ -70,10 +81,12 @@ export default function NewPlayerForm() {
 
                     <input
                         type='text' placeholder='Username' required
-                        className={isInputNotFilled ? styles.inputNotFilled : ''}
+                        className={hasError.situation ? styles.inputNotFilled : ''}
                         onChange={e => setName(e.target.value)}
                         value={name}
                     />
+
+                    <WarningAlert hasError={hasError} />
 
                     <h4>User color:</h4>
 

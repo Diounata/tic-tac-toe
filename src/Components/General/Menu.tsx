@@ -1,6 +1,6 @@
-import styles from '@styles/Menu.module.scss';
+import styles from '@styles/General/Menu.module.scss';
 
-import Button from './General/Button';
+import Button from './Button';
 import Play from '@Icons/Play';
 import Info from '@Icons/Info';
 import History from '@Icons/History';
@@ -9,9 +9,9 @@ import Trophy from '@Icons/Trophy';
 import Users from '@Icons/Users';
 import Gear from '@Icons/Gear';
 
-import LinkButton from './General/LinkButton';
-import Modal from './Modal/Modal';
-import StartNewGame from './Modal/StartNewGame';
+import LinkButton from './LinkButton';
+import Modal from '../Modal/Modal';
+import StartNewGame from '../Modal/StartNewGame';
 
 import { useModal } from '@Contexts/ModalContext';
 

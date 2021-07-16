@@ -3,7 +3,7 @@ import TitlePage from '@utils/TitlePage';
 import X from '@Icons/X';
 import O from '@Icons/O';
 
-import Menu from '@Components/Menu';
+import Menu from '@Components/General/Menu';
 import Footer from '@Components/General/Footer';
 
 export default function Home() {
