@@ -37,14 +37,21 @@ type ShowWinrateProps = {
     matches: number;
 };
 
+type PlayerActionMessagesProps = {
+    action: string;
+    user?: string;
+}
+
 type ContextProps = {
     players: PlayerProps[];
     defaultPlayers: PlayerProps[];
     playersName: string[];
+    playerActionMessage: PlayerActionMessagesProps;
     selectedPlayer: number;
     selectedPlayerForEditing: EditingPlayerProps;
     isEditingAPlayer: boolean;
 
+    changePlayerActionMessage(value: PlayerActionMessagesProps): void;
     changeIsEditingAPlayer(value: boolean): void;
     changeSelectedPlayer(key: number): void;
     addNewPlayer(newPlayer: PlayerProps): void;
@@ -107,9 +114,14 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     ]);
 
     const [playersName, setPlayersName] = useState({} as string[]);
+    const [playerActionMessage, setPlayerActionMessage] = useState({} as PlayerActionMessagesProps);
     const [selectedPlayer, setSelectedPlayer] = useState<number>();
     const [selectedPlayerForEditing, setSelectedPlayerForEditing] = useState<EditingPlayerProps>(EmptyPlayer[0]);
     const [isEditingAPlayer, setIsEditingAPlayer] = useState(false);
+
+    function changePlayerActionMessage(value: PlayerActionMessagesProps) {
+        setPlayerActionMessage(value);
+    }
 
     function changeIsEditingAPlayer(value: boolean): void {
         setIsEditingAPlayer(value);
@@ -129,6 +141,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         const newPlayers = [...players, newPlayer];
 
         setPlayers(newPlayers);
+        changePlayerActionMessage({ action: 'add', user: newPlayer.name });
     }
 
     function editPlayer(player: PlayerProps): void {
@@ -136,12 +149,15 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
 
         setPlayers(newPlayers);
         setIsEditingAPlayer(false);
+        changePlayerActionMessage({ action: 'edit', user: player.name, });
     }
 
     function deletePlayer(key: number): void {
+        const deletedPlayer = players.filter((p, i) => i === key);
         const newPlayers = players.filter((p, i) => i !== key);
 
         setPlayers(newPlayers);
+        changePlayerActionMessage({ action: 'delete', user: deletedPlayer[0].name });
     }
 
     function resetPlayerStats(key: number): void {
@@ -151,6 +167,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         const newPlayers = players.map((player, index) => index !== key ? player : newPlayerStatistic[0]);
 
         setPlayers(newPlayers);
+        changePlayerActionMessage({ action: 'reset', user: newPlayerStatistic[0].name });
     }
 
     
@@ -182,9 +199,11 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 players,
                 defaultPlayers,
                 playersName,
+                playerActionMessage,
                 selectedPlayer,
                 selectedPlayerForEditing,
                 isEditingAPlayer,
+                changePlayerActionMessage,
                 changeIsEditingAPlayer,
                 changeSelectedPlayer,
                 addNewPlayer,

@@ -6,14 +6,21 @@ import BackButton from '@Components/General/BackButton';
 import UserPlus from '@Icons/UserPlus';
 import Users from '@Icons/Users';
 
+import Message from '@Components/General/Message';
 import Header from '@Components/General/Header';
 import Footer from '@Components/General/Footer';
 import PlayerData from '@Components/Players/PlayerData';
 
+import { usePlayers } from '@Contexts/PlayersContext';
+
 export default function Players() {
+    const { playerActionMessage } = usePlayers();
+
     return (
         <>
             <TitlePage title='Players' />
+
+            {playerActionMessage.action && <Message />}
 
             <main>
                 <div>

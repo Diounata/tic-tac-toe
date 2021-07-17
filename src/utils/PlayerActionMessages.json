@@ -1,0 +1,8 @@
+[
+    {
+        "add": " has been added succesfully!",
+        "edit": " has been changed succesfully!",
+        "delete": " has been deleted succesfully!",
+        "reset": " stats has been reseted succesfully!"
+    }
+]
