@@ -8,29 +8,49 @@ import DefaultPlayers from './DefaultPlayers';
 import { usePlayers } from '@Contexts/PlayersContext';
 
 export default function PlayerData() {
-    const { players, ShowWinrate } = usePlayers();
+    const { players, calcWinrate, calcScore } = usePlayers();
+
+    function getClassColor(score: number): string {
+        if (score > 0) {
+            return 'var(--green)';
+        } else if (score < 0) {
+            return 'var(--red)';
+        } else {
+            return 'var(--gray)';
+        }
+    }
 
     return (
         <article className={styles.container}>
-            {players.map((player, key) => (
-                <div key={key}>
-                    <div className={styles.icons}>
-                        <X color={player.color.hex} />
-                        <O color={player.color.hex} />
+            {players.map((p, key) => {
+                const winrate = calcWinrate(
+                    p.match.wins,
+                    p.match.matches
+                );
+                const score = calcScore(p.match.wins, p.match.ties, p.match.defeats);
+
+                return (
+                    <div key={key}>
+                        <div className={styles.icons}>
+                            <X color={p.color.hex} />
+                            <O color={p.color.hex} />
+                        </div>
+
+                        <div className={styles.username}>{p.name}</div>
+
+                        <div>{p.match.matches}</div>
+                        <div>{p.match.wins}</div>
+                        <div>{p.match.defeats}</div>
+                        <div>{p.match.ties}</div>
+                        <div>{winrate} %</div>
+                        <div style={{ color: getClassColor(score) }}>
+                            {score}
+                        </div>
                     </div>
+                );
+            })}
 
-                    <div className={styles.username}>{player.name}</div>
-
-                    <div>{player.match.matches}</div>
-                    <div>{player.match.wins}</div>
-                    <div>{player.match.defeats}</div>
-                    <div>{player.match.ties}</div>
-                    <div><ShowWinrate wins={player.match.wins} matches={player.match.matches} /> %</div>
-                    <div>{player.match.score}</div>
-                </div>
-            ))}
-
-            <DefaultPlayers />
+            <DefaultPlayers getClassColor={getClassColor} />
         </article>
     );
 }

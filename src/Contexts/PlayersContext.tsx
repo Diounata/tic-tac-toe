@@ -24,7 +24,6 @@ type PlayerMatchProps = {
     wins: number;
     defeats: number;
     ties: number;
-    score: number;
 };
 
 type EditingPlayerProps = {
@@ -40,7 +39,7 @@ type ShowWinrateProps = {
 type PlayerActionMessagesProps = {
     action: string;
     user?: string;
-}
+};
 
 type ContextProps = {
     players: PlayerProps[];
@@ -59,8 +58,8 @@ type ContextProps = {
     editPlayer(player: PlayerProps): void;
     deletePlayer(key: number): void;
     resetPlayerStats(key: number): void;
-
-    ShowWinrate({ wins, matches }: ShowWinrateProps): JSX.Element;
+    calcWinrate(wins: number, matches: number): number;
+    calcScore(wins: number, ties: number, defeats: number): number;
 };
 
 export function PlayersContextProvider({ children }: ChildrenProps) {
@@ -72,11 +71,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 name: 'White',
             },
             match: {
-                matches: 0,
-                wins: 0,
+                matches: 10,
+                wins: 5,
                 defeats: 0,
-                ties: 0,
-                score: 0,
+                ties: 2,
             },
         },
     ]);
@@ -93,7 +91,6 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 wins: 0,
                 defeats: 0,
                 ties: 0,
-                score: 0,
             },
         },
 
@@ -104,11 +101,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 name: 'Purple',
             },
             match: {
-                matches: 0,
-                wins: 0,
-                defeats: 0,
-                ties: 0,
-                score: 0,
+                matches: 20,
+                wins: 5,
+                defeats: 15,
+                ties: 1,
             },
         },
     ]);
@@ -170,21 +166,24 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         changePlayerActionMessage({ action: 'reset', user: newPlayerStatistic[0].name });
     }
 
-    
-    // Components
-    
-    function ShowWinrate({ wins, matches }: ShowWinrateProps) {
-        function caculateWinrate(): number {
+    function calcWinrate(wins: number, matches: number): number {
+        const winrate = () => {
             if (matches === 0) {
                 return 0;
             } else {
                 const winrate = (wins * 100) / matches;
-            
+                
                 return winrate;
             }
         }
-    
-        return <> {caculateWinrate()} </>
+        
+        return winrate();
+    }
+
+    function calcScore(wins: number, ties: number, defeats: number): number {
+        const score = ((wins * 2) + (ties * 0.5)) - defeats;
+        
+        return score;
     }
 
     useEffect(() => {
@@ -211,7 +210,8 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 editPlayer,
                 deletePlayer,
                 resetPlayerStats,
-                ShowWinrate
+                calcWinrate,
+                calcScore
             }}
         >
             {children}
