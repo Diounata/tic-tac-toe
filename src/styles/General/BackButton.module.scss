@@ -12,6 +12,11 @@
 
     transition: 0.3s;
 
+    a {
+        width: 0;
+        height: 0;
+    }
+
     &:hover {
         background: var(--light-color);
     }

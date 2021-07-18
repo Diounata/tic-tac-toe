@@ -10,12 +10,12 @@ type ButtonProps = {
 
 export default function BackButton(props: ButtonProps) {
     return (
-        <div className={styles.back}>
-            <Link {...props} href={props.href || '/'}>
+        <Link {...props} href={props.href || '/'}>
+            <div className={styles.back}>
                 <a>
                     <BackIcon />
                 </a>
-            </Link>
-        </div>
+            </div>
+        </Link>
     );
 }
