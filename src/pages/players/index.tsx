@@ -5,6 +5,9 @@ import LinkButton from '@Components/General/LinkButton';
 import BackButton from '@Components/General/BackButton';
 import UserPlus from '@Icons/UserPlus';
 import Users from '@Icons/Users';
+import User from '@Icons/User';
+import UserGear from '@Icons/UserGear';
+import Palette from '@Icons/Palette';
 
 import Message from '@Components/General/Message';
 import Header from '@Components/General/Header';
@@ -34,9 +37,9 @@ export default function Players() {
                 <div className={styles.container}>
                     <div className={styles.tableHeader}>
                         <span></span>
-                        <h4 className={styles.username}>Username</h4>
-                        <h4 className={styles.color}>Color</h4>
-                        <h4>Actions</h4>
+                        <h4 className={styles.username}> <User /> Username </h4>
+                        <h4 className={styles.color}> <Palette /> Color </h4>
+                        <h4 className={styles.actions}> <UserGear /> Actions </h4>
                         <h4>
                             <LinkButton href='/players/new'>
                                 <UserPlus /> Add new player
