@@ -13,31 +13,38 @@ import O from '@Icons/O';
 
 export const GameContext = createContext({} as ContextProps);
 
-interface ChildrenProps {
+type ChildrenProps = {
     children: ReactNode;
-}
+};
 
-interface PlayerContentProps {
+type PlayerContentProps = {
     name: string;
     symbol: string;
     color: string;
     score: number;
     icon: JSX.Element;
+};
+
+type PlayersName = {
+    x: string;
+    o: string;
 }
 
-interface PlayerProps {
+type PlayerProps = {
     x: PlayerContentProps;
     o: PlayerContentProps;
-}
+};
 
-interface ContextProps {
+type ContextProps = {
     player: PlayerProps;
+    playersName: PlayersName;
     position: string[];
     playerTurn: string;
     winner: PlayerContentProps;
     winnerPosition: Number[];
     isGameFinished: boolean;
 
+    updatePlayer(playerValues, symbol: string): void
     updatePosition(number: number): void;
     resetGame(): void;
 }
@@ -59,7 +66,9 @@ export function GameContextProvider({ children }: ChildrenProps) {
             score: 0,
             icon: <O />
         },
-    })
+    });
+    const [playersName, setPlayersName] = useState<PlayersName>({ x: '', o: '' });
+
     const [position, setPosition] = useState(['', '', '', '', '', '', '', '', '']);
     const [playerTurn, setPlayerTurn] = useState('Player'); // It'll start as X
     const [amountFilledPosition, setAmountFilledPosition] = useState(0);
@@ -69,6 +78,23 @@ export function GameContextProvider({ children }: ChildrenProps) {
     
     const { isModalOpen, changeModalState } = useModal();
     
+    function updatePlayer(playerValues, symbol: string): void {
+        const newPlayer = { ...playerValues, symbol: symbol, icon: <X /> };
+        let newObject: PlayerProps;
+
+        if (player[symbol].name === newPlayer.name) {
+            newPlayer.name = '';
+        }
+
+        if (symbol === 'x') {
+            newObject = { x: newPlayer, o: player.o }
+        } else if (symbol === 'o') {
+            newObject = { x: player.x, o: newPlayer }
+        }
+
+        setPlayer(newObject);
+    }
+
     function updatePosition(number: number): void {
         if (!position[number]) {
             const newPosition = position.map((i, index) =>
@@ -166,16 +192,23 @@ export function GameContextProvider({ children }: ChildrenProps) {
         }
     }), [winner])
 
+    useEffect(() => {
+        const usernames = { x: player.x.name, o: player.o.name };
+
+        setPlayersName(usernames);
+    }, [player]);
+
     return (
         <GameContext.Provider
             value={{
                 player,
+                playersName,
                 position,
                 playerTurn,
                 winner,
                 winnerPosition,
                 isGameFinished,
-                updatePosition,
+                updatePosition,updatePlayer,
                 resetGame,
             }}
         >

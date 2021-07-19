@@ -5,8 +5,15 @@
     justify-content: space-between;
     gap: 0.5rem;
 
+    height: 4.6rem;
+
     padding: 1.2rem 0;
     border-bottom: 2px solid var(--light-color);
+
+    button:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
 }
 
 .username {
@@ -36,5 +43,11 @@
 .actions {
     display: flex;
     justify-content: center;
+    gap: 1.3rem;
+}
+
+.selectPlayer {
+    display: flex;
+    align-items: center;
     gap: 1.3rem;
 }

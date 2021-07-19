@@ -9,15 +9,15 @@ export default function MyApp({ Component, pageProps }) {
     return (
         <IconContext.Provider value={{ color: '#e1e1e1', style: { verticalAlign: 'middle' }}}>
             <ModalContextProvider>
-                <GameContextProvider>
-                    <PlayersContextProvider>
+                <PlayersContextProvider>
+                    <GameContextProvider>
                        
                         <div className='container'>
                             <Component {...pageProps} />
                         </div>
                         
-                    </PlayersContextProvider>
-                </GameContextProvider>
+                    </GameContextProvider>
+                </PlayersContextProvider>
             </ModalContextProvider>
         </IconContext.Provider>
     );

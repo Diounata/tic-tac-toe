@@ -77,6 +77,20 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 ties: 2,
             },
         },
+
+        {
+            name: 'John',
+            color: {
+                hex: '#bb86fc',
+                name: 'Purple',
+            },
+            match: {
+                matches: 20,
+                wins: 3,
+                defeats: 16,
+                ties: 1,
+            },
+        },
     ]);
 
     const [defaultPlayers, setDefaultPlayers] = useState([
