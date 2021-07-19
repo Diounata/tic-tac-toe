@@ -7,8 +7,9 @@
     margin-top: 5rem;
 
     input[type='text'] {
-        width: 100%;        
-        padding: 1rem 1.4rem;
+        width: 100%;
+        height: 100%;      
+        padding: 1rem 3rem 1rem 1.4rem;
         
         background: var(--light-color);
         border: 0;
@@ -18,6 +19,26 @@
         &:focus {
             box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.4);
         }
+    }
+}
+
+.inputContainer {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+}
+
+.deleteIcon {
+    justify-self: flex-end;
+    margin-left: -2.4rem;
+    z-index: 2;
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    &:hover {
+        transform: scale(1.15);
     }
 }
 

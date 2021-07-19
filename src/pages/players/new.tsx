@@ -13,6 +13,7 @@ import WarningAlert from '@Components/Players/WarningAlert';
 import Header from '@Components/General/Header';
 
 import { usePlayers } from '@Contexts/PlayersContext';
+import DeleteCircle from '@Icons/DeleteCircle';
 
 type ColorProps = {
     hex: string;
@@ -34,6 +35,10 @@ export default function NewPlayerForm() {
 
     function updateColor(value: ColorProps): void {
         setColor(value);
+    }
+
+    function resetInputName(): void {
+        setName('');
     }
 
     function newPlayerButton(e): void {
@@ -79,12 +84,16 @@ export default function NewPlayerForm() {
                 <form action='/players/' className={styles.newContainer}>
                     <h4>Fill out this form below to sign up in our system.</h4>
 
-                    <input
-                        type='text' placeholder='Username' required
-                        className={hasError.situation ? styles.inputNotFilled : ''}
-                        onChange={e => setName(e.target.value)}
-                        value={name}
-                    />
+                    <div className={styles.inputContainer}>
+                        <input
+                            type='text' placeholder='Username' required
+                            className={hasError.situation ? styles.inputNotFilled : ''}
+                            onChange={e => setName(e.target.value)}
+                            value={name}
+                        />
+
+                        <DeleteCircle className={styles.deleteIcon} onClick={resetInputName} title='Reset' size={20} />
+                    </div>
 
                     <WarningAlert hasError={hasError} />
 
