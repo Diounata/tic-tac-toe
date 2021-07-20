@@ -17,13 +17,13 @@ export default function Scoreboard() {
                         <span className='x'>&times;</span> {player.x.name}
                     </div>
 
-                    <div>{player.x.score}</div>
+                    <div>{player.x.wins}</div>
                 </div>
 
                 <div className={styles.divisor}>&times;</div>
 
                 <div>
-                    <div>{player.o.score}</div>
+                    <div>{player.o.wins}</div>
 
                     <div>
                         {player.o.name} <span className='o'>o</span>

@@ -43,13 +43,14 @@ type PlayerActionMessagesProps = {
 
 type ContextProps = {
     players: PlayerProps[];
-    defaultPlayers: PlayerProps[];
     playersName: string[];
     playerActionMessage: PlayerActionMessagesProps;
     selectedPlayer: number;
     selectedPlayerForEditing: EditingPlayerProps;
     isEditingAPlayer: boolean;
 
+    updatePlayersWhenWinning(winnerName: string, loserName: string): void;
+    updatePlayersWhenTie(player1Name: string, player2Name: string): void;
     changePlayerActionMessage(value: PlayerActionMessagesProps): void;
     changeIsEditingAPlayer(value: boolean): void;
     changeSelectedPlayer(key: number): void;
@@ -58,8 +59,8 @@ type ContextProps = {
     editPlayer(player: PlayerProps): void;
     deletePlayer(key: number): void;
     resetPlayerStats(key: number): void;
-    calcWinrate(wins: number, matches: number): number;
-    calcScore(wins: number, ties: number, defeats: number): number;
+    calcWinrate(wins: number, matches: number): string;
+    calcScore(wins: number, ties: number, defeats: number): string;
 };
 
 export function PlayersContextProvider({ children }: ChildrenProps) {
@@ -71,10 +72,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 name: 'White',
             },
             match: {
-                matches: 10,
-                wins: 5,
+                matches: 0,
+                wins: 0,
                 defeats: 0,
-                ties: 2,
+                ties: 0,
             },
         },
 
@@ -85,15 +86,13 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 name: 'Purple',
             },
             match: {
-                matches: 20,
-                wins: 3,
-                defeats: 16,
-                ties: 1,
+                matches: 0,
+                wins: 0,
+                defeats: 0,
+                ties: 0,
             },
         },
-    ]);
 
-    const [defaultPlayers, setDefaultPlayers] = useState([
         {
             name: 'Player X',
             color: {
@@ -115,10 +114,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 name: 'Purple',
             },
             match: {
-                matches: 20,
-                wins: 5,
-                defeats: 15,
-                ties: 1,
+                matches: 0,
+                wins: 0,
+                defeats: 0,
+                ties: 0,
             },
         },
     ]);
@@ -128,6 +127,33 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     const [selectedPlayer, setSelectedPlayer] = useState<number>();
     const [selectedPlayerForEditing, setSelectedPlayerForEditing] = useState<EditingPlayerProps>(EmptyPlayer[0]);
     const [isEditingAPlayer, setIsEditingAPlayer] = useState(false);
+
+    function updatePlayersWhenWinning(winnerName: string, loserName: string): void {
+        const winner = players.findIndex(p => p.name === winnerName);
+        const loser = players.findIndex(p => p.name === loserName);
+
+        players[winner].match.wins += 1;
+        players[winner].match.matches += 1;
+
+        players[loser].match.defeats += 1;
+        players[loser].match.matches += 1;
+
+        setPlayers(players);
+    }
+
+    function updatePlayersWhenTie(player1Name: string, player2Name: string): void {
+        const player1 = players.findIndex(p => p.name === player1Name);
+        const player2 = players.findIndex(p => p.name === player2Name);
+
+        const arrayWithPlayers = [player1, player2];
+
+        arrayWithPlayers.forEach(element => {
+            players[element].match.matches += 1;
+            players[element].match.ties += 1;    
+        });
+
+        setPlayers(players);
+    }
 
     function changePlayerActionMessage(value: PlayerActionMessagesProps) {
         setPlayerActionMessage(value);
@@ -180,12 +206,12 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         changePlayerActionMessage({ action: 'reset', user: newPlayerStatistic[0].name });
     }
 
-    function calcWinrate(wins: number, matches: number): number {
+    function calcWinrate(wins: number, matches: number): string {
         const winrate = () => {
             if (matches === 0) {
-                return 0;
+                return '0.0';
             } else {
-                const winrate = (wins * 100) / matches;
+                const winrate = ((wins * 100) / matches).toFixed(1);
                 
                 return winrate;
             }
@@ -194,8 +220,8 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         return winrate();
     }
 
-    function calcScore(wins: number, ties: number, defeats: number): number {
-        const score = ((wins * 2) + (ties * 0.5)) - defeats;
+    function calcScore(wins: number, ties: number, defeats: number): string {
+        const score = (((wins * 2) + (ties * 0.5)) - defeats).toFixed(1);
         
         return score;
     }
@@ -210,12 +236,13 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         <PlayersContext.Provider
             value={{
                 players,
-                defaultPlayers,
                 playersName,
                 playerActionMessage,
                 selectedPlayer,
                 selectedPlayerForEditing,
                 isEditingAPlayer,
+                updatePlayersWhenWinning,
+                updatePlayersWhenTie,
                 changePlayerActionMessage,
                 changeIsEditingAPlayer,
                 changeSelectedPlayer,

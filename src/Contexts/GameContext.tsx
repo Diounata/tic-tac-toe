@@ -7,6 +7,7 @@ import {
 } from 'react';
 
 import { useModal } from './ModalContext';
+import { usePlayers } from './PlayersContext';
 
 import X from '@Icons/X';
 import O from '@Icons/O';
@@ -21,7 +22,7 @@ type PlayerContentProps = {
     name: string;
     symbol: string;
     color: string;
-    score: number;
+    wins: number;
     icon: JSX.Element;
 };
 
@@ -34,6 +35,12 @@ type PlayerProps = {
     x: PlayerContentProps;
     o: PlayerContentProps;
 };
+
+type NewPlayerData = {
+    name: string;
+    color: string;
+    wins: number;
+}
 
 type ContextProps = {
     player: PlayerProps;
@@ -52,18 +59,18 @@ type ContextProps = {
 export function GameContextProvider({ children }: ChildrenProps) {
     const [player, setPlayer] = useState({
         x: {
-            name: 'Player 1',
+            name: 'Player X',
             symbol: 'X',
             color: '#04dac2',
-            score: 0,
+            wins: 0,
             icon: <X />
         },
 
         o: {
-            name: 'Player 2',
+            name: 'Player O',
             symbol: 'O',
             color: '#bb86fc',
-            score: 0,
+            wins: 0,
             icon: <O />
         },
     });
@@ -77,9 +84,13 @@ export function GameContextProvider({ children }: ChildrenProps) {
     const [isGameFinished, setIsGameFinished] = useState(false);
     
     const { isModalOpen, changeModalState } = useModal();
+    const { updatePlayersWhenWinning, updatePlayersWhenTie } = usePlayers();
+
+    const symbolsIcon = { x: <X /> , o: <O /> }
     
-    function updatePlayer(playerValues, symbol: string): void {
-        const newPlayer = { ...playerValues, symbol: symbol, icon: <X /> };
+    function updatePlayer(playerValues: NewPlayerData, symbol: string): void {
+        const newPlayer = { ...playerValues, symbol, icon: symbolsIcon[symbol] };
+
         let newObject: PlayerProps;
 
         if (player[symbol].name === newPlayer.name) {
@@ -134,9 +145,11 @@ export function GameContextProvider({ children }: ChildrenProps) {
 
             if (c === 3) {
                 const winnerPlayer = playerTurn === 'X' ? player.x : player.o; 
+                const loserPlayer = playerTurn !== 'X' ? player.x : player.o; 
                 
                 setWinner(winnerPlayer);
                 setWinnerPosition(numArray);
+                updatePlayersWhenWinning(winnerPlayer.name, loserPlayer.name);
                 setIsGameFinished(true);
                 changeModalState(true);
             }
@@ -144,23 +157,27 @@ export function GameContextProvider({ children }: ChildrenProps) {
     }
 
     function checkIfGameHasTie(): void {
+        const player1 = player.x.name;
+        const player2 = player.o.name;
+
         if (amountFilledPosition === 9) {
             setWinner(null);
             setIsGameFinished(true);
             changeModalState(true);
+            updatePlayersWhenTie(player1, player2);
         }
     }
 
-    function addScore(): void {
+    function addWins(): void {
         const players = player;
 
 
         if (winner.symbol === 'X') {
-            players.x.score++
+            players.x.wins++
         }
 
         if (winner.symbol === 'O') {
-            players.o.score++
+            players.o.wins++
         }
 
         setPlayer({...players});
@@ -188,7 +205,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
 
     useEffect((() => {
         if (winner) {
-            addScore();
+            addWins();
         }
     }), [winner])
 

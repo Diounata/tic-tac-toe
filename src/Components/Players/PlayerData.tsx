@@ -14,15 +14,14 @@ import Modal from '../Modal/Modal';
 import EditModal from './Modals/Edit';
 import DeleteModal from './Modals/Delete';
 import ResetModal from './Modals/Reset';
+import SelectPlayerButtons from './SelectPlayerButtons';
 
 import { usePlayers } from '@Contexts/PlayersContext';
 import { useModal } from '@Contexts/ModalContext';
-import { useGame } from '@Contexts/GameContext';
 
 export default function PlayerData() {
-    const { players, changeSelectedPlayer, calcScore } = usePlayers();
+    const { players, changeSelectedPlayer } = usePlayers();
     const { changeModalState } = useModal();
-    const { playersName, updatePlayer } = useGame();
 
     const [modalComponent, setModalComponent] = useState<JSX.Element>();
 
@@ -37,66 +36,45 @@ export default function PlayerData() {
             <Modal>{modalComponent}</Modal>
 
             <article className={styles.container}>
-                {players.map((p, key) => {
-                    function getPlayerProps() {
-                        const playerValues = {
-                            name: p.name,
-                            color: p.color.hex,
-                            score: 0
-                        };
+                {players.map((player, key) => {
+                    const p = { ...player, wins: player.match.wins };
 
-                        return playerValues;
-                    }
-
-                    return (
-                        <div key={key}>
-                            <div className={styles.icons}>
-                                <X color={p.color.hex} />
-                                <O color={p.color.hex} />
-                            </div>
-
-                            <div className={styles.username}>{p.name}</div>
-                            <div className={styles.colorSquare}>
-                                <div style={{ background: p.color.hex }}></div>
-                                {p.color.name}
-                            </div>
-
-                            <div className={styles.actions}>
-                                <PlayersButton onClick={() => showModal(<EditModal />, key)}>
-                                    <Edit /> Edit
-                                </PlayersButton>
-
-                                <PlayersButton onClick={() => showModal(<DeleteModal />, key)}>
-                                    <Trash /> Delete
-                                </PlayersButton>
-
-                                <PlayersButton onClick={() => showModal(<ResetModal />, key)}>
-                                    <Refresh /> Reset
-                                </PlayersButton>
-                            </div>
-
-                            <div className={styles.selectPlayer}>
-                                <PlayersButton 
-                                    style={{ border: playersName.x === p.name ? `2px solid ${p.color.hex}` : ''}}
-                                    onClick={() => updatePlayer(getPlayerProps(), 'x')}
-                                    disabled={playersName.o === p.name}
-                                >
-                                    
+                    if (p.name !== 'Player X' && p.name !== 'Player O') {
+                        return (
+                            <div key={key}>
+                                <div className={styles.icons}>
                                     <X color={p.color.hex} />
-                                </PlayersButton>
-
-                                <PlayersButton 
-                                    style={{ border: playersName.o === p.name ? `2px solid ${p.color.hex}` : ''}}
-                                    onClick={() => updatePlayer(getPlayerProps(), 'o')}
-                                    disabled={playersName.x === p.name}
-                                >
                                     <O color={p.color.hex} />
-                                </PlayersButton>
-                            </div>
-                        </div>
-                    );
-                })}
+                                </div>
 
+                                <div className={styles.username}>{p.name}</div>
+                                <div className={styles.colorSquare}>
+                                    <div style={{ background: p.color.hex }}></div>
+                                    {p.color.name}
+                                </div>
+
+                                <div className={styles.actions}>
+                                    <PlayersButton onClick={() => showModal(<EditModal />, key)}>
+                                        <Edit /> Edit
+                                    </PlayersButton>
+
+                                    <PlayersButton onClick={() => showModal(<DeleteModal />, key)}>
+                                        <Trash /> Delete
+                                    </PlayersButton>
+
+                                    <PlayersButton onClick={() => showModal(<ResetModal />, key)}>
+                                        <Refresh /> Reset
+                                    </PlayersButton>
+                                </div>
+
+                                <div className={styles.selectPlayer}>
+                                    <SelectPlayerButtons p={p} />
+                                </div>
+                            </div>
+                        )
+                    }
+                })}
+                
                 <DefaultPlayers />
             </article>
         </>

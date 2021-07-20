@@ -6,11 +6,13 @@ import O from '@Icons/O';
 import { usePlayers } from '@Contexts/PlayersContext';
 
 type Props = {
-    getClassColor(score: number): string;
+    getClassColor(score: string): string;
 }
 
 export default function DefaultPlayers({ getClassColor }: Props) {
-    const { defaultPlayers, calcWinrate, calcScore } = usePlayers();
+    const { players, calcWinrate, calcScore } = usePlayers();
+
+    const defaultPlayers = players.filter(p => p.name === 'Player X' || p.name === 'Player O');
 
     return (
         <>

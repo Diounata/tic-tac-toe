@@ -10,7 +10,9 @@ import { usePlayers } from '@Contexts/PlayersContext';
 export default function PlayerData() {
     const { players, calcWinrate, calcScore } = usePlayers();
 
-    function getClassColor(score: number): string {
+    function getClassColor(scoreString: string): string {
+        const score = Number(scoreString);
+
         if (score > 0) {
             return 'var(--green)';
         } else if (score < 0) {
@@ -23,31 +25,34 @@ export default function PlayerData() {
     return (
         <article className={styles.container}>
             {players.map((p, key) => {
-                const winrate = calcWinrate(
+                const winrate = calcWinrate(p.match.wins, p.match.matches);
+                const score = calcScore(
                     p.match.wins,
-                    p.match.matches
+                    p.match.ties,
+                    p.match.defeats
                 );
-                const score = calcScore(p.match.wins, p.match.ties, p.match.defeats);
 
-                return (
-                    <div key={key}>
-                        <div className={styles.icons}>
-                            <X color={p.color.hex} />
-                            <O color={p.color.hex} />
+                if (p.name !== 'Player X' && p.name !== 'Player O') {
+                    return (
+                        <div key={key}>
+                            <div className={styles.icons}>
+                                <X color={p.color.hex} />
+                                <O color={p.color.hex} />
+                            </div>
+
+                            <div className={styles.username}>{p.name}</div>
+
+                            <div>{p.match.matches}</div>
+                            <div>{p.match.wins}</div>
+                            <div>{p.match.defeats}</div>
+                            <div>{p.match.ties}</div>
+                            <div>{winrate} %</div>
+                            <div style={{ color: getClassColor(score) }}>
+                                {score}
+                            </div>
                         </div>
-
-                        <div className={styles.username}>{p.name}</div>
-
-                        <div>{p.match.matches}</div>
-                        <div>{p.match.wins}</div>
-                        <div>{p.match.defeats}</div>
-                        <div>{p.match.ties}</div>
-                        <div>{winrate} %</div>
-                        <div style={{ color: getClassColor(score) }}>
-                            {score}
-                        </div>
-                    </div>
-                );
+                    );
+                }
             })}
 
             <DefaultPlayers getClassColor={getClassColor} />
