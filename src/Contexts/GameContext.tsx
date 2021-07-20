@@ -51,7 +51,8 @@ type ContextProps = {
     winnerPosition: Number[];
     isGameFinished: boolean;
 
-    updatePlayer(playerValues, symbol: string): void
+    updatePlayer(playerValues, symbol: string): void;
+    updatePlayersToDefault(): void;
     updatePosition(number: number): void;
     resetGame(): void;
 }
@@ -104,6 +105,28 @@ export function GameContextProvider({ children }: ChildrenProps) {
         }
 
         setPlayer(newObject);
+    }
+
+    function updatePlayersToDefault(): void {
+        const newPlayers = {
+            x: {
+                name: 'Player X',
+                symbol: 'X',
+                color: '#04dac2',
+                wins: 0,
+                icon: <X />
+            },
+    
+            o: {
+                name: 'Player O',
+                symbol: 'O',
+                color: '#bb86fc',
+                wins: 0,
+                icon: <O />
+            },
+        }
+
+        setPlayer(newPlayers);
     }
 
     function updatePosition(number: number): void {
@@ -225,7 +248,9 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 winner,
                 winnerPosition,
                 isGameFinished,
-                updatePosition,updatePlayer,
+                updatePosition,
+                updatePlayer,
+                updatePlayersToDefault,
                 resetGame,
             }}
         >

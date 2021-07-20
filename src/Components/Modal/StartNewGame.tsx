@@ -3,12 +3,15 @@ import Link from 'next/link';
 import Question from '@Icons/Question';
 
 import { useModal } from '@Contexts/ModalContext';
+import { useGame } from '@Contexts/GameContext';
 
 export default function StartNewGame() {
     const { changeModalState } = useModal();
+    const { updatePlayersToDefault } = useGame();
 
     function startQuickGame() {
         changeModalState(false);
+        updatePlayersToDefault();
     }
 
     return (
