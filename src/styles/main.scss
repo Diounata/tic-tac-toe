@@ -10,6 +10,20 @@ body,
 html {
     background: var(--dark-color);
     color: var(--text);
+    
+    overflow-x: hidden;
+
+    ::-webkit-scrollbar {
+        width: 0.3rem;
+    }
+       
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
+    }
+       
+    ::-webkit-scrollbar-thumb {
+        background: #e1e1e1;
+    }
 }
 
 h1, h2, h3, h4, h5 {

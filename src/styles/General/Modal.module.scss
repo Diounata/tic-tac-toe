@@ -10,9 +10,9 @@
     display: grid;
     place-items: center;
 
-    > div {
-        width: 25rem;
-        height: 14rem;
+    > .content {
+        min-width: 25rem;
+        min-height: 14rem;
 
         display: flex;
         flex-direction: column;
@@ -81,4 +81,13 @@
 
 .closedModal {
     display: none;
+}
+
+.outsideModal {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }

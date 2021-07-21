@@ -66,10 +66,6 @@ export default function PlayerData() {
                                         <Refresh /> Reset
                                     </PlayersButton>
                                 </div>
-
-                                <div className={styles.selectPlayer}>
-                                    <SelectPlayerButtons p={p} />
-                                </div>
                             </div>
                         )
                     }

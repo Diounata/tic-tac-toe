@@ -8,11 +8,18 @@ type ModalProps = {
 };
 
 export default function Modal(props: ModalProps) {
-    const { isModalOpen } = useModal();
+    const { isModalOpen, changeModalState } = useModal();
 
     return (
         <div className={isModalOpen ? styles.modalContainer : styles.closedModal}>
-            <div>{props.children}</div>
+            <div
+                className={styles.outsideModal}
+                onClick={() => changeModalState(false)}
+            ></div>
+                
+            <div className={styles.content}>
+                {props.children}
+            </div>
         </div>
     );
 }

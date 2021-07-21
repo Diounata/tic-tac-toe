@@ -31,11 +31,6 @@ type EditingPlayerProps = {
     key: number;
 };
 
-type ShowWinrateProps = {
-    wins: number;
-    matches: number;
-};
-
 type PlayerActionMessagesProps = {
     action: string;
     user?: string;
@@ -84,20 +79,6 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             color: {
                 hex: '#bb86fc',
                 name: 'Purple',
-            },
-            match: {
-                matches: 0,
-                wins: 0,
-                defeats: 0,
-                ties: 0,
-            },
-        },
-
-        {
-            name: 'Player X',
-            color: {
-                hex: '#04dac2',
-                name: 'Blue',
             },
             match: {
                 matches: 0,
@@ -174,7 +155,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     }
 
     function addNewPlayer(newPlayer: PlayerProps): void {
-        const newPlayers = [...players, newPlayer];
+        const newPlayers = [newPlayer, ...players];
 
         setPlayers(newPlayers);
         changePlayerActionMessage({ action: 'add', user: newPlayer.name });

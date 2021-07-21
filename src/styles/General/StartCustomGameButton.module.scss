@@ -1,0 +1,58 @@
+.container {
+    width: 100%;
+    max-height: 83vh;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    gap: 1rem;
+
+    padding: 2rem;
+    padding-right: 0;
+    background: var(--light-color);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    > div {
+        overflow: auto;
+        padding-right: 2rem;
+
+        > div {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            align-items: center;
+            gap: 1rem;
+
+            padding: 1rem 0;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    }}
+}
+
+.username {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.divColor {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.selectPlayer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.3rem;
+
+    button {
+        background: var(--dark-color);
+        border: 2px solid var(--dark-color);
+    }
+}
