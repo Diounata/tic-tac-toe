@@ -1,8 +1,5 @@
 import { useGame } from '@Contexts/GameContext';
 
-import X from '@Icons/X';
-import O from '@Icons/O';
-
 export default function PlayerTurnComponent() {
     const { playerTurn, player } = useGame();
 
@@ -13,7 +10,7 @@ export default function PlayerTurnComponent() {
     }
     return (
         <>
-            <span>{playerTurn === 'X' ? <X /> : <O />}</span>
+            <span>{playerTurn === 'X' ? player.x.icon : player.o.icon}</span>
 
             <span>{verifyPlayerTurn()}</span>
         </>

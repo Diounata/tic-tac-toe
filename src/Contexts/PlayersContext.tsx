@@ -89,6 +89,20 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         },
 
         {
+            name: 'Player X',
+            color: {
+                hex: '#04dac2',
+                name: 'Blue',
+            },
+            match: {
+                matches: 0,
+                wins: 0,
+                defeats: 0,
+                ties: 0,
+            },
+        },
+
+        {
             name: 'Player O',
             color: {
                 hex: '#bb86fc',

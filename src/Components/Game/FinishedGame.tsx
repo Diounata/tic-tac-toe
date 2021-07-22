@@ -2,13 +2,10 @@ import styles from '@styles/Game/FinishedGame.module.scss';
 
 import Button from '@Components/General/Button';
 
-import X from '@Icons/X';
-import O from '@Icons/O';
-
 import { useGame } from '@Contexts/GameContext';
 
 export default function FinishedGame() {
-    const { position, winnerPosition, resetGame } = useGame();
+    const { player, position, winnerPosition, resetGame } = useGame();
 
     function verifyPosition(index: number): string {
         let background: string;
@@ -31,8 +28,8 @@ export default function FinishedGame() {
                         key={index}
                     >
                         <span>
-                            {i === 'X' && <X />}
-                            {i === 'O' && <O />}
+                            {i === 'X' && player.x.icon}
+                            {i === 'O' && player.o.icon}
                         </span>
                     </div>
                 ))}

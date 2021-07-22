@@ -36,12 +36,6 @@ type PlayerProps = {
     o: PlayerContentProps;
 };
 
-type NewPlayerData = {
-    name: string;
-    color: string;
-    wins: number;
-}
-
 type ContextProps = {
     player: PlayerProps;
     playersName: PlayersName;
@@ -51,7 +45,7 @@ type ContextProps = {
     winnerPosition: Number[];
     isGameFinished: boolean;
 
-    updatePlayer(playerValues, symbol: string): void;
+    updatePlayer(xPlayer: PlayerContentProps, oPlayer: PlayerContentProps): void;
     updatePlayersToDefault(): void;
     updatePosition(number: number): void;
     resetGame(): void;
@@ -64,7 +58,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
             symbol: 'X',
             color: '#04dac2',
             wins: 0,
-            icon: <X />
+            icon: <X color='#04dac2' />
         },
 
         o: {
@@ -72,7 +66,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
             symbol: 'O',
             color: '#bb86fc',
             wins: 0,
-            icon: <O />
+            icon: <O color='#bb86fc' />
         },
     });
     const [playersName, setPlayersName] = useState<PlayersName>({ x: '', o: '' });
@@ -87,24 +81,10 @@ export function GameContextProvider({ children }: ChildrenProps) {
     const { isModalOpen, changeModalState } = useModal();
     const { updatePlayersWhenWinning, updatePlayersWhenTie } = usePlayers();
 
-    const symbolsIcon = { x: <X /> , o: <O /> }
-    
-    function updatePlayer(playerValues: NewPlayerData, symbol: string): void {
-        const newPlayer = { ...playerValues, symbol, icon: symbolsIcon[symbol] };
+    function updatePlayer(xPlayer: PlayerContentProps, oPlayer: PlayerContentProps): void {
+        const newPlayers = { x: xPlayer, o: oPlayer};
 
-        let newObject: PlayerProps;
-
-        if (player[symbol].name === newPlayer.name) {
-            newPlayer.name = '';
-        }
-
-        if (symbol === 'x') {
-            newObject = { x: newPlayer, o: player.o }
-        } else if (symbol === 'o') {
-            newObject = { x: player.x, o: newPlayer }
-        }
-
-        setPlayer(newObject);
+        setPlayer(newPlayers);
     }
 
     function updatePlayersToDefault(): void {

@@ -2,6 +2,9 @@ import styles from '@styles/Game/Scoreboard.module.scss';
 
 import BackButton from '@Components/General/BackButton';
 
+import X from '@Icons/X';
+import O from '@Icons/O';
+
 import { useGame } from '@Contexts/GameContext';
 
 export default function Scoreboard() {
@@ -14,7 +17,7 @@ export default function Scoreboard() {
             <header className={styles.scoreboardComponent}>
                 <div>
                     <div>
-                        <span className='x'>&times;</span> {player.x.name}
+                        <X size='16' color={player.x.color} /> {player.x.name}
                     </div>
 
                     <div>{player.x.wins}</div>
@@ -26,7 +29,7 @@ export default function Scoreboard() {
                     <div>{player.o.wins}</div>
 
                     <div>
-                        {player.o.name} <span className='o'>o</span>
+                        {player.o.name} <O size='16' color={player.o.color} />
                     </div>
                 </div>
             </header>
