@@ -1,18 +1,24 @@
-.container > div {
-    display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr 2fr 1fr;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
+.container {
+    height: 29rem;
 
-    height: 4.6rem;
+    overflow: auto;
 
-    padding: 1.2rem 0;
-    border-bottom: 2px solid var(--light-color);
+    > div {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 1fr 2fr 1fr;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
 
-    button:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
+        height: 4.6rem;
+
+        padding: 1.2rem 0;
+        border-bottom: 2px solid var(--light-color);
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
     }
 }
 
