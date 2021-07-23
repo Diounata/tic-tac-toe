@@ -172,16 +172,9 @@ export function GameContextProvider({ children }: ChildrenProps) {
     }
 
     function addWins(): void {
-        const players = player;
+        const players = {...player};
 
-
-        if (winner.symbol === 'X') {
-            players.x.wins++
-        }
-
-        if (winner.symbol === 'O') {
-            players.o.wins++
-        }
+        winner.symbol === 'x' ? players.x.wins++ : players.o.wins++;
 
         setPlayer({...players});
     }
