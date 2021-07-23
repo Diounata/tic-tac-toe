@@ -1,8 +1,4 @@
 .container {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-
     margin-top: -1rem;
     padding: 0.4rem 1rem;
 
@@ -10,4 +6,15 @@
 
     color: #000;
     background: var(--red);
+
+    &, div {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+    }
+
+    svg {
+        cursor: pointer;
+    }
 }

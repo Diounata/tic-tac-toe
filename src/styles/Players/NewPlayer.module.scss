@@ -8,9 +8,9 @@
 
     input[type='text'] {
         width: 100%;
-        height: 100%;      
+        height: 100%;
         padding: 1rem 3rem 1rem 1.4rem;
-        
+
         background: var(--light-color);
         border: 0;
         outline: none;
@@ -67,12 +67,11 @@
     label > div {
         display: flex;
         align-items: center;
-        gap: 0.3rem;
+        gap: 0.6rem;
 
         div {
             width: 0.6rem;
             height: 0.6rem;
-            border-radius: 50px;
         }
     }
 }
@@ -87,5 +86,16 @@
 
     button {
         width: 14rem;
+    }
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    div {
+        width: 0.6rem;
+        height: 0.6rem;
     }
 }

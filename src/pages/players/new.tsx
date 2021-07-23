@@ -5,6 +5,7 @@ import styles from '@styles/Players/NewPlayer.module.scss';
 import TitlePage from '@utils/TitlePage';
 import Button from '@Components/General/Button';
 import UserPlus from '@Icons/UserPlus';
+import DeleteCircle from '@Icons/DeleteCircle';
 
 import Colors from '@Components/Players/new/Colors';
 import Footer from '@Components/General/Footer';
@@ -13,7 +14,6 @@ import WarningAlert from '@Components/Players/WarningAlert';
 import Header from '@Components/General/Header';
 
 import { usePlayers } from '@Contexts/PlayersContext';
-import DeleteCircle from '@Icons/DeleteCircle';
 
 type ColorProps = {
     hex: string;
@@ -37,8 +37,13 @@ export default function NewPlayerForm() {
         setColor(value);
     }
 
+    function updateHasError(value: ErrorProps): void {
+        setHasError(value);
+    }
+
     function resetInputName(): void {
         setName('');
+        setHasError({ situation: false, text: '' });
     }
 
     function newPlayerButton(e): void {
@@ -49,6 +54,8 @@ export default function NewPlayerForm() {
             setHasError({ situation: true, text: "There's no username insered" });
         } else if (hasEqualNameRegistered) {
             setHasError({ situation: true, text: "There's a username registered with this name" });
+        } else if (name.length > 16) {
+            setHasError({ situation: true, text: "Username exceded the character limit (16)"})
         } else {
             const player = {
                 name,
@@ -95,7 +102,7 @@ export default function NewPlayerForm() {
                         <DeleteCircle className={styles.deleteIcon} onClick={resetInputName} title='Reset' size={20} />
                     </div>
 
-                    <WarningAlert hasError={hasError} />
+                    <WarningAlert hasError={hasError} updateHasError={updateHasError} />
 
                     <h4>User color:</h4>
 
