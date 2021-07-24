@@ -1,18 +1,17 @@
 import styles from '@styles/Leaderboard/PlayerData.module.scss';
 
-import X from '@Icons/X';
-import O from '@Icons/O';
+import showDecimal from '../../utils/showDecimal';
 
-import DefaultPlayers from './DefaultPlayers';
+import PlayerIcon from './PlayerIcon';
 
 import { usePlayers } from '@Contexts/PlayersContext';
 
 export default function PlayerData() {
-    const { players, calcWinrate, calcScore } = usePlayers();
+    const { players, calcWinrate } = usePlayers();
 
-    function getClassColor(scoreString: string): string {
-        const score = Number(scoreString);
+    const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
 
+    function getClassColor(score: number): string {
         if (score > 0) {
             return 'var(--green)';
         } else if (score < 0) {
@@ -24,38 +23,35 @@ export default function PlayerData() {
 
     return (
         <article className={styles.container}>
-            {players.map((p, key) => {
+            {sortedPlayers.map((p, key) => {
                 const winrate = calcWinrate(p.match.wins, p.match.matches);
-                const score = calcScore(
-                    p.match.wins,
-                    p.match.ties,
-                    p.match.defeats
-                );
+                const isDefaultPlayer = p.name === 'Player X' || p.name === 'Player O';
 
-                if (p.name !== 'Player X' && p.name !== 'Player O') {
-                    return (
-                        <div key={key}>
-                            <div className={styles.icons}>
-                                <X color={p.color.hex} />
-                                <O color={p.color.hex} />
-                            </div>
-
-                            <div className={styles.username}>{p.name}</div>
-
-                            <div>{p.match.matches}</div>
-                            <div>{p.match.wins}</div>
-                            <div>{p.match.defeats}</div>
-                            <div>{p.match.ties}</div>
-                            <div>{winrate} %</div>
-                            <div style={{ color: getClassColor(score) }}>
-                                {score}
-                            </div>
+                return (
+                    <div key={key}>
+                        <div className={styles.icons}>
+                            <PlayerIcon
+                                color={p.color.hex}
+                                isDefaultPlayer={isDefaultPlayer}
+                                username={p.name}
+                            />
                         </div>
-                    );
-                }
-            })}
 
-            <DefaultPlayers getClassColor={getClassColor} />
+                        <div className={styles.username}>{p.name}</div>
+
+                        <div>{p.match.matches}</div>
+                        <div>{p.match.wins}</div>
+                        <div>{p.match.defeats}</div>
+                        <div>{p.match.ties}</div>
+
+                        <div>{showDecimal(winrate)} %</div>
+
+                        <div style={{ color: getClassColor(p.score) }}>
+                            {showDecimal(p.score)}
+                        </div>
+                    </div>
+                );
+            })}
         </article>
     );
 }

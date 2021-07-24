@@ -14,7 +14,6 @@ import Modal from '../Modal/Modal';
 import EditModal from './Modals/Edit';
 import DeleteModal from './Modals/Delete';
 import ResetModal from './Modals/Reset';
-import SelectPlayerButtons from './SelectPlayerButtons';
 
 import { usePlayers } from '@Contexts/PlayersContext';
 import { useModal } from '@Contexts/ModalContext';
@@ -48,6 +47,7 @@ export default function PlayerData() {
                                 </div>
 
                                 <div className={styles.username}>{p.name}</div>
+                                
                                 <div className={styles.colorSquare}>
                                     <div style={{ background: p.color.hex }}></div>
                                     {p.color.name}

@@ -12,6 +12,7 @@ type PlayerProps = {
     name: string;
     color: ColorProps;
     match: PlayerMatchProps;
+    score: number;
 };
 
 type ColorProps = {
@@ -54,8 +55,7 @@ type ContextProps = {
     editPlayer(player: PlayerProps): void;
     deletePlayer(key: number): void;
     resetPlayerStats(key: number): void;
-    calcWinrate(wins: number, matches: number): string;
-    calcScore(wins: number, ties: number, defeats: number): string;
+    calcWinrate(wins: number, matches: number): number;
 };
 
 export function PlayersContextProvider({ children }: ChildrenProps) {
@@ -72,6 +72,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 defeats: 0,
                 ties: 0,
             },
+            score: 0
         },
 
         {
@@ -86,6 +87,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 defeats: 0,
                 ties: 0,
             },
+            score: 0
         },
 
         {
@@ -100,6 +102,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 defeats: 0,
                 ties: 0,
             },
+            score: 0
         },
 
         {
@@ -114,6 +117,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 defeats: 0,
                 ties: 0,
             },
+            score: 0
         },
     ]);
 
@@ -123,17 +127,27 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     const [selectedPlayerForEditing, setSelectedPlayerForEditing] = useState<EditingPlayerProps>(EmptyPlayer[0]);
     const [isEditingAPlayer, setIsEditingAPlayer] = useState(false);
 
+    function updatePlayers(p: PlayerProps[]): void {
+        const currentPlayers = p;
+    
+        const newPlayers = sortPlayers(currentPlayers);
+        
+        setPlayers(newPlayers);
+    }
+
     function updatePlayersWhenWinning(winnerName: string, loserName: string): void {
         const winner = players.findIndex(p => p.name === winnerName);
         const loser = players.findIndex(p => p.name === loserName);
 
         players[winner].match.wins += 1;
         players[winner].match.matches += 1;
+        players[winner].score += 2;
 
         players[loser].match.defeats += 1;
         players[loser].match.matches += 1;
+        players[loser].score -= 1;
 
-        setPlayers(players);
+        updatePlayers(players);
     }
 
     function updatePlayersWhenTie(player1Name: string, player2Name: string): void {
@@ -144,10 +158,11 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
 
         arrayWithPlayers.forEach(element => {
             players[element].match.matches += 1;
-            players[element].match.ties += 1;    
+            players[element].match.ties += 1;
+            players[element].score += 0.5;
         });
 
-        setPlayers(players);
+        updatePlayers(players);
     }
 
     function changePlayerActionMessage(value: PlayerActionMessagesProps) {
@@ -170,15 +185,15 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
 
     function addNewPlayer(newPlayer: PlayerProps): void {
         const newPlayers = [newPlayer, ...players];
-
-        setPlayers(newPlayers);
+        
+        updatePlayers(newPlayers);
         changePlayerActionMessage({ action: 'add', user: newPlayer.name });
     }
 
     function editPlayer(player: PlayerProps): void {
         const newPlayers = players.map((p, index) => selectedPlayerForEditing.key === index ? player : p);
 
-        setPlayers(newPlayers);
+        updatePlayers(newPlayers);
         setIsEditingAPlayer(false);
         changePlayerActionMessage({ action: 'edit', user: player.name, });
     }
@@ -186,27 +201,29 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     function deletePlayer(key: number): void {
         const deletedPlayer = players.filter((p, i) => i === key);
         const newPlayers = players.filter((p, i) => i !== key);
-
-        setPlayers(newPlayers);
+        
+        updatePlayers(newPlayers);
         changePlayerActionMessage({ action: 'delete', user: deletedPlayer[0].name });
     }
 
     function resetPlayerStats(key: number): void {
         const newPlayerStatistic = players.filter((p, i) => i === key);
+
         Object.keys(newPlayerStatistic[0].match).forEach(item => (newPlayerStatistic[0].match[item] = 0));
+        newPlayerStatistic[0].score = 0;
 
         const newPlayers = players.map((player, index) => index !== key ? player : newPlayerStatistic[0]);
 
-        setPlayers(newPlayers);
+        updatePlayers(newPlayers);
         changePlayerActionMessage({ action: 'reset', user: newPlayerStatistic[0].name });
     }
 
-    function calcWinrate(wins: number, matches: number): string {
+    function calcWinrate(wins: number, matches: number): number {
         const winrate = () => {
             if (matches === 0) {
-                return '0.0';
+                return 0;
             } else {
-                const winrate = ((wins * 100) / matches).toFixed(1);
+                const winrate = ((wins * 100) / matches);
                 
                 return winrate;
             }
@@ -215,10 +232,20 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         return winrate();
     }
 
-    function calcScore(wins: number, ties: number, defeats: number): string {
-        const score = (((wins * 2) + (ties * 0.5)) - defeats).toFixed(1);
+    function sortPlayers(p: PlayerProps[]): PlayerProps[] {
+        const sortedPlayers = p.sort((a, b) => {
+            const nameA = a.name;
+            const nameB = b.name;
         
-        return score;
+            if (nameA < nameB) {
+                return -1;
+            }
+            if (nameA > nameB) {
+                return 1;
+            }
+        });
+
+        return sortedPlayers;
     }
 
     useEffect(() => {
@@ -247,7 +274,6 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 deletePlayer,
                 resetPlayerStats,
                 calcWinrate,
-                calcScore
             }}
         >
             {children}

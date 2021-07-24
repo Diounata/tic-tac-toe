@@ -11,7 +11,9 @@
                 "wins": 0,
                 "defeats": 0,
                 "ties": 0
-            }
+            },
+
+            "score": 0
         },
 
         "key": -1
