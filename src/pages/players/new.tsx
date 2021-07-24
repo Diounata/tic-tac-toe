@@ -65,9 +65,8 @@ export default function NewPlayerForm() {
                     wins: 0,
                     defeats: 0,
                     ties: 0,
-                    winrate: 0,
-                    score: 0,
                 },
+                score: 0
             };
 
             addNewPlayer(player);
