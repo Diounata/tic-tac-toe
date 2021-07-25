@@ -72,7 +72,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 defeats: 0,
                 ties: 0,
             },
-            score: 0
+            score: 0,
         },
 
         {
@@ -87,7 +87,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 defeats: 0,
                 ties: 0,
             },
-            score: 0
+            score: 0,
         },
 
         {
@@ -102,7 +102,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 defeats: 0,
                 ties: 0,
             },
-            score: 0
+            score: 0,
         },
 
         {
@@ -117,7 +117,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 defeats: 0,
                 ties: 0,
             },
-            score: 0
+            score: 0,
         },
     ]);
 
@@ -129,9 +129,9 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
 
     function updatePlayers(p: PlayerProps[]): void {
         const currentPlayers = p;
-    
+
         const newPlayers = sortPlayers(currentPlayers);
-        
+
         setPlayers(newPlayers);
     }
 
@@ -185,23 +185,23 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
 
     function addNewPlayer(newPlayer: PlayerProps): void {
         const newPlayers = [newPlayer, ...players];
-        
+
         updatePlayers(newPlayers);
         changePlayerActionMessage({ action: 'add', user: newPlayer.name });
     }
 
     function editPlayer(player: PlayerProps): void {
-        const newPlayers = players.map((p, index) => selectedPlayerForEditing.key === index ? player : p);
+        const newPlayers = players.map((p, index) => (selectedPlayerForEditing.key === index ? player : p));
 
         updatePlayers(newPlayers);
         setIsEditingAPlayer(false);
-        changePlayerActionMessage({ action: 'edit', user: player.name, });
+        changePlayerActionMessage({ action: 'edit', user: player.name });
     }
 
     function deletePlayer(key: number): void {
         const deletedPlayer = players.filter((p, i) => i === key);
         const newPlayers = players.filter((p, i) => i !== key);
-        
+
         updatePlayers(newPlayers);
         changePlayerActionMessage({ action: 'delete', user: deletedPlayer[0].name });
     }
@@ -212,7 +212,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         Object.keys(newPlayerStatistic[0].match).forEach(item => (newPlayerStatistic[0].match[item] = 0));
         newPlayerStatistic[0].score = 0;
 
-        const newPlayers = players.map((player, index) => index !== key ? player : newPlayerStatistic[0]);
+        const newPlayers = players.map((player, index) => (index !== key ? player : newPlayerStatistic[0]));
 
         updatePlayers(newPlayers);
         changePlayerActionMessage({ action: 'reset', user: newPlayerStatistic[0].name });
@@ -223,20 +223,20 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             if (matches === 0) {
                 return 0;
             } else {
-                const winrate = ((wins * 100) / matches);
-                
+                const winrate = (wins * 100) / matches;
+
                 return winrate;
             }
-        }
-        
+        };
+
         return winrate();
     }
 
     function sortPlayers(p: PlayerProps[]): PlayerProps[] {
         const sortedPlayers = p.sort((a, b) => {
-            const nameA = a.name;
-            const nameB = b.name;
-        
+            const nameA = a.name.toUpperCase();
+            const nameB = b.name.toUpperCase();
+
             if (nameA < nameB) {
                 return -1;
             }
