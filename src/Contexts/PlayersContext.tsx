@@ -37,8 +37,20 @@ type PlayerActionMessagesProps = {
     user?: string;
 };
 
+type HistoryPlayerProps = {
+    name: string;
+    color: string;
+    situation: 'Winner' | 'Loser' | 'Tie';
+};
+
+type HistoryProps = {
+    x: HistoryPlayerProps;
+    o: HistoryPlayerProps;
+};
+
 type ContextProps = {
     players: PlayerProps[];
+    history: HistoryProps[];
     playersName: string[];
     playerActionMessage: PlayerActionMessagesProps;
     selectedPlayer: number;
@@ -47,6 +59,7 @@ type ContextProps = {
 
     updatePlayersWhenWinning(winnerName: string, loserName: string): void;
     updatePlayersWhenTie(player1Name: string, player2Name: string): void;
+    updateHistory(history: HistoryProps): void;
     changePlayerActionMessage(value: PlayerActionMessagesProps): void;
     changeIsEditingAPlayer(value: boolean): void;
     changeSelectedPlayer(key: number): void;
@@ -121,6 +134,8 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         },
     ]);
 
+    const [history, setHistory] = useState<HistoryProps[]>([]);
+
     const [playersName, setPlayersName] = useState({} as string[]);
     const [playerActionMessage, setPlayerActionMessage] = useState({} as PlayerActionMessagesProps);
     const [selectedPlayer, setSelectedPlayer] = useState<number>();
@@ -163,6 +178,13 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         });
 
         updatePlayers(players);
+    }
+
+    function updateHistory(newMatchHistory: HistoryProps): void {
+        const filteredHistory = history.filter((i, key) => key < 20);
+        const newHistory = [newMatchHistory, ...filteredHistory];
+
+        setHistory(newHistory);
     }
 
     function changePlayerActionMessage(value: PlayerActionMessagesProps) {
@@ -258,6 +280,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         <PlayersContext.Provider
             value={{
                 players,
+                history,
                 playersName,
                 playerActionMessage,
                 selectedPlayer,
@@ -265,6 +288,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 isEditingAPlayer,
                 updatePlayersWhenWinning,
                 updatePlayersWhenTie,
+                updateHistory,
                 changePlayerActionMessage,
                 changeIsEditingAPlayer,
                 changeSelectedPlayer,

@@ -1,10 +1,4 @@
-import {
-    createContext,
-    ReactNode,
-    useContext,
-    useEffect,
-    useState,
-} from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 import { useModal } from './ModalContext';
 import { usePlayers } from './PlayersContext';
@@ -29,11 +23,22 @@ type PlayerContentProps = {
 type PlayersName = {
     x: string;
     o: string;
-}
+};
 
 type PlayerProps = {
     x: PlayerContentProps;
     o: PlayerContentProps;
+};
+
+type HistoryPlayerProps = {
+    name: string;
+    color: string;
+    situation: 'Winner' | 'Loser' | 'Tie';
+};
+
+type HistoryProps = {
+    x: HistoryPlayerProps;
+    o: HistoryPlayerProps;
 };
 
 type ContextProps = {
@@ -49,7 +54,7 @@ type ContextProps = {
     updatePlayersToDefault(): void;
     updatePosition(number: number): void;
     resetGame(): void;
-}
+};
 
 export function GameContextProvider({ children }: ChildrenProps) {
     const [player, setPlayer] = useState({
@@ -58,7 +63,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
             symbol: 'X',
             color: '#04dac2',
             wins: 0,
-            icon: <X color='#04dac2' />
+            icon: <X color='#04dac2' />,
         },
 
         o: {
@@ -66,7 +71,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
             symbol: 'O',
             color: '#bb86fc',
             wins: 0,
-            icon: <O color='#bb86fc' />
+            icon: <O color='#bb86fc' />,
         },
     });
     const [playersName, setPlayersName] = useState<PlayersName>({ x: '', o: '' });
@@ -77,12 +82,12 @@ export function GameContextProvider({ children }: ChildrenProps) {
     const [winner, setWinner] = useState({} as PlayerContentProps);
     const [winnerPosition, setWinnerPosition] = useState([]);
     const [isGameFinished, setIsGameFinished] = useState(false);
-    
+
     const { isModalOpen, changeModalState } = useModal();
-    const { updatePlayersWhenWinning, updatePlayersWhenTie } = usePlayers();
+    const { updatePlayersWhenWinning, updatePlayersWhenTie, updateHistory } = usePlayers();
 
     function updatePlayer(xPlayer: PlayerContentProps, oPlayer: PlayerContentProps): void {
-        const newPlayers = { x: xPlayer, o: oPlayer};
+        const newPlayers = { x: xPlayer, o: oPlayer };
 
         setPlayer(newPlayers);
     }
@@ -94,26 +99,24 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 symbol: 'X',
                 color: '#04dac2',
                 wins: 0,
-                icon: <X />
+                icon: <X />,
             },
-    
+
             o: {
                 name: 'Player O',
                 symbol: 'O',
                 color: '#bb86fc',
                 wins: 0,
-                icon: <O />
+                icon: <O />,
             },
-        }
+        };
 
         setPlayer(newPlayers);
     }
 
     function updatePosition(number: number): void {
         if (!position[number]) {
-            const newPosition = position.map((i, index) =>
-                number === index ? playerTurn : i
-            );
+            const newPosition = position.map((i, index) => (number === index ? playerTurn : i));
 
             setPosition(newPosition);
             setAmountFilledPosition(() => amountFilledPosition + 1);
@@ -147,9 +150,24 @@ export function GameContextProvider({ children }: ChildrenProps) {
             });
 
             if (c === 3) {
-                const winnerPlayer = playerTurn === 'X' ? player.x : player.o; 
-                const loserPlayer = playerTurn !== 'X' ? player.x : player.o; 
-                
+                const winnerPlayer = playerTurn === 'X' ? player.x : player.o;
+                const loserPlayer = playerTurn !== 'X' ? player.x : player.o;
+
+                const history: HistoryProps = {
+                    x: {
+                        name: player.x.name,
+                        color: player.x.color,
+                        situation: playerTurn === 'X' ? 'Winner' : 'Loser',
+                    },
+
+                    o: {
+                        name: player.o.name,
+                        color: player.o.color,
+                        situation: playerTurn !== 'X' ? 'Winner' : 'Loser',
+                    },
+                };
+
+                updateHistory(history);
                 setWinner(winnerPlayer);
                 setWinnerPosition(numArray);
                 updatePlayersWhenWinning(winnerPlayer.name, loserPlayer.name);
@@ -164,6 +182,21 @@ export function GameContextProvider({ children }: ChildrenProps) {
         const player2 = player.o.name;
 
         if (amountFilledPosition === 9) {
+            const history: HistoryProps = {
+                x: {
+                    name: player.x.name,
+                    color: player.x.color,
+                    situation: 'Tie',
+                },
+
+                o: {
+                    name: player.o.name,
+                    color: player.o.color,
+                    situation: 'Tie',
+                },
+            };
+
+            updateHistory(history);
             setWinner(null);
             setIsGameFinished(true);
             changeModalState(true);
@@ -172,11 +205,11 @@ export function GameContextProvider({ children }: ChildrenProps) {
     }
 
     function addWins(): void {
-        const players = {...player};
+        const players = { ...player };
 
         winner.symbol === 'x' ? players.x.wins++ : players.o.wins++;
 
-        setPlayer({...players});
+        setPlayer({ ...players });
     }
 
     function resetGame(): void {
@@ -199,11 +232,11 @@ export function GameContextProvider({ children }: ChildrenProps) {
         }
     }, [position]);
 
-    useEffect((() => {
+    useEffect(() => {
         if (winner) {
             addWins();
         }
-    }), [winner])
+    }, [winner]);
 
     useEffect(() => {
         const usernames = { x: player.x.name, o: player.o.name };
