@@ -60,6 +60,7 @@ type ContextProps = {
     updatePlayersWhenWinning(winnerName: string, loserName: string): void;
     updatePlayersWhenTie(player1Name: string, player2Name: string): void;
     updateHistory(history: HistoryProps): void;
+    deleteAllHistory(): void;
     changePlayerActionMessage(value: PlayerActionMessagesProps): void;
     changeIsEditingAPlayer(value: boolean): void;
     changeSelectedPlayer(key: number): void;
@@ -187,6 +188,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         setHistory(newHistory);
     }
 
+    function deleteAllHistory(): void {
+        setHistory([]);
+    }
+
     function changePlayerActionMessage(value: PlayerActionMessagesProps) {
         setPlayerActionMessage(value);
     }
@@ -289,6 +294,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 updatePlayersWhenWinning,
                 updatePlayersWhenTie,
                 updateHistory,
+                deleteAllHistory,
                 changePlayerActionMessage,
                 changeIsEditingAPlayer,
                 changeSelectedPlayer,

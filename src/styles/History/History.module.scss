@@ -4,20 +4,24 @@
     justify-content: center;
 
     width: 100vw;
-    margin-top: 3rem;
-    padding: 0 8rem;
+    max-height: 36vw;
 
-    .historyItem,
-    .tableHeader {
-        > div,
-        & {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-        }
+    padding: 0 12rem;
 
-        padding: 1.4rem;
+    .tableHeader,
+    .historyItem {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+
+        padding: 1.3rem 3rem;
         border-bottom: 2px solid var(--light-color);
+    }
+
+    .historyItemContainer {
+        overflow: auto;
     }
 }
 
