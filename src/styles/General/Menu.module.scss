@@ -1,8 +1,11 @@
 .menuContainer {
     div:last-of-type {
         display: grid;
+        grid-template-areas:
+            'start start start'
+            'a a a'
+            'a a a';
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
         gap: 2rem;
 
         margin-top: 2rem;
@@ -16,6 +19,7 @@
 .startButton {
     display: grid;
     justify-content: center;
+    grid-area: 'start';
 
     button {
         padding: 0.8rem 6rem;

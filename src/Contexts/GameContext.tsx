@@ -74,12 +74,12 @@ export function GameContextProvider({ children }: ChildrenProps) {
             icon: <O color='#bb86fc' />,
         },
     });
-    const [playersName, setPlayersName] = useState<PlayersName>({ x: '', o: '' });
+    const [playersName, setPlayersName] = useState({} as PlayersName);
 
     const [position, setPosition] = useState(['', '', '', '', '', '', '', '', '']);
     const [playerTurn, setPlayerTurn] = useState('Player'); // It'll start as X
     const [amountFilledPosition, setAmountFilledPosition] = useState(0);
-    const [winner, setWinner] = useState({} as PlayerContentProps);
+    const [winner, setWinner] = useState<PlayerContentProps>();
     const [winnerPosition, setWinnerPosition] = useState([]);
     const [isGameFinished, setIsGameFinished] = useState(false);
 
@@ -207,7 +207,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
     function addWins(): void {
         const players = { ...player };
 
-        winner.symbol === 'x' ? players.x.wins++ : players.o.wins++;
+        winner.symbol === 'X' ? players.x.wins++ : players.o.wins++;
 
         setPlayer({ ...players });
     }
@@ -243,6 +243,8 @@ export function GameContextProvider({ children }: ChildrenProps) {
 
         setPlayersName(usernames);
     }, [player]);
+
+    useEffect(() => resetGame());
 
     return (
         <GameContext.Provider
