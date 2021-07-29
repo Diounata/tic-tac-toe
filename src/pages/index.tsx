@@ -9,14 +9,12 @@ import Footer from '@Components/General/Footer';
 export default function Home() {
     return (
         <>
-            <div>
-                <TitlePage title='Home' />
+            <TitlePage title='Home' />
 
-                <h2>
-                    <X /> <O />
-                    Tic-tac-toe
-                </h2>
-            </div>
+            <h2>
+                <X /> <O />
+                Tic-tac-toe
+            </h2>
 
             <Menu />
 

@@ -1,27 +1,89 @@
 .menuContainer {
-    div:last-of-type {
-        display: grid;
-        grid-template-areas:
-            'start start start'
-            'a a a'
-            'a a a';
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 2rem;
+    display: grid;
+    grid-template-areas:
+        's s s'
+        'a b c'
+        'd e f';
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
 
-        margin-top: 2rem;
-    }
+    margin-top: 2rem;
 
     button {
         padding: 0.8rem 3rem;
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        & {
+            grid-template-areas: 
+            "s s"
+            "a b"
+            "c d"
+            "e f";
+
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 550px) {
+        & {
+            grid-template-areas:
+                's'
+                'a'
+                'b'
+                'c'
+                'd'
+                'e'
+                'f';
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(7, 1fr);
+        }
+    }
+
+    @media (max-width: 330px) {
+        & {
+            padding: 0 1rem;
+        }
     }
 }
 
 .startButton {
-    display: grid;
-    justify-content: center;
-    grid-area: 'start';
+    grid-area: s;
+    justify-self: center;
 
     button {
         padding: 0.8rem 6rem;
+
+        @media (max-width: 330px) {
+            & {
+                padding: 0.8rem 3rem;
+            }
+        }
     }
+}
+
+.a {
+    grid-area: a;
+}
+
+.b {
+    grid-area: b;
+}
+
+.c {
+    grid-area: c;
+}
+
+.d {
+    grid-area: d;
+}
+
+.e {
+    grid-area: e;
+}
+
+.f {
+    grid-area: f;
 }

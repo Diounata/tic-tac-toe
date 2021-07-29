@@ -31,27 +31,37 @@ export default function Menu() {
                     </Button>
                 </div>
 
-                <div>
+                <div className={styles.a}>
                     <LinkButton href='/about'>
                         <Info /> About
                     </LinkButton>
+                </div>
 
+                <div className={styles.b}>
                     <LinkButton href='/history'>
                         <History /> History
                     </LinkButton>
+                </div>
 
+                <div className={styles.c}>
                     <LinkButton href='/how-to-play'>
                         <Question /> How to play
                     </LinkButton>
+                </div>
 
+                <div className={styles.d}>
                     <LinkButton href='/leaderboard'>
                         <Trophy /> Leaderboard
                     </LinkButton>
+                </div>
 
+                <div className={styles.e}>
                     <LinkButton href='/players'>
                         <Users /> Players
                     </LinkButton>
+                </div>
 
+                <div className={styles.f}>
                     <LinkButton href='/settings'>
                         <Gear /> Settings
                     </LinkButton>
