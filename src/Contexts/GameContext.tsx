@@ -244,8 +244,6 @@ export function GameContextProvider({ children }: ChildrenProps) {
         setPlayersName(usernames);
     }, [player]);
 
-    useEffect(() => resetGame());
-
     return (
         <GameContext.Provider
             value={{
