@@ -7,8 +7,6 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
 
-    margin-top: 2rem;
-
     button {
         padding: 0.8rem 3rem;
         width: 100%;
@@ -16,11 +14,11 @@
 
     @media (max-width: 768px) {
         & {
-            grid-template-areas: 
-            "s s"
-            "a b"
-            "c d"
-            "e f";
+            grid-template-areas:
+                's s'
+                'a b'
+                'c d'
+                'e f';
 
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1fr 1fr 1fr;
