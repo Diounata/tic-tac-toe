@@ -15,7 +15,7 @@ export default function Scoreboard() {
             <BackButton />
 
             <header className={styles.scoreboardComponent}>
-                <div>
+                <div className={styles.player}>
                     <div>
                         <X size='16' color={player.x.color} /> {player.x.name}
                     </div>
@@ -23,13 +23,13 @@ export default function Scoreboard() {
                     <div>{player.x.wins}</div>
                 </div>
 
-                <div className={styles.divisor}>&times;</div>
+                <div className={styles.x}>&times;</div>
 
-                <div>
+                <div className={styles.player}>
                     <div>{player.o.wins}</div>
 
                     <div>
-                        {player.o.name} <O size='16' color={player.o.color} />
+                        {player.o.name} <O size='14' color={player.o.color} />
                     </div>
                 </div>
             </header>
