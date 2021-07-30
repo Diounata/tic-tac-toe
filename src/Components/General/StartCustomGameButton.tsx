@@ -20,26 +20,26 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
     const { updatePlayer } = useGame();
     const { changeModalState } = useModal();
 
-    const [selectedPlayer, setSelectedPlayer] = useState({ x: players.length - 2, o: players.length - 1 });
+    const [selectedPlayer, setSelectedPlayer] = useState({ X: -1, O: -1 });
     const router = useRouter();
 
     function changeSelectedPlayer(value: number, symbol: 'X' | 'O') {
-        if (value === selectedPlayer[symbol]) {
-            const selectedChange = symbol === 'X' ? { x: -1 } : { o: -1 };
-            const newSelectedPlayer = { ...selectedPlayer, ...selectedChange };
+        const newSelectedPlayer = { ...selectedPlayer };
 
-            setSelectedPlayer(newSelectedPlayer);
+        if (newSelectedPlayer[symbol] === value) {
+            newSelectedPlayer[symbol] = -1;
         } else {
-            const selectedChange = symbol === 'O' ? { x: value } : { o: value };
-            const newSelectedPlayer = { ...selectedPlayer, ...selectedChange };
-
-            setSelectedPlayer(newSelectedPlayer);
+            newSelectedPlayer[symbol] = value;
         }
+
+        setSelectedPlayer(newSelectedPlayer);
     }
 
     function addPlayers(): void {
-        const x = players[selectedPlayer['x']];
-        const o = players[selectedPlayer['o']];
+        const x = players[selectedPlayer['X']];
+        const o = players[selectedPlayer['O']];
+
+        console.log(selectedPlayer);
 
         const xPlayer = {
             name: x.name,
@@ -64,7 +64,10 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
     return (
         <>
             <div className={styles.container}>
-                <h3>Players</h3>
+                <h3>
+                    <span>Players</span>
+                    <span>Symbol</span>
+                </h3>
 
                 <div>
                     {players.map((p, key) => {
@@ -73,49 +76,42 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
                             name: p.name,
                             color: { hex: p.color.hex },
                             wins: p.match.wins,
-                            key: key,
+                            key,
                         };
 
                         return (
                             <div key={key}>
                                 <div className={styles.username}>
-                                    <div
-                                        style={{ background: p.color.hex }}
-                                        className={styles.divColor}
-                                    ></div>
+                                    <div style={{ background: p.color.hex }} className={styles.divColor}></div>
 
                                     <div>{p.name}</div>
                                 </div>
 
                                 <div className={styles.selectPlayer}>
-                                    {isDefaultPlayer
-                                        ? (
+                                    {isDefaultPlayer ? (
+                                        <SelectPlayerButtons
+                                            p={playerData}
+                                            symbol={p.name === 'Player X' ? 'X' : 'O'}
+                                            selectedPlayer={selectedPlayer}
+                                            changeSelectedPlayer={changeSelectedPlayer}
+                                        />
+                                    ) : (
+                                        <>
                                             <SelectPlayerButtons
                                                 p={playerData}
-                                                symbol={p.name === 'Player X' ? 'X' : 'O'}
+                                                symbol='X'
                                                 selectedPlayer={selectedPlayer}
                                                 changeSelectedPlayer={changeSelectedPlayer}
                                             />
-                                        )
 
-                                        : (
-                                            <>
-                                                <SelectPlayerButtons
-                                                    p={playerData}
-                                                    symbol='X'
-                                                    selectedPlayer={selectedPlayer}
-                                                    changeSelectedPlayer={changeSelectedPlayer}
-                                                />
-
-                                                <SelectPlayerButtons
-                                                    p={playerData}
-                                                    symbol='O'
-                                                    selectedPlayer={selectedPlayer}
-                                                    changeSelectedPlayer={changeSelectedPlayer}
-                                                />
-                                            </>
-                                        )
-                                    }
+                                            <SelectPlayerButtons
+                                                p={playerData}
+                                                symbol='O'
+                                                selectedPlayer={selectedPlayer}
+                                                changeSelectedPlayer={changeSelectedPlayer}
+                                            />
+                                        </>
+                                    )}
                                 </div>
                             </div>
                         );
@@ -124,9 +120,7 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
             </div>
 
             <footer>
-                <button onClick={() => updateCustomGameModalState(false)}>
-                    Back
-                </button>
+                <button onClick={() => updateCustomGameModalState(false)}>Back</button>
 
                 <button onClick={addPlayers}>Start Game</button>
             </footer>

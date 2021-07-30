@@ -1,7 +1,7 @@
 .container {
     width: 100%;
     max-height: 83vh;
-    
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,6 +13,16 @@
     background: var(--light-color);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+
+    h3 {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        padding-right: 2rem;
+        
+        span:last-child {
+            text-align: center;
+        }
+    }
 
     button:disabled {
         opacity: 0.5;
@@ -31,7 +41,8 @@
 
             padding: 1rem 0;
             border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-    }}
+        }
+    }
 }
 
 .username {

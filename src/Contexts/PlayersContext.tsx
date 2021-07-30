@@ -105,10 +105,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         },
 
         {
-            name: 'Player X',
+            name: 'Player O',
             color: {
-                hex: '#04dac2',
-                name: 'Blue',
+                hex: '#bb86fc',
+                name: 'Purple',
             },
             match: {
                 matches: 0,
@@ -120,10 +120,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         },
 
         {
-            name: 'Player O',
+            name: 'Player X',
             color: {
-                hex: '#bb86fc',
-                name: 'Purple',
+                hex: '#04dac2',
+                name: 'Blue',
             },
             match: {
                 matches: 0,

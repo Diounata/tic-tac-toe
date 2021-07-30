@@ -12,21 +12,21 @@ type PlayerData = {
 
 type ButtonProps = {
     p: PlayerData;
-    selectedPlayer: { x: number, o: number};
+    selectedPlayer: { X: number, O: number};
     symbol: 'X' | 'O';
 
     changeSelectedPlayer(value: number, symbol: 'X' | 'O'): void;
 };
 
 export default function SelectPlayerButton({ p, selectedPlayer, symbol, changeSelectedPlayer }: ButtonProps) {
-    const notSymbol = selectedPlayer.x !== p.key ? 'O' : 'X'; 
+    const notSymbol = symbol === 'X' ? 'O' : 'X'; 
 
     const Icon = {
-        x: <X color={p.color.hex} />,
-        o: <O color={p.color.hex} />
+        X: <X color={p.color.hex} />,
+        O: <O color={p.color.hex} />
     }
     
-    return ( // caso estiverem com o msm key;
+    return (
         <>
             <PlayersButton
                 style={{ borderColor: selectedPlayer[symbol] === p.key ? p.color.hex : '' }}
