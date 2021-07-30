@@ -20,22 +20,19 @@ export default function FinishedGame() {
     }
 
     return (
-        <>
-            <main className={styles.gameContainer}>
+        <main className={styles.container}>
+            <div className={styles.gameContainer}>
                 {position.map((i, index) => (
-                    <div
-                        style={{ background: verifyPosition(index) }}
-                        key={index}
-                    >
+                    <div style={{ background: verifyPosition(index) }} key={index}>
                         <span>
                             {i === 'X' && player.x.icon}
                             {i === 'O' && player.o.icon}
                         </span>
                     </div>
                 ))}
-            </main>
+            </div>
 
             <Button onClick={resetGame}>Start new game</Button>
-        </>
+        </main>
     );
 }

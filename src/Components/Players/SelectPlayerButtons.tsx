@@ -13,13 +13,13 @@ type PlayerData = {
 type ButtonProps = {
     p: PlayerData;
     selectedPlayer: { x: number, o: number};
-    symbol: 'x' | 'o';
+    symbol: 'X' | 'O';
 
-    changeSelectedPlayer(value: number, symbol: 'x' | 'o'): void;
+    changeSelectedPlayer(value: number, symbol: 'X' | 'O'): void;
 };
 
 export default function SelectPlayerButton({ p, selectedPlayer, symbol, changeSelectedPlayer }: ButtonProps) {
-    const notSymbol = selectedPlayer.x !== p.key ? 'o' : 'x'; 
+    const notSymbol = selectedPlayer.x !== p.key ? 'O' : 'X'; 
 
     const Icon = {
         x: <X color={p.color.hex} />,

@@ -23,14 +23,14 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
     const [selectedPlayer, setSelectedPlayer] = useState({ x: players.length - 2, o: players.length - 1 });
     const router = useRouter();
 
-    function changeSelectedPlayer(value: number, symbol: 'x' | 'o') {
+    function changeSelectedPlayer(value: number, symbol: 'X' | 'O') {
         if (value === selectedPlayer[symbol]) {
-            const selectedChange = symbol === 'x' ? { x: -1 } : { o: -1 };
+            const selectedChange = symbol === 'X' ? { x: -1 } : { o: -1 };
             const newSelectedPlayer = { ...selectedPlayer, ...selectedChange };
 
             setSelectedPlayer(newSelectedPlayer);
         } else {
-            const selectedChange = symbol === 'x' ? { x: value } : { o: value };
+            const selectedChange = symbol === 'O' ? { x: value } : { o: value };
             const newSelectedPlayer = { ...selectedPlayer, ...selectedChange };
 
             setSelectedPlayer(newSelectedPlayer);
@@ -43,14 +43,14 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
 
         const xPlayer = {
             name: x.name,
-            symbol: 'x',
+            symbol: 'X',
             color: x.color.hex,
             wins: 0,
             icon: <X color={x.color.hex} />,
         };
         const oPlayer = {
             name: o.name,
-            symbol: 'o',
+            symbol: 'O',
             color: o.color.hex,
             wins: 0,
             icon: <O color={o.color.hex} />,
@@ -92,7 +92,7 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
                                         ? (
                                             <SelectPlayerButtons
                                                 p={playerData}
-                                                symbol={p.name === 'Player X' ? 'x' : 'o'}
+                                                symbol={p.name === 'Player X' ? 'X' : 'O'}
                                                 selectedPlayer={selectedPlayer}
                                                 changeSelectedPlayer={changeSelectedPlayer}
                                             />
@@ -102,14 +102,14 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
                                             <>
                                                 <SelectPlayerButtons
                                                     p={playerData}
-                                                    symbol='x'
+                                                    symbol='X'
                                                     selectedPlayer={selectedPlayer}
                                                     changeSelectedPlayer={changeSelectedPlayer}
                                                 />
 
                                                 <SelectPlayerButtons
                                                     p={playerData}
-                                                    symbol='o'
+                                                    symbol='O'
                                                     selectedPlayer={selectedPlayer}
                                                     changeSelectedPlayer={changeSelectedPlayer}
                                                 />
