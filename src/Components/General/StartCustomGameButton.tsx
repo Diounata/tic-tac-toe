@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '@styles/General/StartCustomGameButton.module.scss';
 
+import Users from '@Icons/Users';
 import X from '@Icons/X';
 import O from '@Icons/O';
 
@@ -65,8 +66,7 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
         <>
             <div className={styles.container}>
                 <h3>
-                    <span>Players</span>
-                    <span>Symbol</span>
+                    <Users /> Players
                 </h3>
 
                 <div>

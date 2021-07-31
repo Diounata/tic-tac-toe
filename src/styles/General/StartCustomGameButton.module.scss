@@ -14,16 +14,6 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 
-    h3 {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        padding-right: 2rem;
-        
-        span:last-child {
-            text-align: center;
-        }
-    }
-
     button:disabled {
         opacity: 0.5;
         cursor: not-allowed;
@@ -34,21 +24,21 @@
         padding-right: 2rem;
 
         > div {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
+            display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 1rem;
 
             padding: 1rem 0;
             border-bottom: 2px solid rgba(0, 0, 0, 0.2);
         }
     }
-}
 
-.username {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
+    .username, h3 {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+    }
 }
 
 .divColor {
