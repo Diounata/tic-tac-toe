@@ -41,16 +41,13 @@ export default function PlayerData() {
                     if (p.name !== 'Player X' && p.name !== 'Player O') {
                         return (
                             <div key={key}>
-                                <div className={styles.icons}>
-                                    <X color={p.color.hex} />
-                                    <O color={p.color.hex} />
-                                </div>
+                                <div>
+                                    <div className={styles.icons}>
+                                        <X color={p.color.hex} size={20.8} />
+                                        <O color={p.color.hex} size={16.8} />
+                                    </div>
 
-                                <div className={styles.username}>{p.name}</div>
-                                
-                                <div className={styles.colorSquare}>
-                                    <div style={{ background: p.color.hex }}></div>
-                                    {p.color.name}
+                                    <div className={styles.username}>{p.name}</div>
                                 </div>
 
                                 <div className={styles.actions}>
@@ -67,11 +64,11 @@ export default function PlayerData() {
                                     </PlayersButton>
                                 </div>
                             </div>
-                        )
+                        );
                     }
                 })}
-                
-                <DefaultPlayers />
+
+                <DefaultPlayers showModal={showModal} />
             </article>
         </>
     );

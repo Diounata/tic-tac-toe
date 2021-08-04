@@ -1,34 +1,19 @@
 .container {
-     width: 100vw;
+    width: 90vw;
 
-    padding: 0 6rem;
-    text-align: center;
-
-    > div {
-        padding-bottom: 1.2rem;
-        border-bottom: 2px solid var(--light-color);
-    }
-
-    h4 {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
+    @media (max-width: 450px) {
+        & {
+            width: 94vw;
+        }
     }
 }
 
-.tableHeader {
-    display: grid;
-    grid-template-columns: 0.5fr 1fr 1fr 2fr 1fr;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
+.addNewPlayerButton {
+    margin: 2rem 0;
 
-.username,
-.color {
-    text-align: start;
-}
-
-.actions {
-    justify-content: center;
+    @media (max-width: 768px) {
+        button {
+            margin: auto;
+        }
+    }
 }
