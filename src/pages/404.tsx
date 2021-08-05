@@ -8,18 +8,24 @@ import House from '@Icons/House';
 
 export default function NotFound() {
     return (
-        <div className={styles.container}>
-            <TitlePage title="Page doesn't found" />
+        <>
+            <div></div>
 
-            <Sad />
+            <div className={styles.container}>
+                <TitlePage title="Page doesn't found" />
 
-            <div>
-                <span>404</span> This page does not exist
+                <Sad />
+
+                <div>
+                    <span>404</span> This page does not exist
+                </div>
+
+                <LinkButton href='/'>
+                    <House /> Return home
+                </LinkButton>
             </div>
 
-            <LinkButton href='/'>
-                <House /> Return home
-            </LinkButton>
-        </div>
+            <div></div>
+        </>
     );
 }
