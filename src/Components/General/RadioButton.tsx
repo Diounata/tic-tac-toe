@@ -6,12 +6,14 @@ type RadioProps = {
     name: string;
     children: ReactNode;
     selected?: boolean;
+
+    onClick?: () => void;
 };
 
-export default function RadioButton({ id, name, children, selected }: RadioProps) {
+export default function RadioButton({ id, name, children, selected, onClick }: RadioProps) {
     return (
         <div className={styles.container}>
-            <input type='radio' name={name} id={id} checked={selected} />
+            <input type='radio' name={name} id={id} checked={selected} onClick={onClick} />
 
             <label htmlFor={id}>{children}</label>
         </div>

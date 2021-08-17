@@ -2,9 +2,11 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 
 import { useModal } from './ModalContext';
 import { usePlayers } from './PlayersContext';
+import { useSettings } from './SettingsContext';
 
 import X from '@Icons/X';
 import O from '@Icons/O';
+import { start } from 'repl';
 
 export const GameContext = createContext({} as ContextProps);
 
@@ -77,7 +79,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
     const [playersName, setPlayersName] = useState({} as PlayersName);
 
     const [position, setPosition] = useState(['', '', '', '', '', '', '', '', '']);
-    const [playerTurn, setPlayerTurn] = useState('Player'); // It'll start as X
+    const [playerTurn, setPlayerTurn] = useState('');
     const [amountFilledPosition, setAmountFilledPosition] = useState(0);
     const [winner, setWinner] = useState<PlayerContentProps>();
     const [winnerPosition, setWinnerPosition] = useState([]);
@@ -85,6 +87,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
 
     const { isModalOpen, changeModalState } = useModal();
     const { updatePlayersWhenWinning, updatePlayersWhenTie, updateHistory } = usePlayers();
+    const { startGameAs } = useSettings();
 
     function updatePlayer(xPlayer: PlayerContentProps, oPlayer: PlayerContentProps): void {
         const newPlayers = { x: xPlayer, o: oPlayer };
@@ -214,7 +217,6 @@ export function GameContextProvider({ children }: ChildrenProps) {
 
     function resetGame(): void {
         setPosition(['', '', '', '', '', '', '', '', '']);
-        setPlayerTurn('');
         setAmountFilledPosition(0);
         setWinner(null);
         setWinnerPosition([]);
@@ -222,13 +224,47 @@ export function GameContextProvider({ children }: ChildrenProps) {
         changeModalState(false);
     }
 
-    useEffect(() => {
-        if (playerTurn === 'X' || playerTurn === 'O') {
-            checkGameSituation();
+    function verifyTurnStarter(): void {
+        let starter;
+
+        switch (startGameAs) {
+            case 'X':
+                starter = 'X';
+                break;
+            case 'O':
+                starter = 'O';
+                break;
+            case 'Winner':
+                starter = winner.symbol === 'X' ? 'X' : 'O';
+                break;
+            case 'Loser':
+                starter = winner.symbol === 'X' ? 'O' : 'X';
+                break;
+            case 'Random':
+                const randomNumber = Math.floor(Math.random() * 2);
+
+                starter = randomNumber ? 'X' : 'O';
+                break;
+            default:
+                console.error('Error when verifying the starter.');
         }
 
-        if (!isModalOpen) {
-            setPlayerTurn(playerTurn === 'X' ? 'O' : 'X');
+        console.log(starter);
+
+        setPlayerTurn(starter);
+    }
+
+    useEffect(() => {
+        if (!isGameFinished) {
+            if (playerTurn === 'X' || playerTurn === 'O') {
+                checkGameSituation();
+            }
+
+            if (!isModalOpen) {
+                setPlayerTurn(playerTurn === 'X' ? 'O' : 'X');
+            }
+        } else {
+            verifyTurnStarter();
         }
     }, [position]);
 

@@ -10,7 +10,11 @@ import Header from '@Components/General/Header';
 import Footer from '@Components/General/Footer';
 import RadioButton from '@Components/General/RadioButton';
 
+import { useSettings } from '@Contexts/SettingsContext';
+
 export default function Settings() {
+    const { startGameAs, updateStartGameAs } = useSettings();
+
     return (
         <>
             <TitlePage title='Leaderboard' />
@@ -32,27 +36,52 @@ export default function Settings() {
                             <header>Start game as:</header>
 
                             <div>
-                                <RadioButton name='start-game' id='x' selected>
+                                <RadioButton
+                                    name='start-game'
+                                    id='x'
+                                    selected={startGameAs === 'X'}
+                                    onClick={() => updateStartGameAs('X')}
+                                >
                                     <div>
                                         <span>Player</span> <X color='#e1e1e1' />
                                     </div>
                                 </RadioButton>
 
-                                <RadioButton name='start-game' id='o'>
+                                <RadioButton
+                                    name='start-game'
+                                    id='o'
+                                    selected={startGameAs === 'O'}
+                                    onClick={() => updateStartGameAs('O')}
+                                >
                                     <div>
                                         <span>Player</span> <O color='#e1e1e1' />
                                     </div>
                                 </RadioButton>
 
-                                <RadioButton name='start-game' id='winner'>
+                                <RadioButton
+                                    name='start-game'
+                                    id='winner'
+                                    selected={startGameAs === 'Winner'}
+                                    onClick={() => updateStartGameAs('Winner')}
+                                >
                                     Winner
                                 </RadioButton>
 
-                                <RadioButton name='start-game' id='loser'>
+                                <RadioButton
+                                    name='start-game'
+                                    id='loser'
+                                    selected={startGameAs === 'Loser'}
+                                    onClick={() => updateStartGameAs('Loser')}
+                                >
                                     Loser
                                 </RadioButton>
 
-                                <RadioButton name='start-game' id='random'>
+                                <RadioButton
+                                    name='start-game'
+                                    id='random'
+                                    selected={startGameAs === 'Random'}
+                                    onClick={() => updateStartGameAs('Random')}
+                                >
                                     Random
                                 </RadioButton>
                             </div>
@@ -63,54 +92,6 @@ export default function Settings() {
 
                             <div>
                                 <RadioButton name='save-stats' id='yes' selected>
-                                    Yes
-                                </RadioButton>
-
-                                <RadioButton name='save-stats' id='no'>
-                                    No
-                                </RadioButton>
-                            </div>
-                        </article>
-                    </section>
-
-                    <section>
-                        <h3>Game</h3>
-
-                        <article>
-                            <header>Start game as:</header>
-
-                            <div>
-                                <RadioButton name='start-game' id='x'>
-                                    <div>
-                                        <span>Player</span> <X color='#e1e1e1' />
-                                    </div>
-                                </RadioButton>
-
-                                <RadioButton name='start-game' id='o'>
-                                    <div>
-                                        <span>Player</span> <O color='#e1e1e1' />
-                                    </div>
-                                </RadioButton>
-
-                                <RadioButton name='start-game' id='winner'>
-                                    Winner
-                                </RadioButton>
-
-                                <RadioButton name='start-game' id='loser'>
-                                    Loser
-                                </RadioButton>
-
-                                <RadioButton name='start-game' id='random'>
-                                    Random
-                                </RadioButton>
-                            </div>
-                        </article>
-
-                        <article>
-                            <header>Save game statistics (wins, defeats, score)</header>
-
-                            <div>
-                                <RadioButton name='save-stats' id='yes'>
                                     Yes
                                 </RadioButton>
 
