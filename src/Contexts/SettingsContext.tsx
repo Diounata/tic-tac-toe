@@ -6,7 +6,7 @@ type ChildrenProps = {
     children: ReactNode;
 };
 
-type StartGameAsProps = 'X' | 'O' | 'Winner' | 'Loser' | 'Random';
+type StartGameAsProps = 'X' | 'O' | 'Winner' | 'Loser' | 'Evenly' | 'Random';
 
 type ContextProps = {
     startGameAs: StartGameAsProps;
@@ -15,7 +15,7 @@ type ContextProps = {
 };
 
 export function SettingsContextProvider({ children }: ChildrenProps) {
-    const [startGameAs, setStartGameAs] = useState<StartGameAsProps>('O');
+    const [startGameAs, setStartGameAs] = useState<StartGameAsProps>('Winner');
 
     function updateStartGameAs(value: StartGameAsProps): void {
         setStartGameAs(value);

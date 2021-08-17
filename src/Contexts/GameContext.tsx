@@ -6,7 +6,6 @@ import { useSettings } from './SettingsContext';
 
 import X from '@Icons/X';
 import O from '@Icons/O';
-import { start } from 'repl';
 
 export const GameContext = createContext({} as ContextProps);
 
@@ -41,6 +40,11 @@ type HistoryPlayerProps = {
 type HistoryProps = {
     x: HistoryPlayerProps;
     o: HistoryPlayerProps;
+};
+
+type FilledPositionAmountProps = {
+    lastGame: number;
+    current: number;
 };
 
 type ContextProps = {
@@ -80,10 +84,11 @@ export function GameContextProvider({ children }: ChildrenProps) {
 
     const [position, setPosition] = useState(['', '', '', '', '', '', '', '', '']);
     const [playerTurn, setPlayerTurn] = useState('');
-    const [amountFilledPosition, setAmountFilledPosition] = useState(0);
+    const [filledPositionAmount, setFilledPositionAmount] = useState<FilledPositionAmountProps>({ lastGame: 0, current: 0 });
     const [winner, setWinner] = useState<PlayerContentProps>();
     const [winnerPosition, setWinnerPosition] = useState([]);
     const [isGameFinished, setIsGameFinished] = useState(false);
+    const [starterPlayer, setStarterPlayer] = useState<'X' | 'O'>('O');
 
     const { isModalOpen, changeModalState } = useModal();
     const { updatePlayersWhenWinning, updatePlayersWhenTie, updateHistory } = usePlayers();
@@ -120,9 +125,13 @@ export function GameContextProvider({ children }: ChildrenProps) {
     function updatePosition(number: number): void {
         if (!position[number]) {
             const newPosition = position.map((i, index) => (number === index ? playerTurn : i));
+            const newFilledPositionAmount = {
+                lastGame: filledPositionAmount.lastGame,
+                current: filledPositionAmount.current + 1,
+            };
 
             setPosition(newPosition);
-            setAmountFilledPosition(() => amountFilledPosition + 1);
+            setFilledPositionAmount(newFilledPositionAmount);
         }
     }
 
@@ -184,7 +193,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
         const player1 = player.x.name;
         const player2 = player.o.name;
 
-        if (amountFilledPosition === 9) {
+        if (filledPositionAmount.current === 9) {
             const history: HistoryProps = {
                 x: {
                     name: player.x.name,
@@ -216,8 +225,8 @@ export function GameContextProvider({ children }: ChildrenProps) {
     }
 
     function resetGame(): void {
+        setFilledPositionAmount({ lastGame: filledPositionAmount.current, current: 0 });
         setPosition(['', '', '', '', '', '', '', '', '']);
-        setAmountFilledPosition(0);
         setWinner(null);
         setWinnerPosition([]);
         setIsGameFinished(false);
@@ -225,7 +234,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
     }
 
     function verifyTurnStarter(): void {
-        let starter;
+        let starter: 'X' | 'O';
 
         switch (startGameAs) {
             case 'X':
@@ -235,10 +244,23 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 starter = 'O';
                 break;
             case 'Winner':
-                starter = winner.symbol === 'X' ? 'X' : 'O';
+                if (filledPositionAmount.lastGame % 2) {
+                    starter = starterPlayer;
+                } else {
+                    starter = starterPlayer === 'X' ? 'O' : 'X';
+                }
+
                 break;
             case 'Loser':
-                starter = winner.symbol === 'X' ? 'O' : 'X';
+                if (filledPositionAmount.lastGame % 2) {
+                    starter = starterPlayer === 'X' ? 'O' : 'X';
+                } else {
+                    starter = starterPlayer;
+                }
+
+                break;
+            case 'Evenly':
+                starter = starterPlayer === 'X' ? 'O' : 'X';
                 break;
             case 'Random':
                 const randomNumber = Math.floor(Math.random() * 2);
@@ -249,13 +271,12 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 console.error('Error when verifying the starter.');
         }
 
-        console.log(starter);
-
+        setStarterPlayer(starter);
         setPlayerTurn(starter);
     }
 
     useEffect(() => {
-        if (!isGameFinished) {
+        if (filledPositionAmount.current) {
             if (playerTurn === 'X' || playerTurn === 'O') {
                 checkGameSituation();
             }

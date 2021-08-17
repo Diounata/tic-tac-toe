@@ -13,7 +13,7 @@ type RadioProps = {
 export default function RadioButton({ id, name, children, selected, onClick }: RadioProps) {
     return (
         <div className={styles.container}>
-            <input type='radio' name={name} id={id} checked={selected} onClick={onClick} />
+            <input type='radio' name={name} id={id} defaultChecked={selected} onClick={onClick} />
 
             <label htmlFor={id}>{children}</label>
         </div>
