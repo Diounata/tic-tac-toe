@@ -56,7 +56,7 @@ export default function StartGameAs() {
                 selected={startGameAs === 'Evenly'}
                 onClick={() => updateStartGameAs('Evenly')}
             >
-                Random
+                Evenly
             </RadioButton>
 
             <RadioButton
