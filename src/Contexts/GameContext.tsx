@@ -182,9 +182,6 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 if (isSaveGameStatsOn) {
                     updateHistory(history);
                     updatePlayersWhenWinning(winnerPlayer.name, loserPlayer.name);
-                    console.log('Game stats has been saved.');
-                } else {
-                    console.log("Game stats wasn't saved because setting is false. ")
                 }
 
                 setWinner(winnerPlayer);
