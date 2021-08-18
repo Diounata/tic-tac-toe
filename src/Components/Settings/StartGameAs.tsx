@@ -10,13 +10,23 @@ export default function StartGameAs() {
 
     return (
         <div>
-            <RadioButton name='start-game' id='x' selected={startGameAs === 'X'} onClick={() => updateStartGameAs('X')}>
+            <RadioButton
+                name='start-game'
+                id='x'
+                selected={startGameAs === 'X'}
+                onClick={() => updateStartGameAs('X')}
+            >
                 <div>
                     <span>Player</span> <X color='#e1e1e1' />
                 </div>
             </RadioButton>
 
-            <RadioButton name='start-game' id='o' selected={startGameAs === 'O'} onClick={() => updateStartGameAs('O')}>
+            <RadioButton
+                name='start-game'
+                id='o'
+                selected={startGameAs === 'O'}
+                onClick={() => updateStartGameAs('O')}
+            >
                 <div>
                     <span>Player</span> <O color='#e1e1e1' />
                 </div>

@@ -6,9 +6,9 @@ import Gear from '@Icons/Gear';
 
 import Header from '@Components/General/Header';
 import Footer from '@Components/General/Footer';
-import RadioButton from '@Components/General/RadioButton';
 
 import StartGameAs from '@Components/Settings/StartGameAs';
+import SaveGameStats from '@Components/Settings/SaveGameStats';
 
 export default function Settings() {
     return (
@@ -35,17 +35,11 @@ export default function Settings() {
                         </article>
 
                         <article>
-                            <header>Save game statistics (wins, defeats, score)</header>
+                            <header>
+                                Save game statistics (wins, defeats, score)
+                            </header>
 
-                            <div>
-                                <RadioButton name='save-stats' id='yes' selected>
-                                    Yes
-                                </RadioButton>
-
-                                <RadioButton name='save-stats' id='no'>
-                                    No
-                                </RadioButton>
-                            </div>
+                            <SaveGameStats />
                         </article>
                     </section>
                 </div>

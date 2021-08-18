@@ -92,7 +92,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
 
     const { isModalOpen, changeModalState } = useModal();
     const { updatePlayersWhenWinning, updatePlayersWhenTie, updateHistory } = usePlayers();
-    const { startGameAs } = useSettings();
+    const { startGameAs, isSaveGameStatsOn } = useSettings();
 
     function updatePlayer(xPlayer: PlayerContentProps, oPlayer: PlayerContentProps): void {
         const newPlayers = { x: xPlayer, o: oPlayer };
@@ -179,10 +179,16 @@ export function GameContextProvider({ children }: ChildrenProps) {
                     },
                 };
 
-                updateHistory(history);
+                if (isSaveGameStatsOn) {
+                    updateHistory(history);
+                    updatePlayersWhenWinning(winnerPlayer.name, loserPlayer.name);
+                    console.log('Game stats has been saved.');
+                } else {
+                    console.log("Game stats wasn't saved because setting is false. ")
+                }
+
                 setWinner(winnerPlayer);
                 setWinnerPosition(numArray);
-                updatePlayersWhenWinning(winnerPlayer.name, loserPlayer.name);
                 setIsGameFinished(true);
                 changeModalState(true);
             }
