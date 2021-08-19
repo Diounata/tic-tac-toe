@@ -1,0 +1,20 @@
+.alertContainer {
+    position: relative;
+    padding: 0.4rem 1rem;
+    
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    
+    width: fit-content;
+    margin: 1rem auto;
+
+    background: #fff3cd;
+    color: #856404;
+
+    &,
+    b {
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+    }
+}
