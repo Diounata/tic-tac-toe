@@ -4,21 +4,21 @@ type TimeProps = {
     sec: number;
 };
 
-export default function convertTime(lowT: number, upT: number): TimeProps {
+export default function convertTime(initTime: number, endTime: number): TimeProps {
     const time = { hour: 0, min: 0, sec: 0 };
-    let t = upT - lowT;
+    let sec = (Math.round(endTime) - Math.round(initTime)) / 1000; // convert attributes to seconds.
 
-    while (t >= 600) {
+    while (sec >= 3600) {
         time.hour++;
-        t -= 600;
+        sec -= 3600;
     }
 
-    while (t >= 60) {
+    while (sec >= 60) {
         time.min++;
-        t -= 60;
+        sec -= 60;
     }
 
-    time.sec = t;
+    time.sec = sec;
 
     return time;
 }
