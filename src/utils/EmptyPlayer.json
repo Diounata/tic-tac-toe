@@ -13,7 +13,12 @@
                 "ties": 0
             },
 
-            "score": 0
+            "score": 0,
+            "playedTime": {
+                "min": 0,
+                "sec": 0,
+                "ms": 0
+            }
         },
 
         "key": -1

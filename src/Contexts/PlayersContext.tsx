@@ -13,6 +13,7 @@ type PlayerProps = {
     color: ColorProps;
     match: PlayerMatchProps;
     score: number;
+    playedTime: PlayedTimeProps;
 };
 
 type ColorProps = {
@@ -25,6 +26,12 @@ type PlayerMatchProps = {
     wins: number;
     defeats: number;
     ties: number;
+};
+
+type PlayedTimeProps = {
+    min: number;
+    sec: number;
+    ms: number;
 };
 
 type EditingPlayerProps = {
@@ -87,6 +94,11 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 ties: 0,
             },
             score: 0,
+            playedTime: {
+                min: 0,
+                sec: 0,
+                ms: 0,
+            },
         },
 
         {
@@ -102,6 +114,11 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 ties: 0,
             },
             score: 0,
+            playedTime: {
+                min: 0,
+                sec: 0,
+                ms: 0,
+            },
         },
 
         {
@@ -117,6 +134,11 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 ties: 0,
             },
             score: 0,
+            playedTime: {
+                min: 0,
+                sec: 0,
+                ms: 0,
+            },
         },
 
         {
@@ -132,6 +154,11 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 ties: 0,
             },
             score: 0,
+            playedTime: {
+                min: 0,
+                sec: 0,
+                ms: 0,
+            },
         },
     ]);
 
@@ -230,7 +257,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         const newPlayers = players.filter((p, i) => i !== key);
 
         updatePlayers(newPlayers);
-        changePlayerActionMessage({ action: 'delete', user: deletedPlayer[0].name });
+        changePlayerActionMessage({
+            action: 'delete',
+            user: deletedPlayer[0].name,
+        });
     }
 
     function resetPlayerStats(key: number): void {
@@ -242,7 +272,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         const newPlayers = players.map((player, index) => (index !== key ? player : newPlayerStatistic[0]));
 
         updatePlayers(newPlayers);
-        changePlayerActionMessage({ action: 'reset', user: newPlayerStatistic[0].name });
+        changePlayerActionMessage({
+            action: 'reset',
+            user: newPlayerStatistic[0].name,
+        });
     }
 
     function calcWinrate(wins: number, matches: number): number {

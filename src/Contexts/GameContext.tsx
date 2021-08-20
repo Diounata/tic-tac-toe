@@ -1,11 +1,12 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
+import X from '@Icons/X';
+import O from '@Icons/O';
+import convertTime from '@utils/timeConversor';
+
 import { useModal } from './ModalContext';
 import { usePlayers } from './PlayersContext';
 import { useSettings } from './SettingsContext';
-
-import X from '@Icons/X';
-import O from '@Icons/O';
 
 export const GameContext = createContext({} as ContextProps);
 
@@ -84,11 +85,15 @@ export function GameContextProvider({ children }: ChildrenProps) {
 
     const [position, setPosition] = useState(['', '', '', '', '', '', '', '', '']);
     const [playerTurn, setPlayerTurn] = useState('');
-    const [filledPositionAmount, setFilledPositionAmount] = useState<FilledPositionAmountProps>({ lastGame: 0, current: 0 });
+    const [filledPositionAmount, setFilledPositionAmount] = useState<FilledPositionAmountProps>({
+        lastGame: 0,
+        current: 0,
+    });
     const [winner, setWinner] = useState<PlayerContentProps>();
     const [winnerPosition, setWinnerPosition] = useState([]);
     const [isGameFinished, setIsGameFinished] = useState(false);
     const [starterPlayer, setStarterPlayer] = useState<'X' | 'O'>('O');
+    const [gameInitTime, setGameInitTime] = useState(0);
 
     const { isModalOpen, changeModalState } = useModal();
     const { updatePlayersWhenWinning, updatePlayersWhenTie, updateHistory } = usePlayers();
@@ -184,6 +189,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
                     updatePlayersWhenWinning(winnerPlayer.name, loserPlayer.name);
                 }
 
+                calcGameDuration();
                 setWinner(winnerPlayer);
                 setWinnerPosition(numArray);
                 setIsGameFinished(true);
@@ -211,6 +217,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 },
             };
 
+            calcGameDuration();
             updateHistory(history);
             setWinner(null);
             setIsGameFinished(true);
@@ -225,6 +232,20 @@ export function GameContextProvider({ children }: ChildrenProps) {
         winner.symbol === 'X' ? players.x.wins++ : players.o.wins++;
 
         setPlayer({ ...players });
+    }
+
+    function getGameInitTime(): void {
+        const time = new Date().getTime();
+
+        setGameInitTime(time);
+    }
+
+    function calcGameDuration(): void {
+        const currentTime = new Date().getTime();
+        const ms = currentTime - gameInitTime;
+        const convertedTime = convertTime(ms);
+
+        console.log(convertedTime);
     }
 
     function resetGame(): void {
@@ -274,6 +295,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 console.error('Error when verifying the starter.');
         }
 
+        getGameInitTime();
         setStarterPlayer(starter);
         setPlayerTurn(starter);
     }
