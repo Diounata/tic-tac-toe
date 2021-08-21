@@ -6,6 +6,7 @@ import O from '@Icons/O';
 import { useModal } from './ModalContext';
 import { usePlayers } from './PlayersContext';
 import { useSettings } from './SettingsContext';
+import convertTime from '@utils/timeConversor';
 
 export const GameContext = createContext({} as ContextProps);
 
@@ -40,6 +41,11 @@ type HistoryPlayerProps = {
 type HistoryProps = {
     x: HistoryPlayerProps;
     o: HistoryPlayerProps;
+    duration: {
+        hour: number;
+        min: number;
+        sec: number;
+    };
 };
 
 type FilledPositionAmountProps = {
@@ -59,6 +65,7 @@ type ContextProps = {
     updatePlayer(xPlayer: PlayerContentProps, oPlayer: PlayerContentProps): void;
     updatePlayersToDefault(): void;
     updatePosition(number: number): void;
+    getGameInitTime(): void;
     resetGame(): void;
 };
 
@@ -181,6 +188,8 @@ export function GameContextProvider({ children }: ChildrenProps) {
                         color: player.o.color,
                         situation: playerTurn !== 'X' ? 'Winner' : 'Loser',
                     },
+
+                    duration: convertTime(calcGameDuration()),
                 };
 
                 if (isSaveGameStatsOn) {
@@ -215,6 +224,8 @@ export function GameContextProvider({ children }: ChildrenProps) {
                     color: player.o.color,
                     situation: 'Tie',
                 },
+
+                duration: convertTime(calcGameDuration()),
             };
 
             updatePlayerPlayedTime(playersName.x, playersName.o, calcGameDuration());
@@ -340,6 +351,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 updatePosition,
                 updatePlayer,
                 updatePlayersToDefault,
+                getGameInitTime,
                 resetGame,
             }}
         >

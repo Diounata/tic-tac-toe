@@ -55,6 +55,11 @@ type HistoryPlayerProps = {
 type HistoryProps = {
     x: HistoryPlayerProps;
     o: HistoryPlayerProps;
+    duration: {
+        hour: number;
+        min: number;
+        sec: number;
+    };
 };
 
 type ContextProps = {
