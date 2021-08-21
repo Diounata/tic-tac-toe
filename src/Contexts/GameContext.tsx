@@ -2,7 +2,6 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 
 import X from '@Icons/X';
 import O from '@Icons/O';
-import convertTime from '@utils/timeConversor';
 
 import { useModal } from './ModalContext';
 import { usePlayers } from './PlayersContext';
@@ -96,7 +95,7 @@ export function GameContextProvider({ children }: ChildrenProps) {
     const [gameInitTime, setGameInitTime] = useState(0);
 
     const { isModalOpen, changeModalState } = useModal();
-    const { updatePlayersWhenWinning, updatePlayersWhenTie, updateHistory } = usePlayers();
+    const { updatePlayersWhenWinning, updatePlayersWhenTie, updateHistory, updatePlayerPlayedTime } = usePlayers();
     const { startGameAs, isSaveGameStatsOn } = useSettings();
 
     function updatePlayer(xPlayer: PlayerContentProps, oPlayer: PlayerContentProps): void {
@@ -189,7 +188,8 @@ export function GameContextProvider({ children }: ChildrenProps) {
                     updatePlayersWhenWinning(winnerPlayer.name, loserPlayer.name);
                 }
 
-                calcGameDuration();
+                updatePlayerPlayedTime(playersName.x, playersName.o, calcGameDuration());
+
                 setWinner(winnerPlayer);
                 setWinnerPosition(numArray);
                 setIsGameFinished(true);
@@ -217,6 +217,8 @@ export function GameContextProvider({ children }: ChildrenProps) {
                 },
             };
 
+            updatePlayerPlayedTime(playersName.x, playersName.o, calcGameDuration());
+
             calcGameDuration();
             updateHistory(history);
             setWinner(null);
@@ -240,12 +242,11 @@ export function GameContextProvider({ children }: ChildrenProps) {
         setGameInitTime(time);
     }
 
-    function calcGameDuration(): void {
+    function calcGameDuration(): number {
         const currentTime = new Date().getTime();
         const ms = currentTime - gameInitTime;
-        const convertedTime = convertTime(ms);
 
-        console.log(convertedTime);
+        return ms;
     }
 
     function resetGame(): void {

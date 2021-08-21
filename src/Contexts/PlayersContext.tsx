@@ -1,8 +1,9 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
-export const PlayersContext = createContext({} as ContextProps);
-
 import EmptyPlayer from '@utils/EmptyPlayer.json';
+import convertTime from '@utils/timeConversor';
+
+export const PlayersContext = createContext({} as ContextProps);
 
 type ChildrenProps = {
     children: ReactNode;
@@ -29,6 +30,7 @@ type PlayerMatchProps = {
 };
 
 type PlayedTimeProps = {
+    hour: number;
     min: number;
     sec: number;
     ms: number;
@@ -66,6 +68,7 @@ type ContextProps = {
 
     updatePlayersWhenWinning(winnerName: string, loserName: string): void;
     updatePlayersWhenTie(player1Name: string, player2Name: string): void;
+    updatePlayerPlayedTime(name1: string, name2: string, ms: number);
     updateHistory(history: HistoryProps): void;
     deleteAllHistory(): void;
     changePlayerActionMessage(value: PlayerActionMessagesProps): void;
@@ -95,6 +98,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             },
             score: 0,
             playedTime: {
+                hour: 0,
                 min: 0,
                 sec: 0,
                 ms: 0,
@@ -115,6 +119,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             },
             score: 0,
             playedTime: {
+                hour: 0,
                 min: 0,
                 sec: 0,
                 ms: 0,
@@ -135,6 +140,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             },
             score: 0,
             playedTime: {
+                hour: 0,
                 min: 0,
                 sec: 0,
                 ms: 0,
@@ -155,6 +161,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             },
             score: 0,
             playedTime: {
+                hour: 0,
                 min: 0,
                 sec: 0,
                 ms: 0,
@@ -206,6 +213,33 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         });
 
         updatePlayers(players);
+    }
+
+    function updatePlayerPlayedTime(name1: string, name2: string, ms: number) {
+        function update(name: string) {
+            const filteredP = players.filter(p => p.name === name);
+            const newMs = filteredP[0].playedTime.ms + ms;
+
+            filteredP[0].playedTime = { ...convertTime(newMs), ms: newMs };
+
+            return filteredP[0];
+        }
+
+        const updatedPlayer1 = update(name1);
+        const updatedPlayer2 = update(name2);
+
+        const newPlayers = players.map(p => {
+            switch (p.name) {
+                case name1:
+                    return updatedPlayer1;
+                case name2:
+                    return updatedPlayer2;
+                default:
+                    return p;
+            }
+        });
+
+        updatePlayers(newPlayers);
     }
 
     function updateHistory(newMatchHistory: HistoryProps): void {
@@ -326,6 +360,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 isEditingAPlayer,
                 updatePlayersWhenWinning,
                 updatePlayersWhenTie,
+                updatePlayerPlayedTime,
                 updateHistory,
                 deleteAllHistory,
                 changePlayerActionMessage,
