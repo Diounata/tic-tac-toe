@@ -2,6 +2,7 @@ import styles from '@styles/History/History.module.scss';
 
 import X from '@Icons/X';
 import O from '@Icons/O';
+import formatTime from '@utils/timeFormat';
 
 import ColorSquare from '@Components/History/ColorSquare';
 
@@ -26,10 +27,7 @@ export default function HistoryData() {
                     <div className={styles.situation}>
                         <ColorSquare situation={i.o.situation} /> {i.o.situation}
                     </div>
-                    <div>
-                        {String(i.duration.hour).padStart(2, '0')}:{String(i.duration.min).padStart(2, '0')}:
-                        {String(i.duration.sec).padStart(2, '0')}
-                    </div>
+                    <div>{formatTime(i.duration)}</div>
                 </div>
             ))}
         </div>

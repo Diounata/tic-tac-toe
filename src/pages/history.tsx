@@ -58,6 +58,10 @@ export default function History() {
                         <div>Situation</div>
 
                         <div>
+                            Duration
+                        </div>
+
+                        <div>
                             <Button onClick={deleteAllHistory}>
                                 <Trash /> Delete all
                             </Button>
