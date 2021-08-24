@@ -9,7 +9,7 @@ type Props = {
 
 export default function PlayerIcon({ username, color, isDefaultPlayer }: Props) {
     function showSingleIcon(): JSX.Element {
-        return username === 'Player X' ? <X color={color} /> : <O color={color} />
+        return username === 'Player X' ? <X color={color} /> : <O color={color} size='14' />
     }
 
     return (
@@ -20,7 +20,7 @@ export default function PlayerIcon({ username, color, isDefaultPlayer }: Props) 
                 : (
                     <>
                         <X color={color} />
-                        <O color={color} />
+                        <O color={color} size='14' />
                     </>
                 )}
         </>

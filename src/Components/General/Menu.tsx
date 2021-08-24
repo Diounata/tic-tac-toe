@@ -5,7 +5,7 @@ import Play from '@Icons/Play';
 import Info from '@Icons/Info';
 import History from '@Icons/History';
 import Question from '@Icons/Question';
-import Trophy from '@Icons/Trophy';
+import Statistics from '@Icons/ChartBar';
 import Users from '@Icons/Users';
 import Gear from '@Icons/Gear';
 
@@ -50,20 +50,20 @@ export default function Menu() {
                 </div>
 
                 <div className={styles.d}>
-                    <LinkButton href='/leaderboard'>
-                        <Trophy /> Leaderboard
-                    </LinkButton>
-                </div>
-
-                <div className={styles.e}>
                     <LinkButton href='/players'>
                         <Users /> Players
                     </LinkButton>
                 </div>
 
-                <div className={styles.f}>
+                <div className={styles.e}>
                     <LinkButton href='/settings'>
                         <Gear /> Settings
+                    </LinkButton>
+                </div>
+
+                <div className={styles.f}>
+                    <LinkButton href='/statistics'>
+                        <Statistics /> Statistics
                     </LinkButton>
                 </div>
             </main>

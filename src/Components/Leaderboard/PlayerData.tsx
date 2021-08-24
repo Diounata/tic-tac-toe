@@ -1,6 +1,7 @@
 import styles from '@styles/Leaderboard/PlayerData.module.scss';
 
-import showDecimal from '../../utils/showDecimal';
+import showDecimal from '@utils/showDecimal';
+import formatTime from '@utils/timeFormat';
 
 import PlayerIcon from './PlayerIcon';
 
@@ -22,36 +23,60 @@ export default function PlayerData() {
     }
 
     return (
-        <article className={styles.container}>
+        <>
             {sortedPlayers.map((p, key) => {
                 const winrate = calcWinrate(p.match.wins, p.match.matches);
                 const isDefaultPlayer = p.name === 'Player X' || p.name === 'Player O';
 
                 return (
-                    <div key={key}>
-                        <div className={styles.icons}>
-                            <PlayerIcon
-                                color={p.color.hex}
-                                isDefaultPlayer={isDefaultPlayer}
-                                username={p.name}
-                            />
-                        </div>
+                    <div className={styles.container} key={key}>
+                        <header>
+                            <div className={styles.username}>{p.name}</div>
 
-                        <div className={styles.username}>{p.name}</div>
+                            <div className={styles.icons}>
+                                <PlayerIcon color={p.color.hex} isDefaultPlayer={isDefaultPlayer} username={p.name} />
+                            </div>
+                        </header>
 
-                        <div>{p.match.matches}</div>
-                        <div>{p.match.wins}</div>
-                        <div>{p.match.defeats}</div>
-                        <div>{p.match.ties}</div>
+                        <main>
+                            <article>
+                                <span>Played time</span>
+                                <span>{formatTime(p.playedTime)}</span>
+                            </article>
 
-                        <div>{showDecimal(winrate)} %</div>
+                            <article>
+                                <span>Played games</span>
+                                <span>{p.match.matches}</span>
+                            </article>
 
-                        <div style={{ color: getClassColor(p.score) }}>
-                            {showDecimal(p.score)}
-                        </div>
+                            <article>
+                                <span>Wins</span>
+                                <span>{p.match.wins}</span>
+                            </article>
+
+                            <article>
+                                <span>Defeats</span>
+                                <span>{p.match.defeats}</span>
+                            </article>
+
+                            <article>
+                                <span>Ties</span>
+                                <span>{p.match.ties}</span>
+                            </article>
+
+                            <article>
+                                <span>Winrate (%)</span>
+                                <span>{showDecimal(winrate)}%</span>
+                            </article>
+
+                            <article>
+                                <span>Score</span>
+                                <span style={{ color: getClassColor(p.score) }}>{showDecimal(p.score)}</span>
+                            </article>
+                        </main>
                     </div>
                 );
             })}
-        </article>
+        </>
     );
 }
