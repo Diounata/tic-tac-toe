@@ -23,7 +23,7 @@ type ColorProps = {
 type ErrorProps = {
     situation: boolean;
     text: string;
-}
+};
 
 export default function NewPlayerForm() {
     const { playersName, addNewPlayer } = usePlayers();
@@ -55,7 +55,7 @@ export default function NewPlayerForm() {
         } else if (hasEqualNameRegistered) {
             setHasError({ situation: true, text: "There's a username registered with this name" });
         } else if (name.length > 16) {
-            setHasError({ situation: true, text: "Username exceded the character limit (16)"})
+            setHasError({ situation: true, text: 'Username exceded the character limit (16)' });
         } else {
             const player = {
                 name,
@@ -66,7 +66,13 @@ export default function NewPlayerForm() {
                     defeats: 0,
                     ties: 0,
                 },
-                score: 0
+                score: 0,
+                playedTime: {
+                    hour: 0,
+                    min: 0,
+                    sec: 0,
+                    ms: 0,
+                },
             };
 
             addNewPlayer(player);
@@ -92,7 +98,9 @@ export default function NewPlayerForm() {
 
                     <div className={styles.inputContainer}>
                         <input
-                            type='text' placeholder='Username' required
+                            type='text'
+                            placeholder='Username'
+                            required
                             className={hasError.situation ? styles.inputNotFilled : ''}
                             onChange={e => setName(e.target.value)}
                             value={name}
@@ -106,11 +114,7 @@ export default function NewPlayerForm() {
                     <h4>User color:</h4>
 
                     <div className={styles.colors}>
-                        <Colors
-                            color={color}
-                            updateColor={updateColor}
-                            styles={styles}
-                        />
+                        <Colors color={color} updateColor={updateColor} styles={styles} />
                     </div>
 
                     <div className={styles.signUpButton}>
