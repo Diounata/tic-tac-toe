@@ -1,4 +1,4 @@
-import styles from '@styles/Leaderboard/Leaderboard.module.scss';
+import styles from '@styles/Statistics/Statistics.module.scss';
 
 import TitlePage from '@utils/TitlePage';
 import ChartBar from '@Icons/ChartBar';
@@ -6,7 +6,7 @@ import ExclamationTriangle from '@Icons/ExclamationTriangle';
 
 import BackButton from '@Components/General/BackButton';
 import Header from '@Components/General/Header';
-import PlayerData from '@Components/Leaderboard/PlayerData';
+import PlayerData from '@Components/Statistics/PlayerData';
 import Footer from '@Components/General/Footer';
 import Alert from '@Components/General/Alert';
 

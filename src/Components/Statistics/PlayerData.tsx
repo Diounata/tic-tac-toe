@@ -1,4 +1,4 @@
-import styles from '@styles/Leaderboard/PlayerData.module.scss';
+import styles from '@styles/Statistics/PlayerData.module.scss';
 
 import showDecimal from '@utils/showDecimal';
 import formatTime from '@utils/timeFormat';
