@@ -1,27 +1,44 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
 
     width: 100vw;
-    max-height: 36vw;
 
-    padding: 0 12rem;
+    margin-top: 3rem;
+    padding: 0 3rem;
 
-    .tableHeader,
     .historyItem {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: center;
-        gap: 2rem;
 
-        padding: 1.3rem 3rem;
-        border-bottom: 2px solid var(--light-color);
-    }
+        gap: 1rem;
 
-    .historyItemContainer {
-        overflow: auto;
+        padding: 1.2rem;
+
+        background: var(--light-color);
+        border-radius: 10px;
+
+        header {
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 1.1em;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+
+            font-size: 0.85em;
+
+            article {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
     }
 }
 
