@@ -1,0 +1,58 @@
+.container {
+    width: 100%;
+    max-height: 83vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    gap: 1rem;
+
+    padding: 2rem;
+    padding-right: 0;
+    background: var(--light-color);
+
+    .colorDiv {
+        overflow: auto;
+        padding-right: 2rem;
+
+        > div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+
+            padding: 1rem 0;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+
+            > div:first-child {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+        }
+    }
+
+    button {
+        width: 1.7rem;
+        height: 1.7rem;
+
+        background: var(--dark-color);
+        border-radius: 5px;
+        border: 0;
+
+        color: var(--text);
+        cursor: pointer;
+        transition: 0.1s;
+    }
+
+    .selected {
+        border: 2px solid var(--text);
+    }
+
+    .colorSquare {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 0.2rem;
+    }
+}
