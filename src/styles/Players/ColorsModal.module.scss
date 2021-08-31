@@ -12,6 +12,19 @@
     padding-right: 0;
     background: var(--light-color);
 
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 2rem;
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    }
+
     .colorDiv {
         overflow: auto;
         padding-right: 2rem;

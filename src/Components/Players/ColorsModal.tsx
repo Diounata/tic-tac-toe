@@ -1,4 +1,9 @@
+import { useState } from 'react';
 import styles from '@styles/Players/ColorsModal.module.scss';
+
+import X from '@Icons/X';
+import O from '@Icons/O';
+import Colors from '@utils/Colors.json';
 
 import Modal from '@Components/Modal/Modal';
 
@@ -7,62 +12,24 @@ import { useModal } from '@Contexts/ModalContext';
 export default function ColorsModal() {
     const { changeModalState } = useModal();
 
-    const colors = [
-        {
-            hex: '#3498db',
-            name: 'Blue',
-        },
-
-        {
-            hex: '#04dac2',
-            name: 'Cyan',
-        },
-
-        {
-            hex: '#2ecc71',
-            name: 'Green',
-        },
-
-        {
-            hex: '#e67e22',
-            name: 'Orange',
-        },
-
-        {
-            hex: '#fd79a8',
-            name: 'Pink',
-        },
-
-        {
-            hex: '#bb86fc',
-            name: 'Purple',
-        },
-
-        {
-            hex: '#e74c3c',
-            name: 'Red',
-        },
-
-        {
-            hex: '#fff',
-            name: 'White',
-        },
-
-        {
-            hex: '#f1c40f',
-            name: 'Yellow',
-        },
-    ];
-
-    changeModalState(true);
+    const [selectedColor, setSelectedColor] = useState<number>();
 
     return (
         <Modal>
             <div className={styles.container}>
-                <h3>Colors</h3>
+                <header>
+                    <h3>Colors</h3>
+
+                    {selectedColor > -1 && (
+                        <div>
+                            <X color={Colors[selectedColor].hex} size="19" />
+                            <O color={Colors[selectedColor].hex} size="17" />
+                        </div>
+                    )}
+                </header>
 
                 <div className={styles.colorDiv}>
-                    {colors.map((color, key) => (
+                    {Colors.map((color, key) => (
                         <div key={key}>
                             <div>
                                 <div className={styles.colorSquare} style={{ background: color.hex }}></div>
@@ -70,14 +37,19 @@ export default function ColorsModal() {
                                 {color.name}
                             </div>
 
-                            <button className={key === 1 && styles.selected}>{key === 1 && '×'}</button>
+                            <button
+                                className={selectedColor === key && styles.selected}
+                                onClick={() => setSelectedColor(key)}
+                            >
+                                {selectedColor === key && '×'}
+                            </button>
                         </div>
                     ))}
                 </div>
             </div>
 
             <footer>
-                <button>Cancel</button>
+                <button onClick={() => changeModalState(false)}>Cancel</button>
 
                 <button>Select</button>
             </footer>
