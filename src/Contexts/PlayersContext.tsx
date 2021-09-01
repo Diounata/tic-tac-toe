@@ -20,6 +20,7 @@ type PlayerProps = {
 type ColorProps = {
     hex: string;
     name: string;
+    id: number;  
 };
 
 type PlayerMatchProps = {
@@ -94,6 +95,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             color: {
                 hex: '#fff',
                 name: 'White',
+                id: 7
             },
             match: {
                 matches: 0,
@@ -115,6 +117,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             color: {
                 hex: '#bb86fc',
                 name: 'Purple',
+                id: 5
             },
             match: {
                 matches: 0,
@@ -136,6 +139,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             color: {
                 hex: '#bb86fc',
                 name: 'Purple',
+                id: 5
             },
             match: {
                 matches: 0,
@@ -156,7 +160,8 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             name: 'Player X',
             color: {
                 hex: '#04dac2',
-                name: 'Blue',
+                name: 'Cyan',
+                id: 1
             },
             match: {
                 matches: 0,

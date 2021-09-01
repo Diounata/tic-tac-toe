@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from '@styles/Players/ColorsModal.module.scss';
 
 import X from '@Icons/X';
@@ -9,10 +9,15 @@ import Modal from '@Components/Modal/Modal';
 
 import { useModal } from '@Contexts/ModalContext';
 
-export default function ColorsModal() {
+type Props = {
+    color: number;
+    updateColor(color: number): void;
+};
+
+export default function ColorsModal({ color, updateColor }: Props) {
     const { changeModalState } = useModal();
 
-    const [selectedColor, setSelectedColor] = useState<number>();
+    const [selectedColor, setSelectedColor] = useState(color);
 
     return (
         <Modal>
@@ -38,8 +43,11 @@ export default function ColorsModal() {
                             </div>
 
                             <button
-                                className={selectedColor === key && styles.selected}
-                                onClick={() => setSelectedColor(key)}
+                                className={selectedColor === key ? styles.selected : ''}
+                                onClick={() => {
+                                    setSelectedColor(key);
+                                    updateColor(key);
+                                }}
                             >
                                 {selectedColor === key && '×'}
                             </button>
@@ -49,9 +57,7 @@ export default function ColorsModal() {
             </div>
 
             <footer>
-                <button onClick={() => changeModalState(false)}>Cancel</button>
-
-                <button>Select</button>
+                <button onClick={() => changeModalState(false)}>Done</button>
             </footer>
         </Modal>
     );

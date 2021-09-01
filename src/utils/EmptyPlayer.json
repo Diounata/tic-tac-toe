@@ -4,7 +4,8 @@
             "name": "",
             "color": {
                 "hex": "",
-                "name": ""
+                "name": "",
+                "id": -1
             },
             "match": {
                 "matches": 0,

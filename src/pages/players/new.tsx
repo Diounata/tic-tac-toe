@@ -3,21 +3,24 @@ import { useRouter } from 'next/router';
 import styles from '@styles/Players/NewPlayer.module.scss';
 
 import TitlePage from '@utils/TitlePage';
+import Colors from '@utils/Colors.json';
 import Button from '@Components/General/Button';
 import UserPlus from '@Icons/UserPlus';
 import DeleteCircle from '@Icons/DeleteCircle';
 
-import Colors from '@Components/Players/new/Colors';
 import Footer from '@Components/General/Footer';
 import BackButton from '@Components/General/BackButton';
 import WarningAlert from '@Components/Players/WarningAlert';
 import Header from '@Components/General/Header';
+import ColorsModal from '@Components/Players/ColorsModal';
 
 import { usePlayers } from '@Contexts/PlayersContext';
+import { useModal } from '@Contexts/ModalContext';
 
 type ColorProps = {
     hex: string;
     name: string;
+    id: number;
 };
 
 type ErrorProps = {
@@ -27,14 +30,15 @@ type ErrorProps = {
 
 export default function NewPlayerForm() {
     const { playersName, addNewPlayer } = usePlayers();
+    const { changeModalState } = useModal();
     const router = useRouter();
 
     const [hasError, setHasError] = useState({} as ErrorProps);
     const [name, setName] = useState('');
-    const [color, setColor] = useState({ hex: '#fff', name: 'White' } as ColorProps);
+    const [color, setColor] = useState({ hex: '#fff', name: 'White', id: 7 } as ColorProps);
 
-    function updateColor(value: ColorProps): void {
-        setColor(value);
+    function updateColor(id: number): void {
+        setColor(Colors[id]);
     }
 
     function updateHasError(value: ErrorProps): void {
@@ -82,39 +86,54 @@ export default function NewPlayerForm() {
 
     return (
         <>
-            <TitlePage title='New player' />
+            <TitlePage title="New player" />
+
+            <ColorsModal color={color.id} updateColor={updateColor} />
 
             <div>
                 <div>
-                    <BackButton href='/players' />
+                    <BackButton href="/players" />
 
                     <Header>
                         <UserPlus size={24} /> New player
                     </Header>
                 </div>
 
-                <form action='/players/' className={styles.newContainer}>
+                <div className={styles.newContainer}>
                     <h4>Fill out this form below to sign up in our system.</h4>
 
                     <div className={styles.inputContainer}>
                         <input
-                            type='text'
-                            placeholder='Username'
+                            type="text"
+                            placeholder="Username"
                             required
                             className={hasError.situation ? styles.inputNotFilled : ''}
                             onChange={e => setName(e.target.value)}
                             value={name}
                         />
 
-                        <DeleteCircle className={styles.deleteIcon} onClick={resetInputName} title='Reset' size={20} />
+                        <DeleteCircle
+                            className={styles.deleteIcon}
+                            onClick={resetInputName}
+                            title="Reset"
+                            size={20}
+                        />
                     </div>
 
                     <WarningAlert hasError={hasError} updateHasError={updateHasError} />
 
-                    <h4>User color:</h4>
+                    <div className={styles.colorDiv}>
+                        <div>
+                            <h4>User color:</h4>
 
-                    <div className={styles.colors}>
-                        <Colors color={color} updateColor={updateColor} styles={styles} />
+                            <div>
+                                <div className={styles.colorSquare} style={{ background: color.hex }}></div>
+
+                                {color.name}
+                            </div>
+                        </div>
+
+                        <button onClick={() => changeModalState(true)}>Change</button>
                     </div>
 
                     <div className={styles.signUpButton}>
@@ -122,7 +141,7 @@ export default function NewPlayerForm() {
                             <UserPlus /> Sign up
                         </Button>
                     </div>
-                </form>
+                </div>
             </div>
 
             <Footer />
