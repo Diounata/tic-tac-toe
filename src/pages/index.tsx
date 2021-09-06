@@ -5,7 +5,6 @@ import O from '@Icons/O';
 
 import Menu from '@Components/General/Menu';
 import Footer from '@Components/General/Footer';
-import ColorsModal from '@Components/Players/ColorsModal';
 
 export default function Home() {
     return (
@@ -18,8 +17,6 @@ export default function Home() {
             </h2>
 
             <Menu />
-
-            <ColorsModal />
 
             <Footer />
         </>
