@@ -12,14 +12,18 @@ import Alert from '@Components/General/Alert';
 
 import { useSettings } from '@Contexts/SettingsContext';
 
+import FilterModal from '@Components/Statistics/FilterModal';
+
 export default function Leaderboard() {
     const { isSaveGameStatsOn } = useSettings();
 
     return (
         <>
-            <TitlePage title='Statistics' />
+            <TitlePage title="Statistics" />
 
-            <main> 
+            <FilterModal />
+
+            <main>
                 <div>
                     <BackButton />
 
@@ -31,7 +35,7 @@ export default function Leaderboard() {
                 {!isSaveGameStatsOn && (
                     <Alert>
                         <b>
-                            <ExclamationTriangle color='856404' /> Warning!
+                            <ExclamationTriangle color="856404" /> Warning!
                         </b>
                         Save game statistics setting isn't select.
                     </Alert>
