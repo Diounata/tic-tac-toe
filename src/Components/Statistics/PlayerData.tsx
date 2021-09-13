@@ -1,7 +1,8 @@
 import styles from '@styles/Statistics/PlayerData.module.scss';
 
-import showDecimal from '@utils/showDecimal';
 import formatTime from '@utils/timeFormat';
+import sortPlayers from '@utils/sortPlayers';
+import showDecimal from '@utils/showDecimal';
 
 import PlayerIcon from './PlayerIcon';
 
@@ -10,7 +11,10 @@ import { usePlayers } from '@Contexts/PlayersContext';
 export default function PlayerData() {
     const { players, calcWinrate } = usePlayers();
 
-    const sortedPlayers = [...players].sort((a, b) => b.score - a.score);
+    const sortedPlayers = sortPlayers([...players], {
+        attribute: 'name',
+        order: -1,
+    });
 
     function getClassColor(score: number): string {
         if (score > 0) {
@@ -34,7 +38,11 @@ export default function PlayerData() {
                             <div className={styles.username}>{p.name}</div>
 
                             <div className={styles.icons}>
-                                <PlayerIcon color={p.color.hex} isDefaultPlayer={isDefaultPlayer} username={p.name} />
+                                <PlayerIcon
+                                    color={p.color.hex}
+                                    isDefaultPlayer={isDefaultPlayer}
+                                    username={p.name}
+                                />
                             </div>
                         </header>
 

@@ -59,11 +59,6 @@ export default function FilterModal() {
 
                         <button></button>
                     </div>
-                    <div>
-                        <div>Winrate</div>
-
-                        <button></button>
-                    </div>
                 </div>
             </div>
 
