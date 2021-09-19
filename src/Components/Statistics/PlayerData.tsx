@@ -9,12 +9,9 @@ import PlayerIcon from './PlayerIcon';
 import { usePlayers } from '@Contexts/PlayersContext';
 
 export default function PlayerData() {
-    const { players, calcWinrate } = usePlayers();
+    const { players, sortOrder, calcWinrate } = usePlayers();
 
-    const sortedPlayers = sortPlayers([...players], {
-        attribute: 'name',
-        order: -1,
-    });
+    const sortedPlayers = sortPlayers([...players], sortOrder);
 
     function getClassColor(score: number): string {
         if (score > 0) {

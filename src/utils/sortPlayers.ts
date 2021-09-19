@@ -40,17 +40,21 @@ type FilterProps = {
 
 export default function sortPlayers(obj: PlayerProps[], filter: FilterProps) {
     const sortedArray = obj.sort((a, b) => {
-        if (filter.order === 1) {
-            if (a[filter.attribute] - b[filter.attribute]) {
-                return 1;
-            } else {
-                return -1;
-            }
+        if (filter.attribute === 'score') {
+            return filter.order === -1 ? a.score - b.score : b.score - a.score;
         } else {
-            if (a[filter.attribute] - b[filter.attribute]) {
-                return -1;
+            if (filter.order === 1) {
+                if (a[filter.attribute] - b[filter.attribute]) {
+                    return 1;
+                } else {
+                    return -1;
+                }
             } else {
-                return 1;
+                if (a[filter.attribute] - b[filter.attribute]) {
+                    return -1;
+                } else {
+                    return 1;
+                }
             }
         }
     });

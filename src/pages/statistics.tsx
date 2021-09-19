@@ -10,9 +10,10 @@ import PlayerData from '@Components/Statistics/PlayerData';
 import Footer from '@Components/General/Footer';
 import Alert from '@Components/General/Alert';
 
-import { useSettings } from '@Contexts/SettingsContext';
-
+import FilterButton from '@Components/Statistics/FilterButton';
 import FilterModal from '@Components/Statistics/FilterModal';
+
+import { useSettings } from '@Contexts/SettingsContext';
 
 export default function Leaderboard() {
     const { isSaveGameStatsOn } = useSettings();
@@ -40,6 +41,8 @@ export default function Leaderboard() {
                         Save game statistics setting isn't select.
                     </Alert>
                 )}
+
+                <FilterButton />
 
                 <div className={styles.container}>
                     <PlayerData />

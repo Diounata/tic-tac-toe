@@ -20,7 +20,7 @@ type PlayerProps = {
 type ColorProps = {
     hex: string;
     name: string;
-    id: number;  
+    id: number;
 };
 
 type PlayerMatchProps = {
@@ -63,6 +63,18 @@ type HistoryProps = {
     };
 };
 
+type SortProps = {
+    attribute:
+        | 'name'
+        | 'score'
+        | 'match.matches'
+        | 'match.wins'
+        | 'match.defeats'
+        | 'match.ties'
+        | 'playedTime.ms';
+    order: -1 | 1;
+};
+
 type ContextProps = {
     players: PlayerProps[];
     history: HistoryProps[];
@@ -71,6 +83,7 @@ type ContextProps = {
     selectedPlayer: number;
     selectedPlayerForEditing: EditingPlayerProps;
     isEditingAPlayer: boolean;
+    sortOrder: SortProps;
 
     updatePlayersWhenWinning(winnerName: string, loserName: string): void;
     updatePlayersWhenTie(player1Name: string, player2Name: string): void;
@@ -86,6 +99,7 @@ type ContextProps = {
     deletePlayer(key: number): void;
     resetPlayerStats(key: number): void;
     calcWinrate(wins: number, matches: number): number;
+    changeSortOrder(newSort: SortProps): void;
 };
 
 export function PlayersContextProvider({ children }: ChildrenProps) {
@@ -95,7 +109,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             color: {
                 hex: '#fff',
                 name: 'White',
-                id: 7
+                id: 7,
             },
             match: {
                 matches: 0,
@@ -117,7 +131,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             color: {
                 hex: '#bb86fc',
                 name: 'Purple',
-                id: 5
+                id: 5,
             },
             match: {
                 matches: 0,
@@ -125,7 +139,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 defeats: 0,
                 ties: 0,
             },
-            score: 0,
+            score: 10,
             playedTime: {
                 hour: 0,
                 min: 0,
@@ -139,7 +153,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             color: {
                 hex: '#bb86fc',
                 name: 'Purple',
-                id: 5
+                id: 5,
             },
             match: {
                 matches: 0,
@@ -147,7 +161,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 defeats: 0,
                 ties: 0,
             },
-            score: 0,
+            score: -6,
             playedTime: {
                 hour: 0,
                 min: 0,
@@ -161,7 +175,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
             color: {
                 hex: '#04dac2',
                 name: 'Cyan',
-                id: 1
+                id: 1,
             },
             match: {
                 matches: 0,
@@ -184,8 +198,14 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     const [playersName, setPlayersName] = useState({} as string[]);
     const [playerActionMessage, setPlayerActionMessage] = useState({} as PlayerActionMessagesProps);
     const [selectedPlayer, setSelectedPlayer] = useState<number>();
-    const [selectedPlayerForEditing, setSelectedPlayerForEditing] = useState<EditingPlayerProps>(EmptyPlayer[0]);
+    const [selectedPlayerForEditing, setSelectedPlayerForEditing] = useState<EditingPlayerProps>(
+        EmptyPlayer[0]
+    );
     const [isEditingAPlayer, setIsEditingAPlayer] = useState(false);
+    const [sortOrder, setSortOrder] = useState<SortProps>({
+        attribute: 'name',
+        order: -1,
+    }); // statistics
 
     function updatePlayers(p: PlayerProps[]): void {
         const currentPlayers = p;
@@ -352,6 +372,10 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         return sortedPlayers;
     }
 
+    function changeSortOrder(newSort: SortProps): void {
+        setSortOrder(newSort);
+    }
+
     useEffect(() => {
         const newPlayersName = players.map(player => player.name);
 
@@ -368,6 +392,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 selectedPlayer,
                 selectedPlayerForEditing,
                 isEditingAPlayer,
+                sortOrder,
                 updatePlayersWhenWinning,
                 updatePlayersWhenTie,
                 updatePlayerPlayedTime,
@@ -382,6 +407,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 deletePlayer,
                 resetPlayerStats,
                 calcWinrate,
+                changeSortOrder
             }}
         >
             {children}
