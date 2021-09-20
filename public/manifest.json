@@ -1,0 +1,16 @@
+{
+    "name": "Tic-tac-toe",
+    "short_name": "TTT",
+    "icons": [
+        {
+            "src": "./favicon.svg",
+            "sizes": "192x192",
+            "type": "image/svg"
+        }
+    ],
+    "theme_color": "#E1E1E1",
+    "background_color": "#121212",
+    "start_url": "./",
+    "display": "standalone",
+    "orientation": "portrait"
+}
