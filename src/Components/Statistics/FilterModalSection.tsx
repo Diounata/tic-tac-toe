@@ -1,6 +1,6 @@
 import SortUp from '@Icons/SortUp';
 import SortDown from '@Icons/SortDown';
-import { sections } from '@utils/FiltersSections';
+import sections from '@utils/FiltersSections.json';
 
 import { usePlayers } from '@Contexts/PlayersContext';
 
@@ -18,7 +18,7 @@ type OrderProps = 1 | -1;
 export default function FilterModalSection({ styles }) {
     const { sortOrder, changeSortOrder } = usePlayers();
 
-    function changeFilter(filter: AttributeProps): void {
+    function changeFilter(filter): void {
         function getOrder(): OrderProps {
             if (sortOrder.attribute === filter) {
                 return sortOrder.order === -1 ? 1 : -1;
