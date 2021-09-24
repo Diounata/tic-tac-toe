@@ -22,7 +22,7 @@
 
 ## :dart: Overview
 <p>
-Tic-tac-toe is a simple game usually played over a paper sheet, resulting in some unnecessary work. This app was built to solve these problems and optimize gameplay experience using awesome features. 
+Tic-tac-toe is a simple game usually played over a paper sheet, resulting in some unnecessary work. This app was built to solve these problems and optimize gameplay experience using awesome features such as player system, statistics and more. 
 </p>
 
 ## :books: Technologies
