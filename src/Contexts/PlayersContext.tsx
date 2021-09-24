@@ -330,7 +330,8 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     function resetPlayerStats(key: number): void {
         const newPlayerStatistic = players.filter((p, i) => i === key);
 
-        Object.keys(newPlayerStatistic[0].match).forEach(item => (newPlayerStatistic[0].match[item] = 0));
+        Object.keys(newPlayerStatistic[0].match).forEach(attribute => (newPlayerStatistic[0].match[attribute] = 0));
+        Object.keys(newPlayerStatistic[0].playedTime).forEach(attribute => (newPlayerStatistic[0].playedTime[attribute] = 0));
         newPlayerStatistic[0].score = 0;
 
         const newPlayers = players.map((player, index) => (index !== key ? player : newPlayerStatistic[0]));
