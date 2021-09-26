@@ -27,37 +27,32 @@ type PlayerProps = {
 };
 
 type FilterProps = {
-    attribute:
-        | 'name'
-        | 'score'
-        | 'match.matches'
-        | 'match.wins'
-        | 'match.defeats'
-        | 'match.ties'
-        | 'playedTime.ms';
+    attribute: Array<
+        'name' | 'score' | 'match' | 'matches' | 'wins' | 'defeats' | 'ties' | 'playedTime' | 'ms'
+    >;
     order: -1 | 1;
 };
 
 export default function sortPlayers(obj: PlayerProps[], filter: FilterProps) {
-    const sortedArray = obj.sort((a, b) => {
-        if (filter.attribute === 'score') {
-            return filter.order === -1 ? a.score - b.score : b.score - a.score;
-        } else {
-            if (filter.order === 1) {
-                if (a[filter.attribute] - b[filter.attribute]) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            } else {
-                if (a[filter.attribute] - b[filter.attribute]) {
-                    return -1;
-                } else {
-                    return 1;
-                }
-            }
-        }
-    });
+    function orderValues(a: number, b: number): number {
+        return filter.order === 1 ? b - a : a - b;
+    }
 
-    return sortedArray;
+    switch (filter.attribute[0]) {
+        case 'name':
+            const sortedArray = obj.sort();
+
+            return filter.order === -1 ? sortedArray.reverse() : sortedArray;
+
+        case 'score':
+            return obj.sort((a, b) => orderValues(a.score, b.score));
+
+        default:
+            const attribute = filter.attribute;
+            const newArray = obj.sort();
+
+            return newArray.sort((a, b) =>
+                orderValues(a[attribute[0]][attribute[1]], b[attribute[0]][attribute[1]])
+            );
+    }
 }

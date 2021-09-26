@@ -1,36 +1,36 @@
 [
     {
         "description": "Score",
-        "attribute": "score"
+        "attribute": ["score"]
     },
 
     {
         "description": "Name",
-        "attribute": "name"
+        "attribute": ["name"]
     },
 
     {
         "description": "Played time",
-        "attribute": "playedTime.ms"
+        "attribute": ["playedTime", "ms"]
     },
 
     {
         "description": "Played games",
-        "attribute": "match.matches"
+        "attribute": ["match", "matches"]
     },
 
     {
         "description": "Wins",
-        "attribute": "match.wins"
+        "attribute": ["match", "wins"]
     },
 
     {
         "description": "Defeats",
-        "attribute": "match.defeats"
+        "attribute": ["match", "defeats"]
     },
 
     {
         "description": "Ties",
-        "attribute": "match.ties"
+        "attribute": ["match", "ties"]
     }
 ]

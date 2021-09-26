@@ -64,14 +64,9 @@ type HistoryProps = {
 };
 
 type SortProps = {
-    attribute:
-        | 'name'
-        | 'score'
-        | 'match.matches'
-        | 'match.wins'
-        | 'match.defeats'
-        | 'match.ties'
-        | 'playedTime.ms';
+    attribute: Array<
+        'name' | 'score' | 'match' | 'matches' | 'wins' | 'defeats' | 'ties' | 'playedTime' | 'ms'
+    >;
     order: -1 | 1;
 };
 
@@ -203,7 +198,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     );
     const [isEditingAPlayer, setIsEditingAPlayer] = useState(false);
     const [sortOrder, setSortOrder] = useState<SortProps>({
-        attribute: 'name',
+        attribute: ['name'],
         order: -1,
     }); // statistics
 
@@ -330,8 +325,12 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     function resetPlayerStats(key: number): void {
         const newPlayerStatistic = players.filter((p, i) => i === key);
 
-        Object.keys(newPlayerStatistic[0].match).forEach(attribute => (newPlayerStatistic[0].match[attribute] = 0));
-        Object.keys(newPlayerStatistic[0].playedTime).forEach(attribute => (newPlayerStatistic[0].playedTime[attribute] = 0));
+        Object.keys(newPlayerStatistic[0].match).forEach(
+            attribute => (newPlayerStatistic[0].match[attribute] = 0)
+        );
+        Object.keys(newPlayerStatistic[0].playedTime).forEach(
+            attribute => (newPlayerStatistic[0].playedTime[attribute] = 0)
+        );
         newPlayerStatistic[0].score = 0;
 
         const newPlayers = players.map((player, index) => (index !== key ? player : newPlayerStatistic[0]));
@@ -408,7 +407,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
                 deletePlayer,
                 resetPlayerStats,
                 calcWinrate,
-                changeSortOrder
+                changeSortOrder,
             }}
         >
             {children}
