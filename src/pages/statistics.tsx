@@ -10,8 +10,8 @@ import PlayerData from '@Components/Statistics/PlayerData';
 import Footer from '@Components/General/Footer';
 import Alert from '@Components/General/Alert';
 
-import FilterButton from '@Components/Statistics/FilterButton';
-import FilterModal from '@Components/Statistics/FilterModal';
+import FilterButton from '@Components/Statistics/Filter/FilterButton';
+import FilterModal from '@Components/Statistics/Filter/FilterModal';
 
 import { useSettings } from '@Contexts/SettingsContext';
 
