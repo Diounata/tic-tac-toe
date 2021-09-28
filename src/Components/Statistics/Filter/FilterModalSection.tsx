@@ -1,9 +1,10 @@
-import { getFilterIndex, changeFilter, showOrderIcon } from './FilterFunctions';
 import sections from '@utils/FiltersSections.json';
+import useFilterFunctions from './FilterFunctions';
 
 import { usePlayers } from '@Contexts/PlayersContext';
 
 export default function FilterModalSection({ styles }) {
+    const { getFilterIndex, changeFilter, showOrderIcon } = useFilterFunctions();
     const { sortOrder } = usePlayers();
 
     function getClassName(filter: string[]) {
