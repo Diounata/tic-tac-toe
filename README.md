@@ -68,7 +68,7 @@ This project was made using the following techs:
     -   Player symbol color
 
 -   ### Player Stats
-
+    -   Filter by stats
     -   Played time
     -   Played games
     -   Wins
