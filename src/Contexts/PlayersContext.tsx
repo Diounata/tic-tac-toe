@@ -193,9 +193,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     const [playersName, setPlayersName] = useState({} as string[]);
     const [playerActionMessage, setPlayerActionMessage] = useState({} as PlayerActionMessagesProps);
     const [selectedPlayer, setSelectedPlayer] = useState<number>();
-    const [selectedPlayerForEditing, setSelectedPlayerForEditing] = useState<EditingPlayerProps>(
-        EmptyPlayer[0]
-    );
+    const [selectedPlayerForEditing, setSelectedPlayerForEditing] = useState<EditingPlayerProps>(EmptyPlayer);
     const [isEditingAPlayer, setIsEditingAPlayer] = useState(false);
     const [sortOrder, setSortOrder] = useState<SortProps>({
         attribute: ['name'],
@@ -325,12 +323,8 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     function resetPlayerStats(key: number): void {
         const newPlayerStatistic = players.filter((p, i) => i === key);
 
-        Object.keys(newPlayerStatistic[0].match).forEach(
-            attribute => (newPlayerStatistic[0].match[attribute] = 0)
-        );
-        Object.keys(newPlayerStatistic[0].playedTime).forEach(
-            attribute => (newPlayerStatistic[0].playedTime[attribute] = 0)
-        );
+        Object.keys(newPlayerStatistic[0].match).forEach(attribute => (newPlayerStatistic[0].match[attribute] = 0));
+        Object.keys(newPlayerStatistic[0].playedTime).forEach(attribute => (newPlayerStatistic[0].playedTime[attribute] = 0));
         newPlayerStatistic[0].score = 0;
 
         const newPlayers = players.map((player, index) => (index !== key ? player : newPlayerStatistic[0]));

@@ -1,28 +1,26 @@
-[
-    {
-        "player": {
+{
+    "player": {
+        "name": "",
+        "color": {
+            "hex": "",
             "name": "",
-            "color": {
-                "hex": "",
-                "name": "",
-                "id": -1
-            },
-            "match": {
-                "matches": 0,
-                "wins": 0,
-                "defeats": 0,
-                "ties": 0
-            },
-
-            "score": 0,
-            "playedTime": {
-                "hour": 0,
-                "min": 0,
-                "sec": 0,
-                "ms": 0
-            }
+            "id": -1
+        },
+        "match": {
+            "matches": 0,
+            "wins": 0,
+            "defeats": 0,
+            "ties": 0
         },
 
-        "key": -1
-    }
-]
+        "score": 0,
+        "playedTime": {
+            "hour": 0,
+            "min": 0,
+            "sec": 0,
+            "ms": 0
+        }
+    },
+
+    "key": -1
+}

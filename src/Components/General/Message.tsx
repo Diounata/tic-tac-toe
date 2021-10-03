@@ -24,7 +24,7 @@ export default function Message() {
             className={styles.messageContainer}
         >
             <div className={styles.text}>
-                <Check /> {playerActionMessage.user || ''} {ActionMessage[0][`${playerActionMessage.action}`]}
+                <Check /> {playerActionMessage.user || ''} {ActionMessage[playerActionMessage.action]}
             </div>
 
             <div className={styles.progressBar}>
