@@ -29,11 +29,11 @@ Tic-tac-toe is a simple game usually played over a paper sheet, resulting in som
 
 This project was made using the following techs:
 
+-   [Next.js](https://nextjs.org/)
 -   [React.js](https://reactjs.org/)
 -   [React Icons](https://react-icons.github.io/react-icons/)
--   [Next.js](https://nextjs.org/)
--   [Typescript](https://www.typescriptlang.org/)
 -   [Sass](https://sass-lang.com/)
+-   [Typescript](https://www.typescriptlang.org/)
 
 ## :performing_arts: Features
 
