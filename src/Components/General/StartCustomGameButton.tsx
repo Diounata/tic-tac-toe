@@ -82,7 +82,10 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
                         return (
                             <div key={key}>
                                 <div className={styles.username}>
-                                    <div style={{ background: p.color.hex }} className={styles.divColor}></div>
+                                    <div
+                                        style={{ background: p.color.hex }}
+                                        className={styles.divColor}
+                                    ></div>
 
                                     <div>{p.name}</div>
                                 </div>
@@ -99,14 +102,14 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
                                         <>
                                             <SelectPlayerButtons
                                                 p={playerData}
-                                                symbol='X'
+                                                symbol="X"
                                                 selectedPlayer={selectedPlayer}
                                                 changeSelectedPlayer={changeSelectedPlayer}
                                             />
 
                                             <SelectPlayerButtons
                                                 p={playerData}
-                                                symbol='O'
+                                                symbol="O"
                                                 selectedPlayer={selectedPlayer}
                                                 changeSelectedPlayer={changeSelectedPlayer}
                                             />
@@ -122,7 +125,9 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
             <footer>
                 <button onClick={() => updateCustomGameModalState(false)}>Back</button>
 
-                <button onClick={addPlayers}>Start Game</button>
+                <button disabled={selectedPlayer.X === -1 && selectedPlayer.O === -1} onClick={addPlayers}>
+                    Start Game
+                </button>
             </footer>
         </>
     );
