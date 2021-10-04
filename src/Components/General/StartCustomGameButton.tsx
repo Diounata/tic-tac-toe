@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from '@styles/General/StartCustomGameButton.module.scss';
 
@@ -125,7 +125,7 @@ export default function StartCustomGameButton({ updateCustomGameModalState }: Co
             <footer>
                 <button onClick={() => updateCustomGameModalState(false)}>Back</button>
 
-                <button disabled={selectedPlayer.X === -1 && selectedPlayer.O === -1} onClick={addPlayers}>
+                <button disabled={selectedPlayer.X === -1 || selectedPlayer.O === -1} onClick={addPlayers}>
                     Start Game
                 </button>
             </footer>
