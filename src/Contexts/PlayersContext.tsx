@@ -5,55 +5,55 @@ import convertTime from '@utils/timeConversor';
 
 export const PlayersContext = createContext({} as ContextProps);
 
-type ChildrenProps = {
+interface ChildrenProps {
     children: ReactNode;
-};
+}
 
-type PlayerProps = {
+interface PlayerProps {
     name: string;
     color: ColorProps;
     match: PlayerMatchProps;
     score: number;
     playedTime: PlayedTimeProps;
-};
+}
 
-type ColorProps = {
+interface ColorProps {
     hex: string;
     name: string;
     id: number;
-};
+}
 
-type PlayerMatchProps = {
+interface PlayerMatchProps {
     matches: number;
     wins: number;
     defeats: number;
     ties: number;
-};
+}
 
-type PlayedTimeProps = {
+interface PlayedTimeProps {
     hour: number;
     min: number;
     sec: number;
     ms: number;
-};
+}
 
-type EditingPlayerProps = {
+interface EditingPlayerProps {
     player: PlayerProps;
     key: number;
-};
+}
 
-type PlayerActionMessagesProps = {
+interface PlayerActionMessagesProps {
     action: string;
     user?: string;
-};
+}
 
-type HistoryPlayerProps = {
+interface HistoryPlayerProps {
     name: string;
     color: string;
     situation: 'Winner' | 'Loser' | 'Tie';
-};
+}
 
-type HistoryProps = {
+interface HistoryProps {
     x: HistoryPlayerProps;
     o: HistoryPlayerProps;
     duration: {
@@ -61,16 +61,16 @@ type HistoryProps = {
         min: number;
         sec: number;
     };
-};
+}
 
-type SortProps = {
+interface SortProps {
     attribute: Array<
         'name' | 'score' | 'match' | 'matches' | 'wins' | 'defeats' | 'ties' | 'playedTime' | 'ms'
     >;
     order: -1 | 1;
-};
+}
 
-type ContextProps = {
+interface ContextProps {
     players: PlayerProps[];
     history: HistoryProps[];
     playersName: string[];
@@ -95,7 +95,7 @@ type ContextProps = {
     resetPlayerStats(key: number): void;
     calcWinrate(wins: number, matches: number): number;
     changeSortOrder(newSort: SortProps): void;
-};
+}
 
 export function PlayersContextProvider({ children }: ChildrenProps) {
     const [players, setPlayers] = useState([
@@ -227,9 +227,7 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
         const player1 = players.findIndex(p => p.name === player1Name);
         const player2 = players.findIndex(p => p.name === player2Name);
 
-        const arrayWithPlayers = [player1, player2];
-
-        arrayWithPlayers.forEach(element => {
+        [player1, player2].forEach(element => {
             players[element].match.matches += 1;
             players[element].match.ties += 1;
             players[element].score += 0.5;
@@ -240,12 +238,12 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
 
     function updatePlayerPlayedTime(name1: string, name2: string, ms: number) {
         function update(name: string) {
-            const filteredP = players.filter(p => p.name === name);
-            const newMs = filteredP[0].playedTime.ms + ms;
+            const [filteredPlayer] = players.filter(p => p.name === name);
+            const newMs = filteredPlayer.playedTime.ms + ms;
 
-            filteredP[0].playedTime = { ...convertTime(newMs), ms: newMs };
+            filteredPlayer.playedTime = { ...convertTime(newMs), ms: newMs };
 
-            return filteredP[0];
+            return filteredPlayer;
         }
 
         const updatedPlayer1 = update(name1);
@@ -310,29 +308,31 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     }
 
     function deletePlayer(key: number): void {
-        const deletedPlayer = players.filter((p, i) => i === key);
+        const [deletedPlayer] = players.filter((p, i) => i === key);
         const newPlayers = players.filter((p, i) => i !== key);
 
         updatePlayers(newPlayers);
         changePlayerActionMessage({
             action: 'delete',
-            user: deletedPlayer[0].name,
+            user: deletedPlayer.name,
         });
     }
 
     function resetPlayerStats(key: number): void {
-        const newPlayerStatistic = players.filter((p, i) => i === key);
+        const [newPlayerStatistic] = players.filter((p, i) => i === key);
 
-        Object.keys(newPlayerStatistic[0].match).forEach(attribute => (newPlayerStatistic[0].match[attribute] = 0));
-        Object.keys(newPlayerStatistic[0].playedTime).forEach(attribute => (newPlayerStatistic[0].playedTime[attribute] = 0));
-        newPlayerStatistic[0].score = 0;
+        Object.keys(newPlayerStatistic.match).forEach(attribute => (newPlayerStatistic.match[attribute] = 0));
+        Object.keys(newPlayerStatistic.playedTime).forEach(
+            attribute => (newPlayerStatistic.playedTime[attribute] = 0)
+        );
+        newPlayerStatistic.score = 0;
 
-        const newPlayers = players.map((player, index) => (index !== key ? player : newPlayerStatistic[0]));
+        const newPlayers = players.map((player, index) => (index !== key ? player : newPlayerStatistic));
 
         updatePlayers(newPlayers);
         changePlayerActionMessage({
             action: 'reset',
-            user: newPlayerStatistic[0].name,
+            user: newPlayerStatistic.name,
         });
     }
 
