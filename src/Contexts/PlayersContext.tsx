@@ -1,7 +1,9 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
+import DefaultPlayers from '@utils/DefaultPlayers.json';
 import EmptyPlayer from '@utils/EmptyPlayer.json';
 import convertTime from '@utils/timeConversor';
+import useLocalStorage from '@utils/useLocalStorage';
 
 export const PlayersContext = createContext({} as ContextProps);
 
@@ -70,6 +72,11 @@ interface SortProps {
     order: -1 | 1;
 }
 
+interface LocalStorageDataProps {
+    name: 'historyStorage' | 'playersStorage' | 'settingsStorage';
+    setFunction(any): void;
+}
+
 interface ContextProps {
     players: PlayerProps[];
     history: HistoryProps[];
@@ -98,96 +105,7 @@ interface ContextProps {
 }
 
 export function PlayersContextProvider({ children }: ChildrenProps) {
-    const [players, setPlayers] = useState([
-        {
-            name: 'Diounata',
-            color: {
-                hex: '#fff',
-                name: 'White',
-                id: 7,
-            },
-            match: {
-                matches: 0,
-                wins: 0,
-                defeats: 0,
-                ties: 0,
-            },
-            score: 0,
-            playedTime: {
-                hour: 0,
-                min: 0,
-                sec: 0,
-                ms: 0,
-            },
-        },
-
-        {
-            name: 'John',
-            color: {
-                hex: '#bb86fc',
-                name: 'Purple',
-                id: 5,
-            },
-            match: {
-                matches: 0,
-                wins: 0,
-                defeats: 0,
-                ties: 0,
-            },
-            score: 10,
-            playedTime: {
-                hour: 0,
-                min: 0,
-                sec: 0,
-                ms: 0,
-            },
-        },
-
-        {
-            name: 'Player O',
-            color: {
-                hex: '#bb86fc',
-                name: 'Purple',
-                id: 5,
-            },
-            match: {
-                matches: 0,
-                wins: 0,
-                defeats: 0,
-                ties: 0,
-            },
-            score: -6,
-            playedTime: {
-                hour: 0,
-                min: 0,
-                sec: 0,
-                ms: 0,
-            },
-        },
-
-        {
-            name: 'Player X',
-            color: {
-                hex: '#04dac2',
-                name: 'Cyan',
-                id: 1,
-            },
-            match: {
-                matches: 0,
-                wins: 0,
-                defeats: 0,
-                ties: 0,
-            },
-            score: 0,
-            playedTime: {
-                hour: 0,
-                min: 0,
-                sec: 0,
-                ms: 0,
-            },
-        },
-    ]);
-
+    const [players, setPlayers] = useState<PlayerProps[]>(DefaultPlayers);
     const [history, setHistory] = useState<HistoryProps[]>([]);
 
     const [playersName, setPlayersName] = useState({} as string[]);
@@ -195,10 +113,9 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     const [selectedPlayer, setSelectedPlayer] = useState<number>();
     const [selectedPlayerForEditing, setSelectedPlayerForEditing] = useState<EditingPlayerProps>(EmptyPlayer);
     const [isEditingAPlayer, setIsEditingAPlayer] = useState(false);
-    const [sortOrder, setSortOrder] = useState<SortProps>({
-        attribute: ['name'],
-        order: -1,
-    }); // statistics
+    const [sortOrder, setSortOrder] = useState<SortProps>({ attribute: ['name'], order: -1 }); // statistics
+
+    const { getLocalStorage, setLocalStorage } = useLocalStorage();
 
     function updatePlayers(p: PlayerProps[]): void {
         const currentPlayers = p;
@@ -371,10 +288,35 @@ export function PlayersContextProvider({ children }: ChildrenProps) {
     }
 
     useEffect(() => {
+        const localStorageData: LocalStorageDataProps[] = [
+            {
+                name: 'historyStorage',
+                setFunction: setHistory,
+            },
+
+            {
+                name: 'playersStorage',
+                setFunction: setPlayers,
+            },
+        ];
+
+        for (let pos in localStorageData) {
+            const data = getLocalStorage(localStorageData[pos].name);
+
+            if (data) {
+                localStorageData[pos].setFunction(JSON.parse(data));
+            }
+        }
+    }, []);
+
+    useEffect(() => {
         const newPlayersName = players.map(player => player.name);
 
         setPlayersName(newPlayersName);
+        setLocalStorage('playersStorage', players);
     }, [players]);
+
+    useEffect(() => setLocalStorage('historyStorage', history), [history]);
 
     return (
         <PlayersContext.Provider

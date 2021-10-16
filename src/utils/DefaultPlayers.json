@@ -1,0 +1,45 @@
+[
+    {
+        "name": "Player O",
+        "color": {
+            "hex": "#bb86fc",
+            "name": "Purple",
+            "id": 5
+        },
+        "match": {
+            "matches": 0,
+            "wins": 0,
+            "defeats": 0,
+            "ties": 0
+        },
+        "score": -6,
+        "playedTime": {
+            "hour": 0,
+            "min": 0,
+            "sec": 0,
+            "ms": 0
+        }
+    },
+
+    {
+        "name": "Player X",
+        "color": {
+            "hex": "#04dac2",
+            "name": "Cyan",
+            "id": 1
+        },
+        "match": {
+            "matches": 0,
+            "wins": 0,
+            "defeats": 0,
+            "ties": 0
+        },
+        "score": 0,
+        "playedTime": {
+            "hour": 0,
+            "min": 0,
+            "sec": 0,
+            "ms": 0
+        }
+    }
+]
